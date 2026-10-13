@@ -1,0 +1,22 @@
+{%- assign s = section.settings -%}
+<recently-viewed class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px; display: block;" data-limit="{{ s.limit }}" data-exclude="{{ product.handle }}" data-empty hidden>
+  <div class="page-width">
+    {% render 'section-heading', settings: s %}
+    <ul class="grid" role="list" data-items style="--cols: {{ s.limit }}; list-style: none; padding: 0; margin: 0;"></ul>
+  </div>
+</recently-viewed>
+
+{% schema %}
+{
+  "name": "Recently viewed",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Recently <em>viewed</em>" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 6, "step": 1, "default": 4 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Recently viewed" }]
+}
+{% endschema %}

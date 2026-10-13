@@ -1,0 +1,18 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width page-width--narrow">
+    <h1 class="h1 heading-italic text-center" style="margin-bottom: 2rem;">{{ page.title }}</h1>
+    <div class="rte article__body">{{ page.content }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ]
+}
+{% endschema %}

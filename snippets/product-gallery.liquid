@@ -1,0 +1,91 @@
+{% doc %}
+  Product media gallery: swipeable track, thumbnails, counter, arrows, zoom lightbox and video/3D support.
+
+  @param {product} product - Product object
+  @param {string} [layout] - 'thumbs-bottom', 'thumbs-left' or 'grid'
+  @param {string} [ratio] - CSS aspect ratio, e.g. '4/5' or '1'
+  @param {boolean} [zoom] - Enable lightbox zoom
+  @param {boolean} [contain] - Fit images instead of cropping
+  @param {boolean} [eager] - Eager-load the first image
+
+  @example
+  {% render 'product-gallery', product: product, layout: 'thumbs-bottom', zoom: true %}
+{% enddoc %}
+{%- liquid
+  assign layout = layout | default: 'thumbs-bottom'
+  assign ratio = ratio | default: '4/5'
+  assign variant = product.selected_or_first_available_variant
+  assign initial_media = variant.featured_media.id | default: product.featured_media.id
+-%}
+<media-gallery
+  class="gallery gallery--{{ layout }}{% if contain %} gallery--contain{% endif %}"
+  data-zoom="{{ zoom }}"
+  data-initial-media="{{ initial_media }}"
+  style="--ratio: {{ ratio }};"
+>
+  <div class="gallery__main">
+    {% render 'product-badges', product: product %}
+    <ul class="gallery__track" role="list" aria-label="{{ 'products.product.media_gallery' | t }}">
+      {%- for media in product.media -%}
+        {%- liquid
+          assign loading = 'lazy'
+          if forloop.first and eager
+            assign loading = 'eager'
+          endif
+        -%}
+        <li class="gallery__item" data-media-id="{{ media.id }}">
+          {%- case media.media_type -%}
+            {%- when 'image' -%}
+              <div class="media" {% if zoom %}data-zoom-src="{{ media | image_url: width: 2400 }}" data-alt="{{ media.alt | escape }}" role="button" tabindex="0" aria-label="{{ 'products.product.zoom' | t }}"{% endif %}>
+                {{ media | image_url: width: 1800 | image_tag: loading: loading, widths: '400,600,800,1000,1200,1500,1800', sizes: '(min-width: 990px) 55vw, 100vw', alt: media.alt }}
+              </div>
+            {%- when 'video', 'external_video' -%}
+              <deferred-media class="media media--video">
+                <button type="button" class="deferred-media__poster" data-load aria-label="{{ 'sections.video.play' | t }}">
+                  {{ media.preview_image | image_url: width: 1500 | image_tag: loading: loading, widths: '600,900,1200,1500', sizes: '(min-width: 990px) 55vw, 100vw', alt: media.alt }}
+                  <span class="deferred-media__poster-btn">{% render 'icon', icon: 'play' %}</span>
+                </button>
+                <template>
+                  {%- if media.media_type == 'video' -%}
+                    {{ media | video_tag: autoplay: true, controls: true, playsinline: true }}
+                  {%- else -%}
+                    {{ media | external_video_url: autoplay: true | external_video_tag }}
+                  {%- endif -%}
+                </template>
+              </deferred-media>
+            {%- when 'model' -%}
+              <deferred-media class="media media--video">
+                <button type="button" class="deferred-media__poster" data-load aria-label="{{ 'products.product.view_3d' | t }}">
+                  {{ media.preview_image | image_url: width: 1500 | image_tag: loading: 'lazy', alt: media.alt }}
+                  <span class="deferred-media__poster-btn">{% render 'icon', icon: 'eye' %}</span>
+                </button>
+                <template>{{ media | model_viewer_tag: image_size: '1500x', reveal: 'interaction', toggleable: true }}</template>
+              </deferred-media>
+          {%- endcase -%}
+        </li>
+      {%- else -%}
+        <li class="gallery__item"><div class="media">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div></li>
+      {%- endfor -%}
+    </ul>
+    {%- if product.media.size > 1 -%}
+      <span class="gallery__counter" data-counter>1 / {{ product.media.size }}</span>
+      <div class="gallery__arrows">
+        <button type="button" class="slider__btn" data-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', icon: 'chevron-left' %}</button>
+        <button type="button" class="slider__btn" data-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', icon: 'chevron-right' %}</button>
+      </div>
+    {%- endif -%}
+    {%- if zoom and product.media.size > 0 -%}<span class="gallery__zoom-hint" aria-hidden="true">{% render 'icon', icon: 'zoom' %}</span>{%- endif -%}
+  </div>
+  {%- if product.media.size > 1 and layout != 'grid' -%}
+    <ul class="gallery__thumbs" role="list">
+      {%- for media in product.media -%}
+        <li>
+          <button type="button" class="gallery__thumb" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'products.product.thumbnail' | t: index: forloop.index }}">
+            <span class="media">{{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100,200', sizes: '90px', alt: '' }}</span>
+            {%- if media.media_type != 'image' -%}<span class="gallery__thumb-badge">{% render 'icon', icon: 'play' %}</span>{%- endif -%}
+          </button>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</media-gallery>

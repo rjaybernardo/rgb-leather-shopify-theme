@@ -1,0 +1,65 @@
+{%- if section.blocks.size > 0 -%}
+  <announcement-bar
+    class="announcement-bar color-{{ section.settings.color_scheme }}"
+    data-autoplay="{{ section.settings.autoplay }}"
+    data-speed="{{ section.settings.speed }}"
+    role="region"
+    aria-label="{{ 'sections.announcement.label' | t }}"
+  >
+    <div class="page-width announcement-bar__inner">
+      <div class="announcement-bar__social">
+        {%- if section.settings.show_social -%}{% render 'social-icons' %}{%- endif -%}
+      </div>
+      <div class="announcement-bar__slides">
+        {%- for block in section.blocks -%}
+          <p class="announcement-bar__slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}{% unless forloop.first %} aria-hidden="true"{% endunless %}>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+            {%- else -%}
+              {{ block.settings.text }}
+            {%- endif -%}
+          </p>
+        {%- endfor -%}
+      </div>
+      <div class="announcement-bar__nav">
+        {%- if section.blocks.size > 1 -%}
+          <button type="button" class="icon-button" data-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', icon: 'chevron-left' %}</button>
+          <button type="button" class="icon-button" data-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', icon: 'chevron-right' %}</button>
+        {%- endif -%}
+      </div>
+    </div>
+  </announcement-bar>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate announcements", "default": true },
+    { "type": "range", "id": "speed", "label": "Rotate every", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
+    { "type": "checkbox", "id": "show_social", "label": "Show social icons on desktop", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Free shipping on orders over $150" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        { "type": "announcement", "settings": { "text": "Complimentary shipping on orders over $150" } },
+        { "type": "announcement", "settings": { "text": "Lifetime warranty on every handcrafted piece" } },
+        { "type": "announcement", "settings": { "text": "Free monogramming — make it yours" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

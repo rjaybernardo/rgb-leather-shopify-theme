@@ -1,0 +1,64 @@
+{%- liquid
+  assign s = section.settings
+  assign slider_id = 'Slider-' | append: section.id
+  assign products = s.collection.products
+  assign limit = s.limit
+-%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {%- if s.layout == 'slider' -%}
+      {% render 'section-heading', settings: s, slider_id: slider_id %}
+    {%- else -%}
+      {% render 'section-heading', settings: s %}
+    {%- endif -%}
+    {%- capture cards -%}
+      {%- if s.collection != blank and s.collection.products_count > 0 -%}
+        {%- for product in products limit: limit -%}
+          <li class="reveal" style="--i: {{ forloop.index0 | modulo: 4 }};">{% render 'product-card', product: product, index: forloop.index0 %}</li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <li>
+            <div class="card">
+              <div class="card__media"><div class="media media--portrait">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div></div>
+              <div class="card__info"><h3 class="card__title">{{ 'sections.featured_collection.placeholder_title' | t }}</h3><div class="price">$185.00</div></div>
+            </div>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if s.layout == 'slider' -%}
+      <slider-component id="{{ slider_id }}" class="slider slider--bleed-mobile">
+        <ul class="slider__track" role="list" style="--per-view: {{ s.columns }}; --per-view-tablet: 2.5; --per-view-mobile: 1.6;">{{ cards }}</ul>
+        <div class="slider__progress"><span></span></div>
+      </slider-component>
+    {%- else -%}
+      <ul class="grid" role="list" style="--cols: {{ s.columns }}; list-style: none; padding: 0; margin: 0;">{{ cards }}</ul>
+    {%- endif -%}
+    {%- if s.button_label != blank and s.collection != blank -%}
+      <div class="section-footer"><a href="{{ s.collection.url }}" class="btn btn--secondary">{{ s.button_label }}</a></div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Bestsellers" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Most <em>loved</em> pieces" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 16, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [ { "value": "grid", "label": "Grid" }, { "value": "slider", "label": "Carousel" } ], "default": "slider" },
+    { "type": "text", "id": "link_label", "label": "Header link label", "default": "Shop all" },
+    { "type": "url", "id": "link_url", "label": "Header link" },
+    { "type": "text", "id": "button_label", "label": "Bottom button label" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+{% doc %}
+  Compact horizontal product row with quick add, used in cart upsells and complementary products.
+
+  @param {product} product - Product object
+
+  @example
+  {% render 'upsell-item', product: product %}
+{% enddoc %}
+<div class="upsell-item">
+  <a href="{{ product.url }}" class="media media--portrait" tabindex="-1" aria-hidden="true">
+    {%- if product.featured_media -%}
+      {{ product.featured_media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100,200', sizes: '80px', alt: '' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <div>
+    <a href="{{ product.url }}" class="upsell-item__title">{{ product.title }}</a>
+    {% render 'price', product: product %}
+  </div>
+  {%- if product.available -%}
+    <button
+      type="button"
+      class="icon-button"
+      data-quick-add
+      {% if product.has_only_default_variant %}data-variant-id="{{ product.selected_or_first_available_variant.id }}"{% else %}data-product-url="{{ product.url }}"{% endif %}
+      aria-label="{{ 'products.product.quick_add_named' | t: title: product.title | escape }}"
+    >
+      {%- render 'icon', icon: 'plus' -%}
+    </button>
+  {%- endif -%}
+</div>

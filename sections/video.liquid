@@ -1,0 +1,53 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }} video-section{% if s.full_width %} video-section--full{% endif %}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="{% if s.full_width %}page-width page-width--full{% else %}page-width{% endif %}" {% if s.full_width %}style="padding: 0;"{% endif %}>
+    {%- unless s.full_width -%}{% render 'section-heading', settings: s, align: 'center' %}{%- endunless -%}
+    <deferred-media class="video-section__media reveal" style="--ratio: 16/9; --h: {{ s.height }}vh;" {% if s.autoplay %}data-autoload="true"{% endif %}>
+      {%- if s.cover -%}
+        {{ s.cover | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '600,900,1200,1800,2400', sizes: '100vw', alt: s.cover.alt }}
+      {%- elsif s.video != blank and s.video.preview_image -%}
+        {{ s.video.preview_image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '600,900,1200,1800,2400', sizes: '100vw', alt: '' }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      {%- unless s.autoplay -%}
+        <button type="button" class="video-section__play" data-load aria-label="{{ 'sections.video.play' | t }}">
+          <span class="video-section__play-icon">{% render 'icon', icon: 'play' %}</span>
+          {%- if s.full_width and s.heading != blank -%}<span class="h2 heading-italic" style="margin: 0;">{{ s.heading }}</span>{%- endif -%}
+        </button>
+      {%- endunless -%}
+      <template>
+        {%- if s.video != blank -%}
+          {{ s.video | video_tag: autoplay: true, muted: s.autoplay, loop: s.autoplay, playsinline: true, controls: true }}
+        {%- elsif s.video_url != blank -%}
+          {%- if s.video_url.type == 'youtube' -%}
+            <iframe src="https://www.youtube.com/embed/{{ s.video_url.id }}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="{{ s.heading | strip_html | escape }}"></iframe>
+          {%- else -%}
+            <iframe src="https://player.vimeo.com/video/{{ s.video_url.id }}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen title="{{ s.heading | strip_html | escape }}"></iframe>
+          {%- endif -%}
+        {%- endif -%}
+      </template>
+    </deferred-media>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Behind the seams" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Watch a wallet come to <em>life</em>" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "video", "id": "video", "label": "Shopify-hosted video" },
+    { "type": "video_url", "id": "video_url", "label": "Or YouTube / Vimeo URL", "accept": ["youtube", "vimeo"] },
+    { "type": "image_picker", "id": "cover", "label": "Cover image" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay muted loop (Shopify video only)", "default": false },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    { "type": "range", "id": "height", "label": "Full width height", "min": 40, "max": 100, "step": 5, "unit": "vh", "default": 80 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Video" }]
+}
+{% endschema %}

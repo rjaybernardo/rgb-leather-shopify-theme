@@ -1,0 +1,73 @@
+{% doc %}
+  Variant picker with color swatches, pills or dropdowns. Updates via the Section Rendering API and supports combined listings.
+
+  @param {product} product - Product object
+  @param {string} section_id - Section id used to re-render
+  @param {string} [style] - 'pills' or 'dropdown' for non-swatch options
+  @param {boolean} [update_url] - Update browser URL on change
+  @param {string} [size_guide] - Captured size guide button HTML shown next to size-like options
+
+  @example
+  {% render 'variant-picker', product: product, section_id: section.id, style: 'pills', update_url: true %}
+{% enddoc %}
+{%- unless product.has_only_default_variant -%}
+  {%- assign swatch_names = settings.swatch_option_names | downcase | split: ',' -%}
+  <variant-picker data-section-id="{{ section_id }}" data-url="{{ product.url }}" data-update-url="{{ update_url }}" data-swap="picker" style="display: grid; gap: 1.25rem;">
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign option_key = option.name | downcase | strip
+        assign is_swatch = false
+        for n in swatch_names
+          assign n_clean = n | strip
+          if n_clean == option_key
+            assign is_swatch = true
+          endif
+        endfor
+        if option.values.first.swatch
+          assign is_swatch = true
+        endif
+        assign input_name = option.name | handleize | append: '-' | append: section_id
+      -%}
+      {%- if is_swatch or style != 'dropdown' -%}
+        <fieldset class="option">
+          <legend class="option__legend">
+            <strong>{{ option.name }}:</strong>
+            <span class="option__legend-value" data-selected-value>{{ option.selected_value }}</span>
+            {%- if size_guide != blank and forloop.last -%}{{ size_guide }}{%- endif -%}
+          </legend>
+          <div class="option__values">
+            {%- for value in option.values -%}
+              {%- assign input_id = input_name | append: '-' | append: forloop.index -%}
+              <input
+                class="option__input{% unless value.available %} is-unavailable{% endunless %}"
+                type="radio"
+                id="{{ input_id }}"
+                name="{{ input_name }}"
+                value="{{ value | escape }}"
+                data-option-value-id="{{ value.id }}"
+                {% if value.product_url %}data-product-url="{{ value.product_url }}"{% endif %}
+                {% if value.selected %}checked{% endif %}
+              >
+              {%- if is_swatch -%}
+                <label for="{{ input_id }}" class="option__swatch" style="--swatch: {% render 'swatch-value', value: value %};" title="{{ value | escape }}"><span class="visually-hidden">{{ value }}{% unless value.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}</span></label>
+              {%- else -%}
+                <label for="{{ input_id }}" class="option__pill">{{ value }}<span class="visually-hidden">{% unless value.available %} — {{ 'products.product.sold_out' | t }}{% endunless %}</span></label>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- else -%}
+        <div class="option field" style="margin: 0;">
+          <label class="option__legend" for="{{ input_name }}"><strong>{{ option.name }}</strong>{%- if size_guide != blank and forloop.last -%}{{ size_guide }}{%- endif -%}</label>
+          <select class="select option__dropdown" id="{{ input_name }}" name="{{ input_name }}">
+            {%- for value in option.values -%}
+              <option value="{{ value | escape }}" data-option-value-id="{{ value.id }}" {% if value.product_url %}data-product-url="{{ value.product_url }}"{% endif %} {% if value.selected %}selected{% endif %}>
+                {{- value -}}{%- unless value.available %} — {{ 'products.product.sold_out' | t }}{% endunless -%}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </variant-picker>
+{%- endunless -%}

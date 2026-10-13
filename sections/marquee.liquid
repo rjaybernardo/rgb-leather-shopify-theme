@@ -1,0 +1,55 @@
+{%- capture group -%}
+  <div class="marquee__group">
+    {%- for block in section.blocks -%}
+      {%- if block.settings.link != blank -%}
+        <a href="{{ block.settings.link }}" class="marquee__item{% if block.settings.italic %} marquee__item--italic{% endif %}" {{ block.shopify_attributes }}>
+      {%- else -%}
+        <span class="marquee__item{% if block.settings.italic %} marquee__item--italic{% endif %}" {{ block.shopify_attributes }}>
+      {%- endif -%}
+        {{ block.settings.text }}
+        <span class="marquee__sep" aria-hidden="true">{% render 'icon', icon: section.settings.separator %}</span>
+      {%- if block.settings.link != blank -%}</a>{%- else -%}</span>{%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endcapture -%}
+<div class="marquee color-{{ section.settings.color_scheme }}{% if section.settings.reverse %} marquee--reverse{% endif %}" style="--speed: {{ section.settings.speed }}s; --fs: {{ section.settings.size | divided_by: 10.0 }}rem; --mpad: {{ section.settings.padding | divided_by: 10.0 }}rem;" role="marquee">
+  <div class="marquee__track">
+    {{ group }}{{ group }}{{ group }}{{ group }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling text",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "speed", "label": "Speed (lower is faster)", "min": 10, "max": 80, "step": 5, "unit": "s", "default": 35 },
+    { "type": "range", "id": "size", "label": "Text size", "min": 10, "max": 50, "step": 2, "default": 18 },
+    { "type": "range", "id": "padding", "label": "Vertical padding", "min": 4, "max": 40, "step": 2, "default": 12 },
+    { "type": "checkbox", "id": "reverse", "label": "Reverse direction", "default": false },
+    { "type": "select", "id": "separator", "label": "Separator icon", "options": [ { "value": "star", "label": "Star" }, { "value": "leather", "label": "Leather" }, { "value": "plus", "label": "Plus" }, { "value": "leaf", "label": "Leaf" } ], "default": "star" }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Full-grain leather" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "italic", "label": "Italic", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling text",
+      "blocks": [
+        { "type": "text", "settings": { "text": "Full-grain leather" } },
+        { "type": "text", "settings": { "text": "Hand-stitched", "italic": true } },
+        { "type": "text", "settings": { "text": "Lifetime warranty" } },
+        { "type": "text", "settings": { "text": "Free monogramming", "italic": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

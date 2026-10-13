@@ -1,0 +1,18 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand": { "type": "brand", "settings": {} },
+        "menu-1": { "type": "menu", "settings": { "heading": "Shop", "menu": "main-menu" } },
+        "menu-2": { "type": "menu", "settings": { "heading": "Help", "menu": "footer" } },
+        "newsletter": { "type": "newsletter", "settings": {} }
+      },
+      "block_order": ["brand", "menu-1", "menu-2", "newsletter"],
+      "settings": { "color_scheme": "scheme-3", "wordmark": "RGB Leather" }
+    }
+  },
+  "order": ["footer"]
+}

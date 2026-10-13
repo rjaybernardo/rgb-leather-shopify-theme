@@ -1,0 +1,32 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": { "type": "announcement", "settings": { "text": "Complimentary shipping on orders over $150", "link": "" } },
+        "announcement-2": { "type": "announcement", "settings": { "text": "Lifetime warranty on every handcrafted piece", "link": "" } },
+        "announcement-3": { "type": "announcement", "settings": { "text": "Free monogramming — make it yours", "link": "" } }
+      },
+      "block_order": ["announcement-1", "announcement-2", "announcement-3"],
+      "settings": { "color_scheme": "scheme-3", "autoplay": true, "speed": 5, "show_social": true }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega-1": { "type": "mega_menu", "settings": { "menu_item": "Shop", "title_1": "New arrivals", "title_2": "Bestsellers" } }
+      },
+      "block_order": ["mega-1"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "menu": "main-menu",
+        "layout": "logo-left",
+        "sticky": "smart",
+        "transparent_home": true,
+        "highlight_item": "Sale"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

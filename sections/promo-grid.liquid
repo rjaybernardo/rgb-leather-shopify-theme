@@ -1,0 +1,72 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {% render 'section-heading', settings: s %}
+    <div class="bento" style="--row-h: {{ s.row_height }}px;">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        <a href="{{ b.link | default: '#' }}" class="bento__tile bento__tile--{{ b.size }}{% if b.text_dark %} bento__tile--text-dark{% endif %} hover-zoom reveal" style="--i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <div class="hero__media">
+            {%- if b.image -%}
+              {{ b.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200,1600', sizes: '(min-width: 990px) 50vw, 100vw', alt: b.image.alt }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="hero__overlay" style="--overlay: {{ b.overlay | divided_by: 100.0 }};"></div>
+          <div class="bento__content bento__content--{{ b.position }}">
+            {%- if b.subheading != blank -%}<span class="subheading" style="color: inherit; margin: 0;">{{ b.subheading }}</span>{%- endif -%}
+            <h3 class="bento__title {% if b.size == 'large' %}h1{% else %}h3{% endif %} heading-italic">{{ b.heading }}</h3>
+            {%- if b.text != blank -%}<p class="bento__text">{{ b.text }}</p>{%- endif -%}
+            {%- if b.link_label != blank -%}<span class="link">{{ b.link_label }} {% render 'icon', icon: 'arrow-right' %}</span>{%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo grid (bento)",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "range", "id": "row_height", "label": "Row height", "min": 200, "max": 500, "step": 20, "unit": "px", "default": 300 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "limit": 8,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "size", "label": "Size", "options": [ { "value": "large", "label": "Large (2x2)" }, { "value": "wide", "label": "Wide (2x1)" }, { "value": "tall", "label": "Tall (1x2)" }, { "value": "small", "label": "Small (1x1)" }, { "value": "full", "label": "Full width" } ], "default": "small" },
+        { "type": "text", "id": "subheading", "label": "Subheading" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Tile heading" },
+        { "type": "text", "id": "text", "label": "Text" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop now" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "select", "id": "position", "label": "Content position", "options": [ { "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" } ], "default": "bottom" },
+        { "type": "range", "id": "overlay", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 35 },
+        { "type": "checkbox", "id": "text_dark", "label": "Dark text", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo grid (bento)",
+      "blocks": [
+        { "type": "tile", "settings": { "size": "large", "subheading": "Signature", "heading": "The <em>Weekender</em> duffle", "text": "Our most-gifted bag, now in three new hides.", "link_label": "Shop the bag" } },
+        { "type": "tile", "settings": { "size": "wide", "heading": "Slim wallets", "link_label": "Shop wallets" } },
+        { "type": "tile", "settings": { "size": "small", "heading": "Belts", "link_label": "Shop belts" } },
+        { "type": "tile", "settings": { "size": "small", "heading": "Gift cards", "link_label": "Give a gift" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width{% unless s.layout == 'split' %} page-width--narrow{% endunless %}">
+    <div class="faq{% if s.layout == 'split' %} faq--split{% endif %}">
+      <div class="section-header{% unless s.layout == 'split' %} section-header--center{% endunless %}" style="margin: 0;">
+        <div class="section-header__text">
+          {%- if s.subheading != blank -%}<span class="subheading">{{ s.subheading }}</span>{%- endif -%}
+          <h2 class="h2 heading-italic">{{ s.heading }}</h2>
+          {%- if s.description != blank -%}<div class="section-header__desc">{{ s.description }}</div>{%- endif -%}
+          {%- if s.button_label != blank -%}<a href="{{ s.button_link }}" class="btn btn--secondary" style="margin-top: 1.5rem;">{{ s.button_label }}</a>{%- endif -%}
+        </div>
+      </div>
+      <div class="accordion">
+        {%- for block in section.blocks -%}
+          <details class="accordion__item" {% if forloop.first and s.open_first %}open{% endif %} {{ block.shopify_attributes }}>
+            <summary class="accordion__summary">{{ block.settings.question }}<span class="accordion__toggle" aria-hidden="true"></span></summary>
+            <div class="accordion__content rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- if s.schema_markup and section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          { "@type": "Question", "name": {{ block.settings.question | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} } }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [ { "value": "split", "label": "Heading beside questions" }, { "value": "stacked", "label": "Centered" } ], "default": "split" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "FAQ" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Questions, <em>answered</em>" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Can't find what you're looking for? Our team replies within a day.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Contact us" },
+    { "type": "url", "id": "button_link", "label": "Button link", "default": "/pages/contact" },
+    { "type": "checkbox", "id": "open_first", "label": "Open first question", "default": true },
+    { "type": "checkbox", "id": "schema_markup", "label": "Add FAQ rich results for Google", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How do I care for my leather?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Wipe with a dry cloth and condition every 6–12 months. Every order includes a care card.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "How long does shipping take?", "answer": "<p>Orders ship within 1–2 business days. Domestic delivery takes 2–5 days; international 5–10 days.</p>" } },
+        { "type": "question", "settings": { "question": "What does the lifetime warranty cover?", "answer": "<p>All stitching and hardware for the life of the product. Normal wear and patina are part of the charm.</p>" } },
+        { "type": "question", "settings": { "question": "Can I add a monogram?", "answer": "<p>Yes — choose personalization on the product page. Monogrammed items ship within 3 business days.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

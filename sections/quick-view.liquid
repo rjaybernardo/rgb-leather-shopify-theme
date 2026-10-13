@@ -1,0 +1,25 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'QuickViewForm-' | append: product.id
+-%}
+<div class="quick-view" data-quick-view data-product>
+  <script type="application/json" data-variant-json>{{ variant | json }}</script>
+  {% render 'product-gallery', product: product, layout: 'thumbs-bottom', ratio: '4/5', zoom: false %}
+  <div class="product__info">
+    {%- if product.vendor != blank -%}<span class="product__vendor">{{ product.vendor }}</span>{%- endif -%}
+    <h2 class="product__title">{{ product.title }}</h2>
+    {% render 'rating', product: product, show_count: true %}
+    <div data-swap="price">{% render 'price', product: product, use_variant: true, show_save: true, large: true %}</div>
+    {% render 'variant-picker', product: product, section_id: 'quick-view', style: 'pills', update_url: false %}
+    {% render 'buy-buttons', product: product, form_id: form_id, show_quantity: true, dynamic_checkout: false %}
+    <div class="product__desc rte">{{ product.description | strip_html | truncatewords: 32 }}</div>
+    <a href="{{ product.url }}" class="link">{{ 'products.product.view_details' | t }} {% render 'icon', icon: 'arrow-right' %}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quick view",
+  "settings": []
+}
+{% endschema %}

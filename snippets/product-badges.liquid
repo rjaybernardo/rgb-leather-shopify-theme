@@ -1,0 +1,47 @@
+{% doc %}
+  Renders sale, sold out, new and custom tag badges for a product.
+
+  @param {product} product - Product object
+  @param {variant} [variant] - Variant used for sale calculation
+
+  @example
+  {% render 'product-badges', product: product %}
+{% enddoc %}
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign is_new = false
+  if settings.badge_new_enable
+    assign now_s = 'now' | date: '%s' | plus: 0
+    assign created_s = product.created_at | date: '%s' | plus: 0
+    assign age_days = now_s | minus: created_s | divided_by: 86400
+    if age_days <= settings.badge_new_days
+      assign is_new = true
+    endif
+  endif
+-%}
+<div class="card__badges">
+  {%- if product.available == false -%}
+    <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+  {%- elsif target.compare_at_price > target.price -%}
+    <span class="badge badge--sale">
+      {%- case settings.sale_badge_style -%}
+        {%- when 'percent' -%}
+          {%- assign pct = target.compare_at_price | minus: target.price | times: 100.0 | divided_by: target.compare_at_price | round -%}
+          -{{ pct }}%
+        {%- when 'amount' -%}
+          {%- assign saved = target.compare_at_price | minus: target.price | money_without_trailing_zeros -%}
+          {{- 'products.product.save_amount' | t: amount: saved -}}
+        {%- else -%}
+          {{- 'products.product.on_sale' | t -}}
+      {%- endcase -%}
+    </span>
+  {%- endif -%}
+  {%- for tag in product.tags -%}
+    {%- if tag contains 'badge:' -%}
+      <span class="badge">{{ tag | remove_first: 'badge:' | strip }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if is_new and product.available -%}
+    <span class="badge badge--new">{{ 'products.product.new' | t }}</span>
+  {%- endif -%}
+</div>

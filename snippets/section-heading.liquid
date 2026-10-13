@@ -1,0 +1,30 @@
+{% doc %}
+  Standard section header with subheading, heading, description and a view-all link or slider controls.
+
+  @param {object} settings - Section settings with subheading, heading, description, link_label, link_url
+  @param {string} [align] - 'left' or 'center'
+  @param {string} [slider_id] - Renders previous/next buttons for this slider id
+
+  @example
+  {% render 'section-heading', settings: section.settings, align: 'center' %}
+{% enddoc %}
+{%- if settings.heading != blank or settings.subheading != blank or settings.description != blank -%}
+  <div class="section-header{% if align == 'center' %} section-header--center{% endif %} reveal">
+    <div class="section-header__text">
+      {%- if settings.subheading != blank -%}<span class="subheading">{{ settings.subheading }}</span>{%- endif -%}
+      {%- if settings.heading != blank -%}<h2 class="h2 heading-italic">{{ settings.heading }}</h2>{%- endif -%}
+      {%- if settings.description != blank -%}<div class="section-header__desc">{{ settings.description }}</div>{%- endif -%}
+    </div>
+    {%- if slider_id and align != 'center' -%}
+      <div class="slider__controls">
+        {%- if settings.link_url != blank and settings.link_label != blank -%}
+          <a href="{{ settings.link_url }}" class="link" style="margin-right: 1rem;">{{ settings.link_label }}</a>
+        {%- endif -%}
+        <button type="button" class="slider__btn" data-slider-prev="{{ slider_id }}" aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', icon: 'chevron-left' %}</button>
+        <button type="button" class="slider__btn" data-slider-next="{{ slider_id }}" aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', icon: 'chevron-right' %}</button>
+      </div>
+    {%- elsif settings.link_url != blank and settings.link_label != blank and align != 'center' -%}
+      <a href="{{ settings.link_url }}" class="link">{{ settings.link_label }} {% render 'icon', icon: 'arrow-right' %}</a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

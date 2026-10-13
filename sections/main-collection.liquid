@@ -1,0 +1,131 @@
+{%- liquid
+  assign s = section.settings
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  assign has_filters = false
+  if s.enable_filtering and collection.filters.size > 0
+    assign has_filters = true
+  endif
+-%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {%- paginate collection.products by s.per_page -%}
+      <facet-filters data-section-id="{{ section.id }}" class="collection{% if has_filters and s.filter_layout == 'sidebar' %} collection--sidebar{% endif %}">
+        {%- if has_filters -%}
+          <div class="collection__filters">{% render 'facets', results: collection %}</div>
+        {%- endif -%}
+        <div class="collection__main">
+          <div class="toolbar">
+            <div class="toolbar__left">
+              {%- if has_filters -%}
+                <button type="button" class="toolbar__filter-btn" data-drawer-open="FacetsDrawer">{% render 'icon', icon: 'filter' %} {{ 'collections.filters.title' | t }}</button>
+              {%- endif -%}
+              <span class="toolbar__count" data-facet-render="count"><span data-results-count>{{ collection.products_count }}</span> {{ 'collections.general.products' | t }}</span>
+            </div>
+            <div class="toolbar__right">
+              {%- if s.enable_sorting -%}
+                <form data-facets-form class="toolbar__sort">
+                  <label for="SortBy-{{ section.id }}">{{ 'collections.sorting.title' | t }}</label>
+                  <select class="select" name="sort_by" id="SortBy-{{ section.id }}">
+                    {%- for option in collection.sort_options -%}
+                      <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
+                    {%- endfor -%}
+                  </select>
+                </form>
+              {%- endif -%}
+              <div class="grid-toggle" role="group" aria-label="{{ 'collections.general.grid_layout' | t }}">
+                <button type="button" data-grid-cols="2" aria-pressed="{% if s.columns == 2 %}true{% else %}false{% endif %}" aria-label="2">{% render 'icon', icon: 'grid-2' %}</button>
+                <button type="button" data-grid-cols="3" aria-pressed="{% if s.columns == 3 %}true{% else %}false{% endif %}" aria-label="3">{% render 'icon', icon: 'grid-3' %}</button>
+                <button type="button" data-grid-cols="4" aria-pressed="{% if s.columns == 4 %}true{% else %}false{% endif %}" aria-label="4">{% render 'icon', icon: 'grid-4' %}</button>
+              </div>
+            </div>
+          </div>
+
+          {% render 'active-filters', results: collection %}
+
+          <div data-facet-render="grid">
+            {%- if collection.products.size > 0 -%}
+              <ul id="ProductGrid-{{ section.id }}" class="grid product-grid" data-product-grid data-cols="{{ s.columns }}" role="list" style="list-style: none; padding: 0; margin: 0;">
+                {%- for product in collection.products -%}
+                  {%- if paginate.current_page == 1 -%}
+                    {%- for block in section.blocks -%}
+                      {%- if block.settings.position == forloop.parentloop.index -%}
+                        <li class="grid__promo-cell color-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>
+                          <a href="{{ block.settings.link | default: '#' }}" class="grid__promo hover-zoom">
+                            <div class="hero__media">
+                              {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400,600,800,1200', sizes: '(min-width: 990px) 50vw, 100vw', alt: block.settings.image.alt }}{%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+                            </div>
+                            <div class="hero__overlay"></div>
+                            <div class="bento__content">
+                              <h3 class="h2 heading-italic" style="margin: 0;">{{ block.settings.heading }}</h3>
+                              {%- if block.settings.text != blank -%}<p class="bento__text">{{ block.settings.text }}</p>{%- endif -%}
+                              {%- if block.settings.link_label != blank -%}<span class="link">{{ block.settings.link_label }}</span>{%- endif -%}
+                            </div>
+                          </a>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                  <li class="reveal" style="--i: {{ forloop.index0 | modulo: 4 }};">{% render 'product-card', product: product, index: forloop.index0, eager: forloop.first %}</li>
+                {%- endfor -%}
+              </ul>
+            {%- else -%}
+              <div class="empty-state">
+                <p class="h3">{{ 'collections.general.no_matches' | t }}</p>
+                <a href="{{ collection.url }}" class="btn btn--secondary" data-facet-link>{{ 'collections.filters.clear_all' | t }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div data-facet-render="pagination">
+            {%- if paginate.pages > 1 -%}
+              {%- if s.pagination == 'pages' -%}
+                {% render 'pagination', paginate: paginate %}
+              {%- else -%}
+                {%- assign shown = paginate.current_offset | plus: collection.products.size -%}
+                <load-more class="load-more" data-section-id="{{ section.id }}" data-grid="ProductGrid-{{ section.id }}" data-next-url="{{ paginate.next.url }}" data-infinite="{% if s.pagination == 'infinite' %}true{% else %}false{% endif %}">
+                  <span>{{ 'collections.general.showing' | t: shown: shown, total: paginate.items }}</span>
+                  <div class="load-more__bar"><span style="--pct: {{ shown | times: 100 | divided_by: paginate.items }}%;"></span></div>
+                  {%- if paginate.next -%}<button type="button" class="btn btn--secondary">{{ 'collections.general.load_more' | t }}</button>{%- endif -%}
+                </load-more>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </facet-filters>
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "range", "id": "columns", "label": "Default columns on desktop", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "select", "id": "pagination", "label": "Pagination", "options": [ { "value": "load_more", "label": "Load more button" }, { "value": "infinite", "label": "Infinite scroll" }, { "value": "pages", "label": "Page numbers" } ], "default": "load_more" },
+    { "type": "header", "content": "Filtering & sorting" },
+    { "type": "checkbox", "id": "enable_filtering", "label": "Enable filtering", "default": true, "info": "Customize filters with the Search & Discovery app" },
+    { "type": "select", "id": "filter_layout", "label": "Desktop filter layout", "options": [ { "value": "sidebar", "label": "Sidebar" }, { "value": "drawer", "label": "Drawer" } ], "default": "sidebar" },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 16 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Promo tile",
+      "limit": 3,
+      "settings": [
+        { "type": "range", "id": "position", "label": "Show before product #", "min": 1, "max": 24, "step": 1, "default": 5 },
+        { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Made to <em>last</em>" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Every piece backed by a lifetime warranty." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Learn more" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ]
+}
+{% endschema %}

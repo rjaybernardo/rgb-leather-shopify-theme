@@ -1,0 +1,68 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="text-center" style="margin-bottom: 2.5rem;">
+      <h1 class="h1 heading-italic">{%- if search.performed -%}{{ 'general.search.results_for' | t: terms: search.terms }}{%- else -%}{{ 'general.search.title' | t }}{%- endif -%}</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form-inline">
+        <input class="input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="btn">{% render 'icon', icon: 'search' %}<span class="visually-hidden">{{ 'general.search.submit' | t }}</span></button>
+      </form>
+    </div>
+    {%- if search.performed -%}
+      {%- paginate search.results by 24 -%}
+        <facet-filters data-section-id="{{ section.id }}" class="collection{% if search.filters.size > 0 %} collection--sidebar{% endif %}">
+          {%- if search.filters.size > 0 -%}<div>{% render 'facets', results: search %}</div>{%- endif -%}
+          <div>
+            <div class="toolbar">
+              <div class="toolbar__left">
+                {%- if search.filters.size > 0 -%}<button type="button" class="toolbar__filter-btn" data-drawer-open="FacetsDrawer">{% render 'icon', icon: 'filter' %} {{ 'collections.filters.title' | t }}</button>{%- endif -%}
+                <span class="toolbar__count" data-facet-render="count"><span data-results-count>{{ search.results_count }}</span> {{ 'general.search.results' | t }}</span>
+              </div>
+              <form data-facets-form class="toolbar__sort">
+                <label for="SortBy-{{ section.id }}">{{ 'collections.sorting.title' | t }}</label>
+                <select class="select" name="sort_by" id="SortBy-{{ section.id }}">
+                  {%- for option in search.sort_options -%}
+                    <option value="{{ option.value | escape }}"{% if option.value == search.sort_by %} selected{% endif %}>{{ option.name }}</option>
+                  {%- endfor -%}
+                </select>
+              </form>
+            </div>
+            {% render 'active-filters', results: search %}
+            <div data-facet-render="grid">
+              {%- if search.results_count > 0 -%}
+                <ul class="grid product-grid" data-product-grid role="list" style="--cols: 4; list-style: none; padding: 0; margin: 0;">
+                  {%- for item in search.results -%}
+                    <li>
+                      {%- if item.object_type == 'product' -%}
+                        {% render 'product-card', product: item, index: forloop.index0 %}
+                      {%- elsif item.object_type == 'article' -%}
+                        {% render 'article-card', article: item %}
+                      {%- else -%}
+                        <a href="{{ item.url }}" class="card" style="padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); text-decoration: none;"><span class="card__vendor">{{ 'general.search.page' | t }}</span><span class="h4">{{ item.title }}</span></a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- else -%}
+                <div class="empty-state"><p class="h3">{{ 'general.search.no_results' | t: terms: search.terms }}</p></div>
+              {%- endif -%}
+            </div>
+            <div data-facet-render="pagination">{%- if paginate.pages > 1 -%}{% render 'pagination', paginate: paginate %}{%- endif -%}</div>
+          </div>
+        </facet-filters>
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {% render 'section-heading', settings: s %}
+    <ul class="grid" role="list" style="--cols: {{ s.columns }}; --cols-mobile: 1; --cols-tablet: 2; list-style: none; padding: 0; margin: 0;">
+      {%- if s.blog != blank and s.blog.articles_count > 0 -%}
+        {%- for article in s.blog.articles limit: s.limit -%}
+          <li class="reveal" style="--i: {{ forloop.index0 }};">{% render 'article-card', article: article, show_excerpt: s.show_excerpt %}</li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..3) -%}
+          <li><div class="article-card"><div class="media" style="aspect-ratio: 3/2;">{{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}</div><h3 class="article-card__title">{{ 'sections.featured_blog.placeholder' | t }}</h3></div></li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "The journal" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Stories from the <em>workshop</em>" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "limit", "label": "Posts to show", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "range", "id": "columns", "label": "Columns", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read the journal" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Blog posts" }]
+}
+{% endschema %}

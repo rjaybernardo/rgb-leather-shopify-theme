@@ -1,0 +1,100 @@
+{% doc %}
+  Storefront filtering UI (drawer on mobile, optional sticky sidebar on desktop) plus sort.
+
+  @param {object} results - collection or search object
+
+  @example
+  {% render 'facets', results: collection %}
+{% enddoc %}
+{%- assign swatch_names = settings.swatch_option_names | downcase | split: ',' -%}
+<side-drawer id="FacetsDrawer" class="drawer drawer--left facets-drawer" aria-hidden="true">
+  <div class="drawer__overlay" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="FacetsTitle" tabindex="-1">
+    <div class="drawer__header">
+      <h2 class="drawer__title h4" id="FacetsTitle">{{ 'collections.filters.title' | t }}</h2>
+      <button type="button" class="icon-button" data-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      <form data-facets-form id="FacetsForm" data-facet-render="facets">
+        {%- if results.terms -%}
+          <input type="hidden" name="q" value="{{ results.terms | escape }}">
+          <input type="hidden" name="options[prefix]" value="last">
+          <input type="hidden" name="type" value="product">
+        {%- endif -%}
+        {%- for filter in results.filters -%}
+          {%- liquid
+            assign active_count = filter.active_values.size
+            if filter.type == 'price_range'
+              if filter.min_value.value != null or filter.max_value.value != null
+                assign active_count = 1
+              endif
+            endif
+            assign filter_key = filter.label | downcase | strip
+            assign is_swatch_filter = false
+            for n in swatch_names
+              assign n_clean = n | strip
+              if n_clean == filter_key
+                assign is_swatch_filter = true
+              endif
+            endfor
+            if filter.presentation == 'swatch'
+              assign is_swatch_filter = true
+            endif
+          -%}
+          <details class="facet" data-facet-id="{{ filter.param_name | handleize }}" {% if forloop.index <= 4 or active_count > 0 %}open{% endif %}>
+            <summary class="facet__summary">
+              <span>{{ filter.label }}{% if active_count > 0 %}<span class="facet__count">{{ active_count }}</span>{% endif %}</span>
+              <span class="accordion__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="facet__body">
+              {%- case filter.type -%}
+                {%- when 'list', 'boolean' -%}
+                  {%- if is_swatch_filter -%}
+                    <div class="facet__swatches">
+                      {%- for value in filter.values -%}
+                        {%- assign input_id = 'Filter-' | append: filter.param_name | handleize | append: '-' | append: forloop.index -%}
+                        <span>
+                          <input class="option__input{% if value.count == 0 and value.active == false %} is-unavailable{% endif %}" type="checkbox" id="{{ input_id }}" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                          <label for="{{ input_id }}" class="option__swatch" title="{{ value.label | escape }} ({{ value.count }})" style="--swatch: {% if value.swatch.image %}url({{ value.swatch.image | image_url: width: 80 }}){% elsif value.swatch.color %}{{ value.swatch.color }}{% else %}{% render 'swatch-value', name: value.label %}{% endif %};"><span class="visually-hidden">{{ value.label }}</span></label>
+                        </span>
+                      {%- endfor -%}
+                    </div>
+                  {%- else -%}
+                    <ul class="facet__list" role="list">
+                      {%- for value in filter.values -%}
+                        <li>
+                          <label class="checkbox{% if value.count == 0 and value.active == false %} is-disabled{% endif %}">
+                            <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                            <span>{{ value.label }}</span>
+                            <span>{{ value.count }}</span>
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                {%- when 'price_range' -%}
+                  {%- assign max_price = filter.range_max | money_without_currency | remove: ',' -%}
+                  <div class="facet__price">
+                    <div class="field">
+                      <label class="visually-hidden" for="PriceMin">{{ 'collections.filters.from' | t }}</label>
+                      <input class="input" type="number" id="PriceMin" name="{{ filter.min_value.param_name }}" {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | remove: ',' }}"{% endif %} placeholder="{{ cart.currency.symbol }}0" min="0" max="{{ max_price }}">
+                    </div>
+                    <span>–</span>
+                    <div class="field">
+                      <label class="visually-hidden" for="PriceMax">{{ 'collections.filters.to' | t }}</label>
+                      <input class="input" type="number" id="PriceMax" name="{{ filter.max_value.param_name }}" {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | remove: ',' }}"{% endif %} placeholder="{{ cart.currency.symbol }}{{ max_price }}" min="0" max="{{ max_price }}">
+                    </div>
+                  </div>
+              {%- endcase -%}
+            </div>
+          </details>
+        {%- endfor -%}
+        <noscript><button type="submit" class="btn btn--full" style="margin-top: 1rem;">{{ 'collections.filters.apply' | t }}</button></noscript>
+      </form>
+    </div>
+    <div class="drawer__footer facet__actions">
+      <a href="{{ results.url | default: routes.search_url }}{% if results.terms %}?q={{ results.terms | url_encode }}{% endif %}" class="btn btn--secondary" style="flex: 1;" data-facet-link>{{ 'collections.filters.clear_all' | t }}</a>
+      <button type="button" class="btn" style="flex: 1;" data-close>{{ 'collections.filters.show_results' | t }} (<span data-results-count>{{ results.products_count | default: results.results_count }}</span>)</button>
+    </div>
+  </div>
+</side-drawer>

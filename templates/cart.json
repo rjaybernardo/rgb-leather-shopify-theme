@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    },
+    "related": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "Before you go",
+        "heading": "You might also <em>love</em>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

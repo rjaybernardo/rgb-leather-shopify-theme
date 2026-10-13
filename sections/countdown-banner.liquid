@@ -1,0 +1,48 @@
+{%- assign s = section.settings -%}
+<div class="section" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="promo-banner color-{{ s.color_scheme }}{% if s.image %} promo-banner--split{% endif %} reveal">
+      {%- if s.image -%}
+        <div class="promo-banner__media"><div class="hero__media">{{ s.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '500,800,1100,1400', sizes: '(min-width: 990px) 50vw, 100vw', alt: s.image.alt }}</div></div>
+      {%- endif -%}
+      <div class="promo-banner__content">
+        {%- if s.subheading != blank -%}<span class="subheading" style="margin: 0;">{{ s.subheading }}</span>{%- endif -%}
+        <h2 class="h1 heading-italic" style="margin: 0;">{{ s.heading }}</h2>
+        {%- if s.text != blank -%}<div style="opacity: .85; max-width: 46ch;">{{ s.text }}</div>{%- endif -%}
+        {%- if s.end_date != blank -%}
+          <countdown-timer class="countdown" data-end="{{ s.end_date }}" data-hide-on-end="{{ s.hide_on_end }}" role="timer">
+            <div class="countdown__unit"><span class="countdown__value" data-days>00</span><span class="countdown__label">{{ 'sections.countdown.days' | t }}</span></div>
+            <div class="countdown__unit"><span class="countdown__value" data-hours>00</span><span class="countdown__label">{{ 'sections.countdown.hours' | t }}</span></div>
+            <div class="countdown__unit"><span class="countdown__value" data-minutes>00</span><span class="countdown__label">{{ 'sections.countdown.minutes' | t }}</span></div>
+            <div class="countdown__unit"><span class="countdown__value" data-seconds>00</span><span class="countdown__label">{{ 'sections.countdown.seconds' | t }}</span></div>
+          </countdown-timer>
+        {%- endif -%}
+        {%- if s.code != blank -%}
+          <div class="promo-banner__code">{{ s.code }} <button type="button" class="btn btn--sm" data-copy="{{ s.code | escape }}">{{ 'general.share.copy' | t }}</button></div>
+        {%- endif -%}
+        {%- if s.button_label != blank -%}<a href="{{ s.button_link }}" class="btn">{{ s.button_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Countdown promo",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Limited time" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "The <em>Anniversary</em> sale" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>20% off sitewide — our biggest event of the year ends soon.</p>" },
+    { "type": "text", "id": "end_date", "label": "End date & time", "default": "2026-12-31T23:59:00", "info": "Format: YYYY-MM-DDTHH:MM:SS (customer's local time)" },
+    { "type": "checkbox", "id": "hide_on_end", "label": "Hide section when timer ends", "default": true },
+    { "type": "text", "id": "code", "label": "Discount code", "default": "ANNIV20" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the sale" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "Countdown promo" }]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="contact">
+      <div class="contact__info">
+        {%- if s.subheading != blank -%}<span class="subheading" style="margin: 0;">{{ s.subheading }}</span>{%- endif -%}
+        <h1 class="h1 heading-italic" style="margin: 0;">{{ s.heading }}</h1>
+        <div class="rte text-muted">{{ s.text }}</div>
+        {%- if s.email != blank -%}<div class="contact__info-item">{% render 'icon', icon: 'mail' %}<div><strong>{{ 'contact.email' | t }}</strong><br><a href="mailto:{{ s.email }}">{{ s.email }}</a></div></div>{%- endif -%}
+        {%- if s.phone != blank -%}<div class="contact__info-item">{% render 'icon', icon: 'phone' %}<div><strong>{{ 'contact.phone' | t }}</strong><br>{{ s.phone }}</div></div>{%- endif -%}
+        {%- if s.hours != blank -%}<div class="contact__info-item">{% render 'icon', icon: 'clock' %}<div><strong>{{ 'contact.hours' | t }}</strong><br>{{ s.hours }}</div></div>{%- endif -%}
+      </div>
+      <div>
+        {%- form 'contact', id: 'ContactForm' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success" tabindex="-1" autofocus>{{ 'contact.success' | t }}</p>
+          {%- elsif form.errors -%}
+            <div class="form-message form-message--error">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="form-grid form-grid--2">
+            <div class="field"><label for="ContactName">{{ 'contact.name' | t }}</label><input type="text" id="ContactName" name="contact[{{ 'contact.name' | t }}]" autocomplete="name" value="{{ form.name }}"></div>
+            <div class="field"><label for="ContactEmail">{{ 'contact.email' | t }} *</label><input type="email" id="ContactEmail" name="contact[email]" autocomplete="email" required value="{% if form.email != blank %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"></div>
+            <div class="field field--full"><label for="ContactPhone">{{ 'contact.phone' | t }}</label><input type="tel" id="ContactPhone" name="contact[{{ 'contact.phone' | t }}]" autocomplete="tel" value="{{ form.phone }}"></div>
+            <div class="field field--full"><label for="ContactBody">{{ 'contact.message' | t }}</label><textarea id="ContactBody" name="contact[{{ 'contact.message' | t }}]" rows="6">{{ form.body }}</textarea></div>
+          </div>
+          <button type="submit" class="btn">{{ 'contact.send' | t }}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Get in touch" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "We'd love to <em>hear</em> from you" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Questions about an order, a custom piece or leather care? Our team replies within one business day.</p>" },
+    { "type": "text", "id": "email", "label": "Email", "default": "hello@rgbleather.com" },
+    { "type": "text", "id": "phone", "label": "Phone" },
+    { "type": "text", "id": "hours", "label": "Hours", "default": "Mon – Fri, 9am – 5pm" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

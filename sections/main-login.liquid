@@ -1,0 +1,43 @@
+<div class="section color-{{ section.settings.color_scheme }}" style="--pt: 64px; --pb: 96px;">
+  <div class="page-width">
+    <div class="account">
+      <div id="RecoverPassword" hidden>
+        <h1 class="h2 heading-italic text-center">{{ 'customer.recover_password.title' | t }}</h1>
+        <p class="text-muted text-center">{{ 'customer.recover_password.subtext' | t }}</p>
+        {%- form 'recover_customer_password' -%}
+          {%- if form.posted_successfully? -%}<p class="form-message form-message--success">{{ 'customer.recover_password.success' | t }}</p>{%- endif -%}
+          {%- if form.errors -%}<div class="form-message form-message--error">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <div class="field"><label for="RecoverEmail">{{ 'customer.login.email' | t }}</label><input type="email" id="RecoverEmail" name="email" autocomplete="email" required></div>
+          <button type="submit" class="btn btn--full">{{ 'customer.recover_password.submit' | t }}</button>
+          <p class="text-center" style="margin-top: 1rem;"><a href="#login" class="link" onclick="document.getElementById('RecoverPassword').hidden=true;document.getElementById('CustomerLogin').hidden=false;">{{ 'customer.recover_password.cancel' | t }}</a></p>
+        {%- endform -%}
+      </div>
+      <div id="CustomerLogin">
+        <h1 class="h2 heading-italic text-center">{{ 'customer.login.title' | t }}</h1>
+        {%- form 'customer_login', novalidate: 'novalidate' -%}
+          {%- if form.errors -%}<div class="form-message form-message--error">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <div class="field"><label for="LoginEmail">{{ 'customer.login.email' | t }}</label><input type="email" id="LoginEmail" name="customer[email]" autocomplete="email" required></div>
+          {%- if form.password_needed -%}
+            <div class="field"><label for="LoginPassword">{{ 'customer.login.password' | t }}</label><input type="password" id="LoginPassword" name="customer[password]" autocomplete="current-password" required></div>
+            <p style="text-align: right; margin-top: -.5rem;"><a href="#recover" class="link" onclick="document.getElementById('RecoverPassword').hidden=false;document.getElementById('CustomerLogin').hidden=true;">{{ 'customer.login.forgot_password' | t }}</a></p>
+          {%- endif -%}
+          <button type="submit" class="btn btn--full">{{ 'customer.login.sign_in' | t }}</button>
+        {%- endform -%}
+        <p class="text-center text-muted" style="margin-top: 1.5rem;">{{ 'customer.login.new_customer' | t }} <a href="{{ routes.account_register_url }}">{{ 'customer.register.title' | t }}</a></p>
+        {%- if shop.checkout.guest_login -%}
+          <hr>
+          {%- form 'guest_login' -%}<button type="submit" class="btn btn--secondary btn--full">{{ 'customer.login.guest' | t }}</button>{%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer login",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

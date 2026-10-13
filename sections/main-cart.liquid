@@ -1,0 +1,65 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width" data-cart-render="{{ section.id }}">
+    <span hidden data-item-count="{{ cart.item_count }}"></span>
+    <h1 class="h1 heading-italic">{{ 'cart.general.title' | t }}</h1>
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="CartPageForm" class="cart-page">
+        <div>
+          {% render 'free-shipping-bar' %}
+          {% render 'cart-line-items' %}
+          <a href="{{ routes.all_products_collection_url }}" class="link" style="margin-top: 1.5rem;">{% render 'icon', icon: 'chevron-left' %} {{ 'cart.general.continue_shopping' | t }}</a>
+        </div>
+        <aside class="cart-page__summary">
+          <h2 class="h4">{{ 'cart.general.summary' | t }}</h2>
+          {%- if settings.cart_note_enable -%}
+            <details class="cart-note">
+              <summary>{% render 'icon', icon: 'gift' %} {{ 'cart.general.note' | t }}</summary>
+              <textarea class="textarea" name="note" data-cart-note aria-label="{{ 'cart.general.note' | t }}">{{ cart.note }}</textarea>
+            </details>
+          {%- endif -%}
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="cart-discounts">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li>{{ discount.title }} (-{{ discount.total_allocated_amount | money }})</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          <div class="cart-summary__row cart-summary__total"><span>{{ 'cart.general.subtotal' | t }}</span><span>{{ cart.total_price | money_with_currency }}</span></div>
+          <p class="cart-summary__note">{{ 'cart.general.taxes_and_shipping_at_checkout' | t }}</p>
+          {%- if settings.cart_terms_enable -%}
+            <label class="checkbox" style="margin-bottom: 1rem;"><input type="checkbox" data-cart-terms required><span>{{ 'cart.general.terms_html' | t: url: settings.cart_terms_page.url }}</span></label>
+          {%- endif -%}
+          <button type="submit" name="checkout" class="btn btn--full"{% if settings.cart_terms_enable %} disabled{% endif %}>{% render 'icon', icon: 'lock' %} {{ 'cart.general.checkout' | t }}</button>
+          {%- if additional_checkout_buttons and s.show_additional -%}
+            <div style="margin-top: .75rem;">{{ content_for_additional_checkout_buttons }}</div>
+          {%- endif -%}
+          {%- if settings.cart_trust_text != blank -%}<p class="cart-summary__trust">{% render 'icon', icon: 'shield' %} {{ settings.cart_trust_text }}</p>{%- endif -%}
+          <ul class="payment-icons" role="list" style="justify-content: center; margin-top: 1rem;">{%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}</ul>
+        </aside>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <span class="cart-empty__icon">{% render 'icon', icon: 'cart' %}</span>
+        <p class="h3">{{ 'cart.general.empty' | t }}</p>
+        <p class="text-muted">{{ 'cart.general.empty_text' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'cart.general.continue_shopping' | t }}</a>
+        {%- if shop.customer_accounts_enabled and customer == null -%}
+          <p class="text-muted" style="font-size: .9rem;">{{ 'cart.general.login_html' | t: url: routes.account_login_url }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "checkbox", "id": "show_additional", "label": "Show accelerated checkout buttons", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ]
+}
+{% endschema %}

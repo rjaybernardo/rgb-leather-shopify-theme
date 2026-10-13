@@ -1,0 +1,157 @@
+<footer class="footer color-{{ section.settings.color_scheme }}">
+  <div class="page-width footer__top" style="--cols: {{ section.blocks.size | minus: 1 | at_least: 1 }};">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'brand' -%}
+          <div class="footer__brand" {{ block.shopify_attributes }}>
+            {%- if block.settings.image -%}
+              {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', style: 'width: 160px; margin-bottom: 1.25rem;', alt: shop.name }}
+            {%- else -%}
+              <p class="h3">{{ block.settings.heading | default: shop.name }}</p>
+            {%- endif -%}
+            <div class="rte text-muted">{{ block.settings.text }}</div>
+            {%- if block.settings.show_social -%}
+              <div style="margin-top: 1.25rem; margin-left: -.6rem;">{% render 'social-icons' %}</div>
+            {%- endif -%}
+          </div>
+        {%- when 'menu' -%}
+          <div class="footer__block footer__block--menu" {{ block.shopify_attributes }}>
+            <details open>
+              <summary><h2 class="footer__heading">{{ block.settings.heading | default: block.settings.menu.title }}</h2>{% render 'icon', icon: 'plus' %}</summary>
+              <ul class="footer__links" role="list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          </div>
+        {%- when 'newsletter' -%}
+          <div class="footer__block footer__newsletter" {{ block.shopify_attributes }}>
+            <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+            <div class="text-muted">{{ block.settings.text }}</div>
+            {%- form 'customer', id: 'FooterNewsletter' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              {%- if form.posted_successfully? -%}
+                <p class="form-message form-message--success" style="margin-top: 1rem;">{{ 'newsletter.success' | t }}</p>
+              {%- else -%}
+                {%- if form.errors -%}<p class="form-message form-message--error" style="margin-top: 1rem;">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+                <div class="newsletter__form">
+                  <input class="input" type="email" name="contact[email]" required autocomplete="email" placeholder="{{ 'newsletter.email_placeholder' | t }}" aria-label="{{ 'newsletter.email_placeholder' | t }}">
+                  <button type="submit" class="btn btn--sm" aria-label="{{ 'newsletter.subscribe' | t }}">{% render 'icon', icon: 'arrow-right' %}</button>
+                </div>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        {%- when 'text' -%}
+          <div class="footer__block" {{ block.shopify_attributes }}>
+            <h2 class="footer__heading">{{ block.settings.heading }}</h2>
+            <div class="rte text-muted">{{ block.settings.text }}</div>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="page-width footer__bottom">
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}</span>
+      {%- if section.settings.show_policies -%}
+        {%- for policy in shop.policies -%}
+          <a href="{{ policy.url }}">{{ policy.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_localization -%}
+      {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+        {%- form 'localization', class: 'footer__localization' -%}
+          {%- if localization.available_countries.size > 1 -%}
+            <select class="select" name="country_code" data-localization-select aria-label="{{ 'general.localization.country' | t }}">
+              {%- for country in localization.available_countries -%}
+                <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
+              {%- endfor -%}
+            </select>
+          {%- endif -%}
+          {%- if localization.available_languages.size > 1 -%}
+            <select class="select" name="locale_code" data-localization-select aria-label="{{ 'general.localization.language' | t }}">
+              {%- for language in localization.available_languages -%}
+                <option value="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>{{ language.endonym_name | capitalize }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endif -%}
+          <input type="hidden" name="return_to" value="{{ request.path }}">
+        {%- endform -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if section.settings.show_payment_icons -%}
+      <ul class="payment-icons" role="list">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+  {%- if section.settings.wordmark != blank -%}
+    <div class="footer__wordmark" aria-hidden="true">{{ section.settings.wordmark }}</div>
+  {%- endif -%}
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "checkbox", "id": "show_localization", "label": "Show country & language selectors", "default": true },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
+    { "type": "checkbox", "id": "show_policies", "label": "Show policy links", "default": true },
+    { "type": "text", "id": "wordmark", "label": "Large wordmark", "default": "RGB Leather", "info": "Oversized brand name at the very bottom. Leave empty to hide." }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "RGB Leather" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Full-grain leather goods, hand-stitched in small batches and built to outlast trends. Every piece carries a lifetime warranty.</p>" },
+        { "type": "checkbox", "id": "show_social", "label": "Show social icons", "default": true }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Join the workshop" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Early access to limited drops, care guides and 10% off your first order.</p>" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Visit the studio" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Mon – Sat, 10am – 6pm<br>hello@rgbleather.com</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "brand" },
+        { "type": "menu" },
+        { "type": "newsletter" }
+      ]
+    }
+  ]
+}
+{% endschema %}

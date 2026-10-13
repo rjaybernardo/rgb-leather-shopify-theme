@@ -1,0 +1,98 @@
+{%- liquid
+  assign s = section.settings
+  assign slider_id = 'Slider-' | append: section.id
+-%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <div class="section-header reveal">
+      <div class="section-header__text">
+        {%- if s.subheading != blank -%}<span class="subheading">{{ s.subheading }}</span>{%- endif -%}
+        <h2 class="h2 heading-italic">{{ s.heading }}</h2>
+        {%- if s.score != blank -%}
+          <div class="reviews-summary">
+            <span class="reviews-summary__score">{{ s.score }}</span>
+            <div>
+              <span class="rating__stars" style="--rating: {{ s.score }}; --rating-max: 5;" aria-hidden="true"></span>
+              <p class="text-muted" style="margin: .25rem 0 0; font-size: .88rem;">{{ s.score_label }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="slider__controls">
+        <button type="button" class="slider__btn" data-slider-prev="{{ slider_id }}" aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', icon: 'chevron-left' %}</button>
+        <button type="button" class="slider__btn" data-slider-next="{{ slider_id }}" aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', icon: 'chevron-right' %}</button>
+      </div>
+    </div>
+    <slider-component id="{{ slider_id }}" class="slider slider--bleed-mobile" data-autoplay="{{ s.autoplay }}" data-speed="6">
+      <ul class="slider__track" role="list" style="--per-view: {{ s.columns }}; --per-view-tablet: 2.1; --per-view-mobile: 1.15;">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <li class="reveal" style="--i: {{ forloop.index0 | modulo: 3 }};" {{ block.shopify_attributes }}>
+            <figure class="testimonial" style="margin: 0;">
+              <span class="rating__stars" style="--rating: {{ b.rating }}; --rating-max: 5;" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: b.rating, rating_max: 5 }}"></span>
+              <blockquote class="testimonial__quote">{{ b.quote }}</blockquote>
+              <figcaption class="testimonial__author">
+                {%- if b.avatar -%}
+                  <span class="testimonial__avatar">{{ b.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: b.author }}</span>
+                {%- endif -%}
+                <div>
+                  <div class="testimonial__name">{{ b.author }}</div>
+                  {%- if b.verified -%}<div class="testimonial__verified">{% render 'icon', icon: 'check' %} {{ 'sections.testimonials.verified' | t }}</div>{%- endif -%}
+                </div>
+              </figcaption>
+              {%- if b.product != blank -%}
+                <a href="{{ b.product.url }}" class="testimonial__product">
+                  <span class="media">{{ b.product.featured_media.preview_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}</span>
+                  <span>{{ b.product.title }}</span>
+                </a>
+              {%- endif -%}
+            </figure>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="slider__progress"><span></span></div>
+    </slider-component>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Reviews" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Loved by <em>40,000+</em> customers" },
+    { "type": "text", "id": "score", "label": "Overall rating", "default": "4.9", "info": "Leave empty to hide the score" },
+    { "type": "text", "id": "score_label", "label": "Rating label", "default": "Based on 2,400+ verified reviews" },
+    { "type": "range", "id": "columns", "label": "Visible on desktop", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-scroll", "default": false },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Three years in and my wallet looks better than the day it arrived. The patina is gorgeous." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Marcus T." },
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "checkbox", "id": "verified", "label": "Verified buyer", "default": true },
+        { "type": "product", "id": "product", "label": "Product reviewed" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial", "settings": { "quote": "The stitching is flawless. You can tell a real person made this with care — worth every penny.", "author": "Elena R." } },
+        { "type": "testimonial", "settings": { "quote": "Bought the weekender as an anniversary gift. He hasn't stopped talking about it.", "author": "Priya S." } },
+        { "type": "testimonial", "settings": { "quote": "Customer service repaired a strap I broke myself, no questions asked. Customer for life.", "author": "James W." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,137 @@
+{
+  "sections": {
+    "banner": {
+      "type": "image-banner",
+      "settings": {
+        "subheading": "Our story",
+        "heading": "Made by <em>hand</em>, not by machine",
+        "button_label": "",
+        "height": 70
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "subheading",
+          "settings": {}
+        },
+        "b1": {
+          "type": "heading",
+          "settings": {}
+        },
+        "b2": {
+          "type": "text",
+          "settings": {}
+        },
+        "b3": {
+          "type": "signature",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "subheading",
+          "settings": {}
+        },
+        "b1": {
+          "type": "heading",
+          "settings": {}
+        },
+        "b2": {
+          "type": "text",
+          "settings": {}
+        },
+        "b3": {
+          "type": "checklist",
+          "settings": {}
+        },
+        "b4": {
+          "type": "stats",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "process": {
+      "type": "multicolumn",
+      "settings": {
+        "media": "number",
+        "align": "left",
+        "heading": "From hide to <em>heirloom</em>",
+        "subheading": "The process",
+        "card": true,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "b0": {
+          "type": "column",
+          "settings": {
+            "title": "Select",
+            "text": "<p>We hand-pick full-grain hides from family tanneries.</p>"
+          }
+        },
+        "b1": {
+          "type": "column",
+          "settings": {
+            "title": "Cut",
+            "text": "<p>Every panel is cut by hand to make the most of the grain.</p>"
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "title": "Stitch",
+            "text": "<p>Saddle-stitched with waxed linen, two needles at a time.</p>"
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "title": "Finish",
+            "text": "<p>Edges are burnished and the piece is conditioned before it ships.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "video": {
+      "type": "video",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner",
+    "intro",
+    "story",
+    "process",
+    "video",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {}
+    },
+    "grid": {
+      "type": "main-collection",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "promo",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0"
+      ]
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner",
+    "grid",
+    "recent"
+  ]
+}

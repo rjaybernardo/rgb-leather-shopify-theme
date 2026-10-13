@@ -1,0 +1,26 @@
+{% doc %}
+  Free shipping progress bar based on the cart total and theme threshold.
+  Shown only when the customer shops in the store's default currency.
+
+  @example
+  {% render 'free-shipping-bar' %}
+{% enddoc %}
+{%- if settings.cart_free_shipping_enable and settings.cart_free_shipping_threshold > 0 and cart.currency.iso_code == shop.currency -%}
+  {%- liquid
+    assign threshold = settings.cart_free_shipping_threshold | times: 100
+    assign total = cart.total_price
+    assign remaining = threshold | minus: total
+    assign remaining_money = remaining | money
+    assign pct = total | times: 100.0 | divided_by: threshold | at_most: 100 | round
+  -%}
+  <div class="free-ship{% if remaining <= 0 %} free-ship--done{% endif %}">
+    <p>
+      {%- if remaining > 0 -%}
+        {{ 'cart.general.free_shipping_remaining_html' | t: amount: remaining_money }}
+      {%- else -%}
+        {{ 'cart.general.free_shipping_unlocked' | t }}
+      {%- endif -%}
+    </p>
+    <div class="free-ship__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}"><span class="free-ship__fill" style="--progress: {{ pct }}%;"></span></div>
+  </div>
+{%- endif -%}

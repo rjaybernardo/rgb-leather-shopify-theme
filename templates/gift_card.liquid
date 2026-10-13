@@ -1,0 +1,54 @@
+{% layout none %}
+{%- liquid
+  assign initial_value = gift_card.initial_value | money
+  assign expiry = gift_card.expires_on | date: format: 'abbreviated_date'
+-%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ 'gift_cards.issued.title' | t: value: initial_value, shop: shop.name }}</title>
+    <meta name="robots" content="noindex">
+    {% render 'theme-styles' %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="section" style="--pt: 64px; --pb: 64px;">
+      <div class="page-width page-width--narrow text-center" style="display: grid; gap: 1.5rem; justify-items: center;">
+        <p class="h3" style="margin: 0;">{{ shop.name }}</p>
+        <h1 class="h2 heading-italic" style="margin: 0;">{{ 'gift_cards.issued.subtext' | t }}</h1>
+        <div style="width: min(420px, 100%); aspect-ratio: 1.6; border-radius: 16px; background: linear-gradient(135deg, var(--color-accent), var(--color-fg)); color: #fff; display: flex; flex-direction: column; justify-content: space-between; padding: 1.75rem; text-align: left; box-shadow: 0 30px 60px -20px rgb(0 0 0 / .4);{% if gift_card.expired or gift_card.enabled == false %} opacity: .5;{% endif %}">
+          <span class="subheading" style="color: inherit; margin: 0;">{{ 'gift_cards.issued.gift_card' | t }}</span>
+          <span class="h1" style="margin: 0;">{{ gift_card.balance | money }}</span>
+          <span style="font-family: monospace; letter-spacing: .15em;">{{ gift_card.code | format_code }}</span>
+        </div>
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <p class="text-muted">{{ 'gift_cards.issued.initial_value' | t: value: initial_value }}</p>
+        {%- endif -%}
+        {%- if gift_card.expired -%}
+          <p class="form-message form-message--error">{{ 'gift_cards.issued.expired' | t: expiry: expiry }}</p>
+        {%- elsif gift_card.expires_on -%}
+          <p class="text-muted">{{ 'gift_cards.issued.expiration_date' | t: expires_on: expiry }}</p>
+        {%- endif -%}
+        <div id="QrCode" data-identifier="{{ gift_card.qr_identifier }}" style="background: #fff; padding: 12px;"></div>
+        <div class="button-row button-row--center">
+          <button type="button" class="btn" data-copy="{{ gift_card.code | escape }}" onclick="navigator.clipboard && navigator.clipboard.writeText(this.dataset.copy)">{{ 'gift_cards.issued.copy_code' | t }}</button>
+          <a href="{{ shop.url }}" class="btn btn--secondary">{{ 'gift_cards.issued.shop_link' | t }}</a>
+          <button type="button" class="btn btn--secondary" onclick="window.print()">{{ 'gift_cards.issued.print' | t }}</button>
+        </div>
+        {%- if gift_card.pass_url -%}
+          <a href="{{ gift_card.pass_url }}"><img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}" loading="lazy"></a>
+        {%- endif -%}
+      </div>
+    </main>
+    <script>
+      window.addEventListener('load', function () {
+        var el = document.getElementById('QrCode');
+        if (window.QRCode && el) new QRCode(el, { text: el.dataset.identifier, width: 120, height: 120 });
+      });
+    </script>
+  </body>
+</html>

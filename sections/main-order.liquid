@@ -1,0 +1,42 @@
+<div class="section color-{{ section.settings.color_scheme }}" style="--pt: 64px; --pb: 96px;">
+  <div class="page-width">
+    <a href="{{ routes.account_url }}" class="link">{% render 'icon', icon: 'chevron-left' %} {{ 'customer.account.return' | t }}</a>
+    <h1 class="h2 heading-italic" style="margin-top: 1rem;">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    <p class="text-muted">{%- assign order_date = order.created_at | time_tag: format: 'date' -%}{{ 'customer.order.date_html' | t: date: order_date }}</p>
+    {%- if order.cancelled -%}<p class="form-message form-message--error">{%- assign cancel_date = order.cancelled_at | time_tag: format: 'date' -%}{{ 'customer.order.cancelled_html' | t: date: cancel_date, reason: order.cancel_reason_label }}</p>{%- endif -%}
+    <div class="account-dashboard">
+      <table class="data-table">
+        <thead><tr><th>{{ 'customer.order.product' | t }}</th><th>{{ 'customer.order.price' | t }}</th><th>{{ 'customer.order.quantity' | t }}</th><th>{{ 'customer.order.total' | t }}</th></tr></thead>
+        <tbody>
+          {%- for line_item in order.line_items -%}
+            <tr>
+              <td data-label="{{ 'customer.order.product' | t }}"><a href="{{ line_item.url }}">{{ line_item.title }}</a>{%- if line_item.fulfillment -%}<br><small class="text-muted">{{ line_item.fulfillment.created_at | time_tag: format: 'date' }}{% if line_item.fulfillment.tracking_url %} · <a href="{{ line_item.fulfillment.tracking_url }}">{{ 'customer.order.track' | t }}</a>{% endif %}</small>{%- endif -%}</td>
+              <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.final_price | money }}</td>
+              <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+              <td data-label="{{ 'customer.order.total' | t }}">{{ line_item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3">{{ 'customer.order.subtotal' | t }}</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+          {%- for shipping_method in order.shipping_methods -%}<tr><td colspan="3">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td><td>{{ shipping_method.price | money }}</td></tr>{%- endfor -%}
+          {%- for tax_line in order.tax_lines -%}<tr><td colspan="3">{{ tax_line.title }} ({{ tax_line.rate_percentage }}%)</td><td>{{ tax_line.price | money }}</td></tr>{%- endfor -%}
+          <tr><td colspan="3"><strong>{{ 'customer.order.total' | t }}</strong></td><td><strong>{{ order.total_net_amount | money_with_currency }}</strong></td></tr>
+        </tfoot>
+      </table>
+      <aside style="display: grid; gap: 1.5rem; align-content: start;">
+        <div class="address-card"><h2 class="h5">{{ 'customer.order.billing_address' | t }}</h2>{{ order.billing_address | format_address }}</div>
+        <div class="address-card"><h2 class="h5">{{ 'customer.order.shipping_address' | t }}</h2>{{ order.shipping_address | format_address }}</div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer order",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {}
+    },
+    "products": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "Shop the story",
+        "heading": "Featured in this <em>story</em>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "products"
+  ]
+}

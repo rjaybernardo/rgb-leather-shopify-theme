@@ -1,0 +1,62 @@
+{%- assign s = section.settings -%}
+<article class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <header class="article__header">
+      <p class="article-card__meta">{{ article.published_at | time_tag: format: 'date' }}{% if s.show_author %} · {{ 'blogs.article.by' | t: author: article.author }}{% endif %}</p>
+      <h1 class="h1 heading-italic" style="max-width: 900px; margin-inline: auto;">{{ article.title }}</h1>
+    </header>
+    {%- if article.image -%}
+      <div class="article__image"><div class="media">{{ article.image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '600,900,1200,1800,2400', sizes: '(min-width: 1440px) 1360px, 100vw', alt: article.image.alt }}</div></div>
+    {%- endif -%}
+    <div class="article">
+      <div class="article__body rte">{{ article.content }}</div>
+      <footer class="article__footer">
+        {%- if article.tags.size > 0 -%}
+          <div class="pill-list">{%- for tag in article.tags -%}<a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="pill">{{ tag }}</a>{%- endfor -%}</div>
+        {%- endif -%}
+        <share-button data-url="{{ shop.url | append: article.url }}"><button type="button" class="share">{% render 'icon', icon: 'share' %} {{ 'general.share.share' | t }}</button></share-button>
+      </footer>
+      <a href="{{ blog.url }}" class="link" style="margin-top: 2rem;">{% render 'icon', icon: 'chevron-left' %} {{ 'blogs.article.back' | t: title: blog.title }}</a>
+
+      {%- if blog.comments_enabled? -%}
+        <section class="comments" id="comments">
+          <h2 class="h3">{{ 'blogs.comments.title' | t: count: article.comments_count }}</h2>
+          {%- paginate article.comments by 10 -%}
+            {%- for comment in article.comments -%}
+              <div class="comment">
+                <div class="rte">{{ comment.content }}</div>
+                <p class="text-muted" style="font-size: .85rem; margin-top: .5rem;">{{ comment.author }} · {{ comment.created_at | time_tag: format: 'date' }}</p>
+              </div>
+            {%- endfor -%}
+            {%- if paginate.pages > 1 -%}{% render 'pagination', paginate: paginate %}{%- endif -%}
+          {%- endpaginate -%}
+          {%- form 'new_comment', article -%}
+            <h3 class="h4" style="margin-top: 2.5rem;">{{ 'blogs.comments.leave' | t }}</h3>
+            {%- if form.posted_successfully? -%}
+              <p class="form-message form-message--success">{% if blog.moderated? %}{{ 'blogs.comments.success_moderated' | t }}{% else %}{{ 'blogs.comments.success' | t }}{% endif %}</p>
+            {%- endif -%}
+            {%- if form.errors -%}<div class="form-message form-message--error">{{ form.errors | default_errors }}</div>{%- endif -%}
+            <div class="form-grid form-grid--2">
+              <div class="field"><label for="CommentAuthor">{{ 'blogs.comments.name' | t }}</label><input type="text" id="CommentAuthor" name="comment[author]" value="{{ form.author }}" required></div>
+              <div class="field"><label for="CommentEmail">{{ 'blogs.comments.email' | t }}</label><input type="email" id="CommentEmail" name="comment[email]" value="{{ form.email }}" required></div>
+              <div class="field field--full"><label for="CommentBody">{{ 'blogs.comments.message' | t }}</label><textarea id="CommentBody" name="comment[body]" required>{{ form.body }}</textarea></div>
+            </div>
+            <button type="submit" class="btn">{{ 'blogs.comments.post' | t }}</button>
+          {%- endform -%}
+        </section>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Blog post",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ]
+}
+{% endschema %}

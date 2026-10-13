@@ -1,0 +1,50 @@
+{%- liquid
+  assign s = section.settings
+  assign image = collection.image | default: s.fallback_image
+  assign use_image = false
+  if s.show_image and image
+    assign use_image = true
+  endif
+-%}
+<div class="collection-hero{% if use_image %} collection-hero--image{% endif %} collection-hero--{{ s.align }} color-{{ s.color_scheme }}" style="--h: {{ s.height }}px;">
+  {%- if use_image -%}
+    <div class="hero__media">{{ image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '600,900,1200,1800,2400', sizes: '100vw', alt: collection.title }}</div>
+    <div class="hero__overlay" style="--overlay: {{ s.overlay | divided_by: 100.0 }};"></div>
+  {%- endif -%}
+  <div class="page-width collection-hero__content">
+    <nav aria-label="{{ 'general.breadcrumbs.label' | t }}">
+      <ol class="breadcrumbs">
+        <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+        <li><a href="{{ routes.collections_url }}">{{ 'general.breadcrumbs.collections' | t }}</a></li>
+        <li aria-current="page">{{ collection.title }}</li>
+      </ol>
+    </nav>
+    <h1 class="h1 heading-italic" style="margin-bottom: .35em;">{{ collection.title }}</h1>
+    {%- if s.show_description and collection.description != blank -%}
+      <div class="collection-hero__desc rte">{{ collection.description }}</div>
+    {%- endif -%}
+    {%- if s.subcollections_menu != blank -%}
+      <div class="subcollections">
+        {%- for link in s.subcollections_menu.links -%}
+          <a href="{{ link.url }}" class="pill"{% if link.active %} aria-current="page" style="background: var(--color-fg); color: var(--color-bg);"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "checkbox", "id": "show_image", "label": "Show collection image", "default": true },
+    { "type": "image_picker", "id": "fallback_image", "label": "Fallback image" },
+    { "type": "range", "id": "height", "label": "Image banner height", "min": 200, "max": 700, "step": 20, "unit": "px", "default": 420 },
+    { "type": "range", "id": "overlay", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 40 },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "select", "id": "align", "label": "Alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ], "default": "left" },
+    { "type": "link_list", "id": "subcollections_menu", "label": "Quick links menu", "info": "Shown as pills under the title, e.g. sub-categories" }
+  ]
+}
+{% endschema %}

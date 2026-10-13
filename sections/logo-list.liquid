@@ -1,0 +1,61 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {%- if s.subheading != blank -%}<p class="subheading text-center" style="display: block;">{{ s.subheading }}</p>{%- endif -%}
+    {%- if s.quote != blank -%}<blockquote class="press-quote reveal">{{ s.quote }}</blockquote>{%- endif -%}
+    <div class="logo-list reveal" style="--logo-w: {{ s.logo_width }}px;">
+      {%- for block in section.blocks -%}
+        {%- capture logo_inner -%}
+          {%- if block.settings.image -%}
+            {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.name }}
+          {%- else -%}
+            {{ block.settings.name }}
+          {%- endif -%}
+        {%- endcapture -%}
+        {%- capture logo_class -%}logo-list__item{% unless block.settings.image %} logo-list__item--text{% endunless %}{%- endcapture -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" target="_blank" rel="noopener" class="{{ logo_class }}" {{ block.shopify_attributes }}>{{ logo_inner }}</a>
+        {%- else -%}
+          <span class="{{ logo_class }}" {{ block.shopify_attributes }}>{{ logo_inner }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Logo list / press",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "As featured in" },
+    { "type": "textarea", "id": "quote", "label": "Press quote", "default": "“The kind of leather goods you buy once and keep forever.”" },
+    { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 10, "unit": "px", "default": 130 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo image" },
+        { "type": "text", "id": "name", "label": "Name (used when no image)", "default": "Publication" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo list / press",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Esquire" } },
+        { "type": "logo", "settings": { "name": "GQ" } },
+        { "type": "logo", "settings": { "name": "Monocle" } },
+        { "type": "logo", "settings": { "name": "Kinfolk" } },
+        { "type": "logo", "settings": { "name": "Vogue" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

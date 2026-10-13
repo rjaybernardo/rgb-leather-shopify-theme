@@ -1,0 +1,33 @@
+{% doc %}
+  Removable pills for active storefront filters.
+
+  @param {object} results - collection or search object
+
+  @example
+  {% render 'active-filters', results: collection %}
+{% enddoc %}
+{%- assign has_active = false -%}
+{%- capture pills -%}
+  {%- for filter in results.filters -%}
+    {%- for value in filter.active_values -%}
+      {%- assign has_active = true -%}
+      <a href="{{ value.url_to_remove }}" class="pill" data-facet-link>{{ filter.label }}: {{ value.label }} {% render 'icon', icon: 'close' %}</a>
+    {%- endfor -%}
+    {%- if filter.type == 'price_range' -%}
+      {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+        {%- assign has_active = true -%}
+        <a href="{{ filter.url_to_remove }}" class="pill" data-facet-link>
+          {{- filter.min_value.value | default: 0 | money_without_trailing_zeros }} – {{ filter.max_value.value | default: filter.range_max | money_without_trailing_zeros }} {% render 'icon', icon: 'close' -%}
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<div data-facet-render="active">
+  {%- if has_active -%}
+    <div class="active-filters">
+      {{ pills }}
+      <a href="{{ results.url | default: routes.search_url }}{% if results.terms %}?q={{ results.terms | url_encode }}{% endif %}" class="link active-filters__clear" data-facet-link>{{ 'collections.filters.clear_all' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>

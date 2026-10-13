@@ -1,0 +1,37 @@
+{%- liquid
+  assign s = section.settings
+  assign slider_id = 'Slider-' | append: section.id
+-%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    <product-recommendations data-section-id="{{ section.id }}" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ s.limit }}&intent=related" data-hide-empty="true">
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        {% render 'section-heading', settings: s, slider_id: slider_id %}
+        <slider-component id="{{ slider_id }}" class="slider slider--bleed-mobile">
+          <ul class="slider__track" role="list" style="--per-view: {{ s.columns }}; --per-view-tablet: 2.5; --per-view-mobile: 1.6;">
+            {%- for rec in recommendations.products -%}
+              <li>{% render 'product-card', product: rec, index: forloop.index0 %}</li>
+            {%- endfor -%}
+          </ul>
+          <div class="slider__progress"><span></span></div>
+        </slider-component>
+      {%- endif -%}
+    </product-recommendations>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Related products",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "You may also like" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Complete your <em>collection</em>" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 10, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns", "label": "Visible on desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [{ "name": "Related products" }]
+}
+{% endschema %}

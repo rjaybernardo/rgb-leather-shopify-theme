@@ -1,0 +1,90 @@
+{%- liquid
+  assign s = section.settings
+  assign slider_id = 'Slider-' | append: section.id
+  assign media_class = 'media--' | append: s.image_ratio
+  if s.style == 'circle'
+    assign media_class = 'media--circle'
+  endif
+-%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {%- if s.layout == 'slider' -%}
+      {% render 'section-heading', settings: s, slider_id: slider_id %}
+    {%- else -%}
+      {% render 'section-heading', settings: s %}
+    {%- endif -%}
+    {%- capture tiles -%}
+      {%- for block in section.blocks -%}
+        {%- assign c = block.settings.collection -%}
+        {%- assign img = block.settings.image | default: c.featured_image | default: c.products.first.featured_media.preview_image -%}
+        <li class="reveal" style="--i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <a href="{{ c.url | default: '#' }}" class="collection-tile collection-tile--{{ s.style }} hover-zoom">
+            <div class="media {{ media_class }}">
+              {%- if img -%}
+                {{ img | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300,450,600,750,900', sizes: '(min-width: 990px) 25vw, 50vw', alt: c.title }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <span class="collection-tile__title">
+              <span>{{ block.settings.title | default: c.title | default: 'Collection' }}{% if s.show_count and c %} <span class="collection-tile__count">{{ c.products_count }}</span>{% endif %}</span>
+              {%- unless s.style == 'circle' -%}{% render 'icon', icon: 'arrow-right' %}{%- endunless -%}
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if s.layout == 'slider' -%}
+      <slider-component id="{{ slider_id }}" class="slider slider--bleed-mobile">
+        <ul class="slider__track" role="list" style="--per-view: {{ s.columns }}; --per-view-tablet: {{ s.columns | minus: 1 | at_least: 2 }}.3; --per-view-mobile: {% if s.style == 'circle' %}3.3{% else %}1.6{% endif %};">{{ tiles }}</ul>
+        <div class="slider__progress"><span></span></div>
+      </slider-component>
+    {%- else -%}
+      <ul class="grid" role="list" style="--cols: {{ s.columns }}; --cols-mobile: {% if s.style == 'circle' %}3{% else %}2{% endif %};padding:0;list-style:none;margin:0;">{{ tiles }}</ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Shop by category" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Find your <em>everyday</em> carry" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "All collections" },
+    { "type": "url", "id": "link_url", "label": "Link", "default": "/collections" },
+    { "type": "select", "id": "style", "label": "Tile style", "options": [ { "value": "standard", "label": "Image with title below" }, { "value": "overlay", "label": "Title on image" }, { "value": "circle", "label": "Circles" } ], "default": "overlay" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "options": [ { "value": "portrait", "label": "Portrait" }, { "value": "tall", "label": "Tall" }, { "value": "square", "label": "Square" }, { "value": "landscape", "label": "Landscape" } ], "default": "tall" },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [ { "value": "grid", "label": "Grid" }, { "value": "slider", "label": "Carousel" } ], "default": "slider" },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 6, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": false },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Custom image" },
+        { "type": "text", "id": "title", "label": "Custom title" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list",
+      "blocks": [
+        { "type": "collection", "settings": { "title": "Bags" } },
+        { "type": "collection", "settings": { "title": "Wallets" } },
+        { "type": "collection", "settings": { "title": "Belts" } },
+        { "type": "collection", "settings": { "title": "Accessories" } },
+        { "type": "collection", "settings": { "title": "Gifts" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

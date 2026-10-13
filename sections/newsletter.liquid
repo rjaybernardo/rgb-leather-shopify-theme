@@ -1,0 +1,43 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }} newsletter{% if s.image %} newsletter--split{% endif %}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width newsletter__inner">
+    {%- if s.image -%}
+      <div class="media media--landscape reveal">{{ s.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '500,800,1100,1400', sizes: '(min-width: 990px) 50vw, 100vw', alt: s.image.alt }}</div>
+    {%- endif -%}
+    <div class="newsletter__box reveal" style="--i: 1;">
+      {%- if s.subheading != blank -%}<span class="subheading">{{ s.subheading }}</span>{%- endif -%}
+      <h2 class="h2 heading-italic">{{ s.heading }}</h2>
+      <div class="text-muted">{{ s.text }}</div>
+      {%- form 'customer', id: section.id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="form-message form-message--success" style="margin-top: 1.5rem;" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</p>
+        {%- else -%}
+          {%- if form.errors -%}<p class="form-message form-message--error" style="margin-top: 1.5rem;">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+          <div class="newsletter__form">
+            <input class="input" type="email" name="contact[email]" required autocomplete="email" placeholder="{{ 'newsletter.email_placeholder' | t }}" aria-label="{{ 'newsletter.email_placeholder' | t }}">
+            <button type="submit" class="btn">{{ 'newsletter.subscribe' | t }}</button>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+      {%- if s.note != blank -%}<p class="newsletter__note">{{ s.note }}</p>{%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" },
+    { "type": "image_picker", "id": "image", "label": "Side image" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "The inner circle" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Get <em>10% off</em> your first order" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Plus early access to limited hides, leather care tips and workshop stories.</p>" },
+    { "type": "text", "id": "note", "label": "Small print", "default": "No spam. Unsubscribe anytime." },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

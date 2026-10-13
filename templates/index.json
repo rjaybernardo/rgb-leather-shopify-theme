@@ -1,0 +1,531 @@
+{
+  "sections": {
+    "hero": {
+      "type": "slideshow",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "slide",
+          "settings": {}
+        },
+        "b1": {
+          "type": "slide",
+          "settings": {
+            "subheading": "New season",
+            "heading": "The <em>Heritage</em> collection",
+            "button_label": "Discover",
+            "button_label_2": "",
+            "align": "center",
+            "position": "middle"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1"
+      ]
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "b0": {
+          "type": "text",
+          "settings": {
+            "text": "Full-grain leather"
+          }
+        },
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "Hand-stitched",
+            "italic": true
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "Lifetime warranty"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "Free monogramming",
+            "italic": true
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "collections": {
+      "type": "collection-list",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "collection",
+          "settings": {
+            "title": "Bags"
+          }
+        },
+        "b1": {
+          "type": "collection",
+          "settings": {
+            "title": "Wallets"
+          }
+        },
+        "b2": {
+          "type": "collection",
+          "settings": {
+            "title": "Belts"
+          }
+        },
+        "b3": {
+          "type": "collection",
+          "settings": {
+            "title": "Accessories"
+          }
+        },
+        "b4": {
+          "type": "collection",
+          "settings": {
+            "title": "Gifts"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "scheme-2"
+      }
+    },
+    "bento": {
+      "type": "promo-grid",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "b0": {
+          "type": "tile",
+          "settings": {
+            "size": "large",
+            "subheading": "Signature",
+            "heading": "The <em>Weekender</em> duffle",
+            "text": "Our most-gifted bag, now in three new hides.",
+            "link_label": "Shop the bag"
+          }
+        },
+        "b1": {
+          "type": "tile",
+          "settings": {
+            "size": "wide",
+            "heading": "Slim wallets",
+            "link_label": "Shop wallets"
+          }
+        },
+        "b2": {
+          "type": "tile",
+          "settings": {
+            "size": "small",
+            "heading": "Belts",
+            "link_label": "Shop belts"
+          }
+        },
+        "b3": {
+          "type": "tile",
+          "settings": {
+            "size": "small",
+            "heading": "Gift cards",
+            "link_label": "Give a gift"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free shipping",
+            "text": "On orders over $150"
+          }
+        },
+        "b1": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "30-day returns",
+            "text": "Hassle-free exchanges"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Lifetime warranty",
+            "text": "On every stitch"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "icon": "hand",
+            "title": "Handmade",
+            "text": "By a single artisan"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "subheading",
+          "settings": {}
+        },
+        "b1": {
+          "type": "heading",
+          "settings": {}
+        },
+        "b2": {
+          "type": "text",
+          "settings": {}
+        },
+        "b3": {
+          "type": "stats",
+          "settings": {}
+        },
+        "b4": {
+          "type": "button",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "tabs": {
+      "type": "collection-tabs",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "tab",
+          "settings": {
+            "title": "New arrivals"
+          }
+        },
+        "b1": {
+          "type": "tab",
+          "settings": {
+            "title": "Bestsellers"
+          }
+        },
+        "b2": {
+          "type": "tab",
+          "settings": {
+            "title": "Gifts"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "look": {
+      "type": "shop-the-look",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "hotspot",
+          "settings": {
+            "x": 35,
+            "y": 40
+          }
+        },
+        "b1": {
+          "type": "hotspot",
+          "settings": {
+            "x": 62,
+            "y": 65
+          }
+        },
+        "b2": {
+          "type": "hotspot",
+          "settings": {
+            "x": 48,
+            "y": 82
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "why": {
+      "type": "multicolumn",
+      "settings": {
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "b0": {
+          "type": "column",
+          "settings": {
+            "icon": "leather",
+            "title": "Full-grain only"
+          }
+        },
+        "b1": {
+          "type": "column",
+          "settings": {
+            "icon": "hand",
+            "title": "Hand-stitched",
+            "text": "<p>Saddle-stitched with waxed linen \u2014 twice as strong as machine lock-stitch.</p>"
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "icon": "leaf",
+            "title": "Vegetable tanned",
+            "text": "<p>Tanned slowly with natural tree bark extracts, free of harsh chromium.</p>"
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "title": "Lifetime warranty",
+            "text": "<p>If a stitch ever fails, we repair it for free. For life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "reviews": {
+      "type": "testimonials",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "testimonial",
+          "settings": {}
+        },
+        "b1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The stitching is flawless. You can tell a real person made this with care \u2014 worth every penny.",
+            "author": "Elena R."
+          }
+        },
+        "b2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Bought the weekender as an anniversary gift. He hasn't stopped talking about it.",
+            "author": "Priya S."
+          }
+        },
+        "b3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Customer service repaired a strap I broke myself, no questions asked. Customer for life.",
+            "author": "James W."
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "press": {
+      "type": "logo-list",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "logo",
+          "settings": {
+            "name": "Esquire"
+          }
+        },
+        "b1": {
+          "type": "logo",
+          "settings": {
+            "name": "GQ"
+          }
+        },
+        "b2": {
+          "type": "logo",
+          "settings": {
+            "name": "Monocle"
+          }
+        },
+        "b3": {
+          "type": "logo",
+          "settings": {
+            "name": "Kinfolk"
+          }
+        },
+        "b4": {
+          "type": "logo",
+          "settings": {
+            "name": "Vogue"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "promo": {
+      "type": "countdown-banner",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "question",
+          "settings": {}
+        },
+        "b1": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders ship within 1\u20132 business days. Domestic delivery takes 2\u20135 days; international 5\u201310 days.</p>"
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "What does the lifetime warranty cover?",
+            "answer": "<p>All stitching and hardware for the life of the product. Normal wear and patina are part of the charm.</p>"
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I add a monogram?",
+            "answer": "<p>Yes \u2014 choose personalization on the product page. Monogrammed items ship within 3 business days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "gallery": {
+      "type": "gallery",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "image",
+          "settings": {}
+        },
+        "b1": {
+          "type": "image",
+          "settings": {}
+        },
+        "b2": {
+          "type": "image",
+          "settings": {}
+        },
+        "b3": {
+          "type": "image",
+          "settings": {}
+        },
+        "b4": {
+          "type": "image",
+          "settings": {}
+        },
+        "b5": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "collections",
+    "bestsellers",
+    "bento",
+    "trust",
+    "story",
+    "tabs",
+    "look",
+    "why",
+    "reviews",
+    "press",
+    "promo",
+    "faq",
+    "gallery",
+    "newsletter"
+  ]
+}

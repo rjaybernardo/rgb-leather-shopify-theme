@@ -1,0 +1,27 @@
+{% doc %}
+  Blog article card.
+
+  @param {article} article - Article object
+  @param {boolean} [featured] - Large horizontal layout
+  @param {boolean} [show_excerpt] - Show excerpt
+
+  @example
+  {% render 'article-card', article: article, show_excerpt: true %}
+{% enddoc %}
+<a href="{{ article.url }}" class="article-card{% if featured %} article-card--featured{% endif %} hover-zoom">
+  <div class="media">
+    {%- if article.image -%}
+      {{ article.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '400,600,800,1000,1400', sizes: '(min-width: 990px) 33vw, 100vw', alt: article.image.alt }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div style="display: grid; gap: .6rem;">
+    <p class="article-card__meta">{{ article.published_at | time_tag: format: 'date' }}{% if article.tags.size > 0 %} · {{ article.tags.first }}{% endif %}</p>
+    <h3 class="article-card__title">{{ article.title }}</h3>
+    {%- if show_excerpt -%}
+      <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+    {%- endif -%}
+    <span class="link">{{ 'blogs.article.read_more' | t }}</span>
+  </div>
+</a>

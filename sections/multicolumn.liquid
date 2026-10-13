@@ -1,0 +1,75 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {% render 'section-heading', settings: s, align: s.heading_align %}
+    <ul class="grid multicolumn--{{ s.align }}{% if s.card %} multicolumn--card{% endif %}" role="list" style="--cols: {{ s.columns }}; --cols-mobile: 1; --cols-tablet: 2; list-style: none; padding: 0; margin: 0;">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        <li class="multicolumn__item reveal" style="--i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          {%- case s.media -%}
+            {%- when 'image' -%}
+              <div class="media media--{{ s.image_ratio }} hover-zoom" style="width: 100%; margin-bottom: .5rem;">
+                {%- if b.image -%}
+                  {{ b.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300,500,700,900', sizes: '(min-width: 990px) 33vw, 100vw', alt: b.image.alt }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+            {%- when 'icon' -%}
+              <span class="multicolumn__icon">{% render 'icon', icon: b.icon %}</span>
+            {%- when 'number' -%}
+              <span class="multicolumn__number">{{ forloop.index | prepend: '0' }}</span>
+          {%- endcase -%}
+          <h3 class="multicolumn__title h4">{{ b.title }}</h3>
+          <div class="multicolumn__text rte">{{ b.text }}</div>
+          {%- if b.link_label != blank -%}<a href="{{ b.link }}" class="link">{{ b.link_label }}</a>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Why RGB Leather" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Built to be <em>passed down</em>" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "select", "id": "heading_align", "label": "Heading alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ], "default": "center" },
+    { "type": "select", "id": "media", "label": "Column media", "options": [ { "value": "icon", "label": "Icon" }, { "value": "image", "label": "Image" }, { "value": "number", "label": "Step number" }, { "value": "none", "label": "None" } ], "default": "icon" },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "options": [ { "value": "portrait", "label": "Portrait" }, { "value": "square", "label": "Square" }, { "value": "landscape", "label": "Landscape" } ], "default": "landscape" },
+    { "type": "select", "id": "align", "label": "Column alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ], "default": "center" },
+    { "type": "checkbox", "id": "card", "label": "Show as cards", "default": false },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [ { "value": "leather", "label": "Leather" }, { "value": "hand", "label": "Handmade" }, { "value": "shield", "label": "Shield" }, { "value": "award", "label": "Award" }, { "value": "leaf", "label": "Leaf" }, { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Returns" }, { "value": "gift", "label": "Gift" }, { "value": "heart", "label": "Heart" }, { "value": "globe", "label": "Globe" } ], "default": "leather" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Full-grain only" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>The strongest, most beautiful layer of the hide — never sanded or corrected.</p>" },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multicolumn",
+      "blocks": [
+        { "type": "column", "settings": { "icon": "leather", "title": "Full-grain only" } },
+        { "type": "column", "settings": { "icon": "hand", "title": "Hand-stitched", "text": "<p>Saddle-stitched with waxed linen — twice as strong as machine lock-stitch.</p>" } },
+        { "type": "column", "settings": { "icon": "leaf", "title": "Vegetable tanned", "text": "<p>Tanned slowly with natural tree bark extracts, free of harsh chromium.</p>" } },
+        { "type": "column", "settings": { "icon": "shield", "title": "Lifetime warranty", "text": "<p>If a stitch ever fails, we repair it for free. For life.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

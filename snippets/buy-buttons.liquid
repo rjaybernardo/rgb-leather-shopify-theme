@@ -1,0 +1,53 @@
+{% doc %}
+  Product form with quantity selector, add to cart, dynamic checkout and installment messaging.
+
+  @param {product} product - Product object
+  @param {string} form_id - Unique form id
+  @param {boolean} [show_quantity] - Show quantity selector
+  @param {boolean} [dynamic_checkout] - Show accelerated checkout buttons
+  @param {boolean} [main] - Marks the main add to cart button for the sticky bar observer
+  @param {string} [properties] - Captured HTML of line item property inputs
+
+  @example
+  {% render 'buy-buttons', product: product, form_id: 'ProductForm', show_quantity: true, dynamic_checkout: true %}
+{% enddoc %}
+{%- assign variant = product.selected_or_first_available_variant -%}
+<product-form>
+  {%- form 'product', product, id: form_id, class: 'buy-buttons', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input type="hidden" name="id" value="{{ variant.id }}">
+    {{ properties }}
+    <div class="buy-buttons__row">
+      {%- if show_quantity -%}
+        <div class="qty">
+          <button type="button" class="qty__btn" onclick="this.nextElementSibling.stepDown()" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}">{% render 'icon', icon: 'minus' %}</button>
+          <input class="qty__input" type="number" name="quantity" value="{{ variant.quantity_rule.min | default: 1 }}" min="{{ variant.quantity_rule.min | default: 1 }}" {% if variant.quantity_rule.max %}max="{{ variant.quantity_rule.max }}"{% endif %} step="{{ variant.quantity_rule.increment | default: 1 }}" aria-label="{{ 'products.product.quantity.label' | t }}">
+          <button type="button" class="qty__btn" onclick="this.previousElementSibling.stepUp()" aria-label="{{ 'products.product.quantity.increase' | t: product: product.title | escape }}">{% render 'icon', icon: 'plus' %}</button>
+        </div>
+      {%- endif -%}
+      <div data-swap="buttons-{{ form_id }}" style="display: flex; flex: 1;">
+        <button
+          type="submit"
+          name="add"
+          class="btn btn--full"
+          {% if main %}data-main-atc id="MainAtc-{{ form_id }}"{% endif %}
+          {% unless variant.available %}disabled aria-disabled="true"{% endunless %}
+        >
+          <span>
+            {%- if variant == null -%}
+              {{ 'products.product.unavailable' | t }}
+            {%- elsif variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </span>
+        </button>
+      </div>
+    </div>
+    {%- if dynamic_checkout -%}
+      {{ form | payment_button }}
+    {%- endif -%}
+    <p class="product-form__error" role="alert" data-form-error hidden></p>
+    <div class="product__installments">{{ form | payment_terms }}</div>
+  {%- endform -%}
+</product-form>

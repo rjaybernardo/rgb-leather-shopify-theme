@@ -1,0 +1,241 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "b1": {
+          "type": "title",
+          "settings": {}
+        },
+        "b2": {
+          "type": "rating",
+          "settings": {}
+        },
+        "b3": {
+          "type": "price",
+          "settings": {}
+        },
+        "b4": {
+          "type": "highlights",
+          "settings": {}
+        },
+        "b5": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "b6": {
+          "type": "inventory",
+          "settings": {}
+        },
+        "b7": {
+          "type": "buy_buttons",
+          "settings": {
+            "monogram": true,
+            "gift_wrap": true
+          }
+        },
+        "b8": {
+          "type": "delivery",
+          "settings": {}
+        },
+        "b9": {
+          "type": "trust",
+          "settings": {}
+        },
+        "b10": {
+          "type": "complementary",
+          "settings": {}
+        },
+        "b11": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Description",
+            "icon": "leather",
+            "source": "description",
+            "content": "",
+            "open": true
+          }
+        },
+        "b12": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Materials & care",
+            "icon": "leaf"
+          }
+        },
+        "b13": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Shipping & returns",
+            "icon": "truck",
+            "content": "<p>Free shipping on orders over $150. Free 30-day returns and exchanges.</p>"
+          }
+        },
+        "b14": {
+          "type": "payment_icons",
+          "settings": {}
+        },
+        "b15": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15"
+      ]
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "color_scheme": "scheme-5"
+      },
+      "blocks": {
+        "b0": {
+          "type": "text",
+          "settings": {
+            "text": "Full-grain leather"
+          }
+        },
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "Hand-stitched",
+            "italic": true
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "Lifetime warranty"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "Free monogramming",
+            "italic": true
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "why": {
+      "type": "multicolumn",
+      "settings": {
+        "heading": "Made to be <em>passed down</em>",
+        "subheading": ""
+      },
+      "blocks": {
+        "b0": {
+          "type": "column",
+          "settings": {
+            "icon": "leather",
+            "title": "Full-grain only"
+          }
+        },
+        "b1": {
+          "type": "column",
+          "settings": {
+            "icon": "hand",
+            "title": "Hand-stitched",
+            "text": "<p>Saddle-stitched with waxed linen \u2014 twice as strong as machine lock-stitch.</p>"
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "icon": "leaf",
+            "title": "Vegetable tanned",
+            "text": "<p>Tanned slowly with natural tree bark extracts.</p>"
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "title": "Lifetime warranty",
+            "text": "<p>If a stitch ever fails, we repair it for free.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "reviews": {
+      "type": "testimonials",
+      "settings": {
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "b0": {
+          "type": "testimonial",
+          "settings": {}
+        },
+        "b1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The stitching is flawless \u2014 worth every penny.",
+            "author": "Elena R."
+          }
+        },
+        "b2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Customer service repaired a strap I broke myself, no questions asked.",
+            "author": "James W."
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "related": {
+      "type": "product-recommendations",
+      "settings": {}
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "marquee",
+    "why",
+    "reviews",
+    "related",
+    "recent"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "b0": {
+          "type": "question",
+          "settings": {}
+        },
+        "b1": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders ship within 1\u20132 business days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

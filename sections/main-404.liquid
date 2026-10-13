@@ -1,0 +1,21 @@
+<div class="section error-page color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="error-page__code" aria-hidden="true">404</div>
+    <h1 class="h1 heading-italic">{{ 'templates.404.title' | t }}</h1>
+    <p class="text-muted">{{ 'templates.404.subtext' | t }}</p>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form-inline">
+      <input class="input" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+      <button type="submit" class="btn">{% render 'icon', icon: 'search' %}<span class="visually-hidden">{{ 'general.search.submit' | t }}</span></button>
+    </form>
+    <div class="button-row button-row--center" style="margin-top: 2rem;"><a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'cart.general.continue_shopping' | t }}</a></div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "404 page",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

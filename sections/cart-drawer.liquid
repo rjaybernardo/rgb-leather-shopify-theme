@@ -1,0 +1,105 @@
+<side-drawer id="CartDrawer" class="drawer cart-drawer" aria-hidden="true">
+  <div class="drawer__overlay" data-close></div>
+  <div class="drawer__panel color-{{ section.settings.color_scheme }}" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle" tabindex="-1">
+    <div class="drawer__inner" data-cart-render="cart-drawer">
+    <div class="drawer__header">
+      <h2 class="drawer__title h4" id="CartDrawerTitle">{{ 'cart.general.title' | t }}{% if cart.item_count > 0 %} <span class="text-muted">({{ cart.item_count }})</span>{% endif %}</h2>
+      <button type="button" class="icon-button" data-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      <span hidden data-item-count="{{ cart.item_count }}"></span>
+      {%- if cart.item_count > 0 -%}
+        {% render 'free-shipping-bar' %}
+        {% render 'cart-line-items' %}
+      {%- else -%}
+        <div class="cart-empty">
+          <span class="cart-empty__icon">{% render 'icon', icon: 'cart' %}</span>
+          <p class="h4">{{ 'cart.general.empty' | t }}</p>
+          <p class="text-muted">{{ 'cart.general.empty_text' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'cart.general.continue_shopping' | t }}</a>
+          {%- if section.settings.empty_menu != blank -%}
+            <div class="cart-empty__links">
+              {%- for link in section.settings.empty_menu.links -%}
+                <a href="{{ link.url }}" class="pill">{{ link.title }}</a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if settings.cart_upsell_enable -%}
+        {%- assign upsell_collection = settings.cart_upsell_collection -%}
+        <div class="cart-upsell">
+          <p class="cart-upsell__title">{{ section.settings.upsell_heading }}</p>
+          <product-recommendations
+            data-section-id="cart-upsell"
+            {% if cart.item_count > 0 %}data-url="{{ routes.product_recommendations_url }}?product_id={{ cart.items.first.product_id }}&limit=6&section_id=cart-upsell&intent=related"{% endif %}
+          >
+            <div class="cart-upsell__list">
+              {%- if upsell_collection != blank -%}
+                {%- assign cart_ids = cart.items | map: 'product_id' | join: ',' | prepend: ',' | append: ',' -%}
+                {%- for product in upsell_collection.products limit: 8 -%}
+                  {%- assign pid = ',' | append: product.id | append: ',' -%}
+                  {%- unless cart_ids contains pid -%}
+                    {% render 'upsell-item', product: product %}
+                  {%- endunless -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          </product-recommendations>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if cart.item_count > 0 -%}
+      <div class="drawer__footer">
+        <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm">
+          {%- if settings.cart_note_enable -%}
+            <details class="cart-note">
+              <summary>{% render 'icon', icon: 'gift' %} {{ 'cart.general.note' | t }}</summary>
+              <textarea class="textarea" name="note" data-cart-note aria-label="{{ 'cart.general.note' | t }}">{{ cart.note }}</textarea>
+            </details>
+          {%- endif -%}
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="cart-discounts">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li>{{ discount.title }} (-{{ discount.total_allocated_amount | money }})</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          <div class="cart-summary__row cart-summary__total">
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money_with_currency }}</span>
+          </div>
+          <p class="cart-summary__note">{{ 'cart.general.taxes_and_shipping_at_checkout' | t }}</p>
+          {%- if settings.cart_terms_enable -%}
+            <label class="checkbox" style="margin-bottom: 1rem;">
+              <input type="checkbox" data-cart-terms required>
+              <span>{{ 'cart.general.terms_html' | t: url: settings.cart_terms_page.url }}</span>
+            </label>
+          {%- endif -%}
+          <div style="display: grid; gap: .6rem;">
+            <button type="submit" name="checkout" class="btn btn--full"{% if settings.cart_terms_enable %} disabled{% endif %}>
+              {% render 'icon', icon: 'lock' %} {{ 'cart.general.checkout' | t }}
+            </button>
+            <a href="{{ routes.cart_url }}" class="link" style="justify-self: center;">{{ 'cart.general.view_cart' | t }}</a>
+          </div>
+          {%- if settings.cart_trust_text != blank -%}
+            <p class="cart-summary__trust">{% render 'icon', icon: 'shield' %} {{ settings.cart_trust_text }}</p>
+          {%- endif -%}
+        </form>
+      </div>
+    {%- endif -%}
+    </div>
+  </div>
+</side-drawer>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "text", "id": "upsell_heading", "label": "Upsell heading", "default": "Complete the look" },
+    { "type": "link_list", "id": "empty_menu", "label": "Empty cart quick links" }
+  ]
+}
+{% endschema %}

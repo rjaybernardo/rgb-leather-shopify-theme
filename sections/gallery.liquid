@@ -1,0 +1,49 @@
+{%- assign s = section.settings -%}
+<div class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;">
+  <div class="page-width">
+    {% render 'section-heading', settings: s, align: 'center' %}
+    <div class="gallery-grid" style="--cols: {{ s.columns }};">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: s.link_url | default: '#' }}" class="gallery-grid__item hover-zoom reveal" style="--i: {{ forloop.index0 | modulo: 6 }};" {% if s.link_url contains 'http' %}target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+          <div class="media">
+            {%- if block.settings.image -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', sizes: '(min-width: 750px) 17vw, 50vw', alt: block.settings.image.alt }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <span class="gallery-grid__overlay" aria-hidden="true">{% render 'icon', icon: 'instagram' %}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Social gallery",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "@rgbleather" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Carried <em>everywhere</em>" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Tag us to be featured.</p>" },
+    { "type": "url", "id": "link_url", "label": "Default link", "info": "e.g. your Instagram profile" },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 3, "max": 8, "step": 1, "default": 6 },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Social gallery", "blocks": [ { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" } ] }
+  ]
+}
+{% endschema %}

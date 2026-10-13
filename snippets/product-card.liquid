@@ -1,0 +1,96 @@
+{% doc %}
+  Product card with hover image, badges, rating, color swatches and quick add.
+
+  @param {product} product - Product object
+  @param {number} [index] - Position in list, used for staggered reveal and eager loading
+  @param {boolean} [eager] - Load image eagerly
+  @param {string} [sizes] - Image sizes attribute
+
+  @example
+  {% render 'product-card', product: product, index: forloop.index0 %}
+{% enddoc %}
+{%- liquid
+  assign ratio = settings.card_image_ratio
+  assign media = product.featured_media
+  assign hover_media = product.media[1]
+  assign sizes = sizes | default: '(min-width: 1200px) 25vw, (min-width: 750px) 33vw, 50vw'
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+  assign swatch_names = settings.swatch_option_names | downcase | split: ','
+  assign swatch_option = null
+  if settings.card_show_swatches
+    for option in product.options_with_values
+      assign option_key = option.name | downcase | strip
+      for n in swatch_names
+        assign n_clean = n | strip
+        if n_clean == option_key
+          assign swatch_option = option
+          break
+        endif
+      endfor
+      if swatch_option
+        break
+      endif
+    endfor
+  endif
+  assign card_id = 'Card-' | append: product.id | append: '-' | append: index
+-%}
+<div class="card card--{{ settings.card_text_align }}{% unless settings.card_image_cover %} card--contain{% endunless %} badges--{{ settings.badge_position }}" data-card style="--card-align: {{ settings.card_text_align }};">
+  <a href="{{ product.url }}" class="card__media{% if ratio == 'adapt' %} card__media--adapt{% endif %}{% if settings.card_hover_image and hover_media %} card__media--has-hover{% endif %}" tabindex="-1" aria-hidden="true" {% if ratio == 'adapt' and media %}style="--ratio: {{ media.preview_image.aspect_ratio | default: 1 }};"{% endif %}>
+    <div class="media{% unless ratio == 'adapt' %} media--{{ ratio }}{% endunless %}">
+      {%- if media -%}
+        {{ media.preview_image | image_url: width: 900 | image_tag: loading: loading, sizes: sizes, widths: '240,360,480,600,750,900', alt: media.alt }}
+        {%- if settings.card_hover_image and hover_media -%}
+          {{ hover_media.preview_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: sizes, widths: '240,360,480,600,750,900', alt: '', class: 'card__img-hover' }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </a>
+  {% render 'product-badges', product: product %}
+  {%- if settings.card_quick_add and product.available -%}
+    <div class="card__quick">
+      <button
+        type="button"
+        class="btn"
+        data-quick-add
+        {% if product.has_only_default_variant %}data-variant-id="{{ product.selected_or_first_available_variant.id }}"{% else %}data-product-url="{{ product.url }}"{% endif %}
+        aria-label="{{ 'products.product.quick_add_named' | t: title: product.title | escape }}"
+      >
+        <span class="card__quick-label">{% if product.has_only_default_variant %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.quick_add' | t }}{% endif %}</span>
+        <span class="card__quick-icon">{% render 'icon', icon: 'plus' %}</span>
+      </button>
+    </div>
+  {%- endif -%}
+  <div class="card__info">
+    {%- if settings.card_show_vendor -%}
+      <span class="card__vendor">{{ product.vendor }}</span>
+    {%- endif -%}
+    <h3 class="card__title"><a href="{{ product.url }}" id="{{ card_id }}">{{ product.title }}</a></h3>
+    {%- if settings.card_show_rating -%}
+      {% render 'rating', product: product, show_count: true %}
+    {%- endif -%}
+    {% render 'price', product: product %}
+    {%- if swatch_option -%}
+      <div class="card__swatches">
+        {%- for value in swatch_option.values limit: 5 -%}
+          {%- assign v_img = value.variant.featured_image -%}
+          <a
+            href="{{ value.variant.url | default: product.url }}"
+            class="card__swatch"
+            title="{{ value.name | escape }}"
+            aria-label="{{ swatch_option.name | escape }}: {{ value.name | escape }}"
+            style="--swatch: {% render 'swatch-value', value: value %};"
+            {% if v_img %}data-swatch-image="{{ v_img | image_url: width: 900 }}"{% endif %}
+          ></a>
+        {%- endfor -%}
+        {%- if swatch_option.values.size > 5 -%}
+          <span class="card__swatch-more">+{{ swatch_option.values.size | minus: 5 }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>

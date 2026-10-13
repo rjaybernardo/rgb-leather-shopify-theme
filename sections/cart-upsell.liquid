@@ -1,0 +1,20 @@
+<product-recommendations data-section-id="cart-upsell">
+  <div class="cart-upsell__list">
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      {%- assign cart_ids = cart.items | map: 'product_id' | join: ',' | prepend: ',' | append: ',' -%}
+      {%- for product in recommendations.products -%}
+        {%- assign pid = ',' | append: product.id | append: ',' -%}
+        {%- unless cart_ids contains pid -%}
+          {% render 'upsell-item', product: product %}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</product-recommendations>
+
+{% schema %}
+{
+  "name": "Cart upsell",
+  "settings": []
+}
+{% endschema %}

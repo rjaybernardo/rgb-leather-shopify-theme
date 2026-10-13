@@ -1,0 +1,62 @@
+{%- liquid
+  assign s = section.settings
+  assign loading = 'lazy'
+  if section.index == 1
+    assign loading = 'eager'
+  endif
+-%}
+<section class="slideshow image-banner{% if s.text_dark %} hero--dark-text{% endif %}" style="--h: {{ s.height }}vh; --h-mobile: {{ s.height_mobile }}svh;">
+  <div class="slideshow__slide is-active" style="opacity: 1; visibility: visible;">
+    <div class="hero__media">
+      {%- if s.video != blank -%}
+        {{ s.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false, image_size: '1920x' }}
+      {%- elsif s.image != blank -%}
+        {%- if s.image_mobile != blank -%}
+          <div class="hero__media hero__media--mobile">{{ s.image_mobile | image_url: width: 1200 | image_tag: loading: loading, widths: '400,600,800,1000,1200', sizes: '100vw', alt: s.image_mobile.alt }}</div>
+        {%- endif -%}
+        <div class="hero__media hero__media--desktop">{{ s.image | image_url: width: 3000 | image_tag: loading: loading, widths: '600,900,1200,1600,2000,2400,3000', sizes: '100vw', alt: s.image.alt }}</div>
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="hero__overlay{% if s.flat_overlay %} hero__overlay--flat{% endif %}" style="--overlay: {{ s.overlay | divided_by: 100.0 }};"></div>
+    <div class="page-width hero__content hero__content--{{ s.position }} hero__content--{{ s.align }}">
+      <div class="hero__box reveal">
+        {%- if s.subheading != blank -%}<span class="subheading">{{ s.subheading }}</span>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="h0 heading-italic">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<div class="hero__text">{{ s.text }}</div>{%- endif -%}
+        <div class="button-row">
+          {%- if s.button_label != blank -%}<a href="{{ s.link }}" class="btn {% if s.text_dark %}btn{% else %}btn--light{% endif %}">{{ s.button_label }}</a>{%- endif -%}
+          {%- if s.button_label_2 != blank -%}<a href="{{ s.link_2 }}" class="btn {% if s.text_dark %}btn--secondary{% else %}btn--outline-light{% endif %}">{{ s.button_label_2 }}</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image" },
+    { "type": "video", "id": "video", "label": "Background video", "info": "Overrides image" },
+    { "type": "range", "id": "height", "label": "Desktop height", "min": 30, "max": 100, "step": 5, "unit": "vh", "default": 75 },
+    { "type": "range", "id": "height_mobile", "label": "Mobile height", "min": 30, "max": 100, "step": 5, "unit": "vh", "default": 70 },
+    { "type": "range", "id": "overlay", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 35 },
+    { "type": "checkbox", "id": "flat_overlay", "label": "Even overlay (no gradient)", "default": false },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "The workshop" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Made by <em>hand</em>, not by machine" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Every piece passes through the hands of one artisan — from cutting the hide to burnishing the final edge.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Meet the makers" },
+    { "type": "url", "id": "link", "label": "Button link" },
+    { "type": "text", "id": "button_label_2", "label": "Second button label" },
+    { "type": "url", "id": "link_2", "label": "Second button link" },
+    { "type": "select", "id": "position", "label": "Vertical position", "options": [ { "value": "top", "label": "Top" }, { "value": "middle", "label": "Middle" }, { "value": "bottom", "label": "Bottom" } ], "default": "middle" },
+    { "type": "select", "id": "align", "label": "Alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" } ], "default": "center" },
+    { "type": "checkbox", "id": "text_dark", "label": "Dark text", "default": false }
+  ],
+  "presets": [{ "name": "Image banner" }]
+}
+{% endschema %}

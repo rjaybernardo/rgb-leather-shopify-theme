@@ -1,0 +1,360 @@
+{%- liquid
+  assign s = section.settings
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'ProductForm-' | append: section.id
+  assign ratio = '4/5'
+  case s.media_ratio
+    when 'square'
+      assign ratio = '1'
+    when 'tall'
+      assign ratio = '2/3'
+  endcase
+-%}
+<recently-viewed-tracker data-handle="{{ product.handle }}"></recently-viewed-tracker>
+<section class="section color-{{ s.color_scheme }}" style="--pt: {{ s.padding_top }}px; --pb: {{ s.padding_bottom }}px;" data-product>
+  <script type="application/json" data-variant-json>{{ variant | json }}</script>
+  <div class="page-width">
+    {%- if s.show_breadcrumbs -%}
+      <nav aria-label="{{ 'general.breadcrumbs.label' | t }}">
+        <ol class="breadcrumbs">
+          <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+          {%- if collection -%}<li><a href="{{ collection.url }}">{{ collection.title }}</a></li>{%- endif -%}
+          <li aria-current="page">{{ product.title }}</li>
+        </ol>
+      </nav>
+    {%- endif -%}
+    <div class="product" style="--media-w: {{ s.media_width }}%;">
+      <div class="product__media">
+        {% render 'product-gallery', product: product, layout: s.gallery_layout, ratio: ratio, zoom: s.enable_zoom, contain: s.media_contain, eager: true %}
+      </div>
+      <div class="product__info{% if s.sticky_info %} product__info--sticky{% endif %}">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          {%- case block.type -%}
+            {%- when '@app' -%}
+              <div class="product__app-block">{% render block %}</div>
+            {%- when 'vendor' -%}
+              <a href="{{ product.vendor | url_for_vendor }}" class="product__vendor" {{ block.shopify_attributes }}>{{ product.vendor }}</a>
+            {%- when 'title' -%}
+              <h1 class="product__title heading-italic" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+            {%- when 'rating' -%}
+              <a href="#{{ b.anchor | default: 'reviews' }}" class="product__rating" {{ block.shopify_attributes }}>{% render 'rating', product: product, show_count: true %}</a>
+            {%- when 'price' -%}
+              <div class="product__price-wrap" {{ block.shopify_attributes }}>
+                <div data-swap="price">{% render 'price', product: product, use_variant: true, show_save: b.show_save, large: true %}</div>
+                {%- if b.show_tax -%}
+                  <span class="product__tax">
+                    {%- if cart.taxes_included -%}{{ 'products.product.tax_included' | t }}{%- else -%}{{ 'products.product.tax_excluded' | t }}{%- endif -%}
+                    {%- if shop.shipping_policy.body != blank %} {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}{%- endif -%}
+                  </span>
+                {%- endif -%}
+              </div>
+            {%- when 'sku' -%}
+              <p class="product__sku" data-swap="sku" {{ block.shopify_attributes }}>{% if variant.sku != blank %}{{ 'products.product.sku' | t }}: {{ variant.sku }}{% endif %}</p>
+            {%- when 'description' -%}
+              <div class="product__desc rte" {{ block.shopify_attributes }}>
+                {%- if b.truncate -%}
+                  {{ product.description | strip_html | truncatewords: 40 }}
+                  {%- if b.collapsible_anchor != blank -%} <a href="#{{ b.collapsible_anchor }}">{{ 'products.product.read_more' | t }}</a>{%- endif -%}
+                {%- else -%}
+                  {{ product.description }}
+                {%- endif -%}
+              </div>
+            {%- when 'highlights' -%}
+              <ul class="highlights" {{ block.shopify_attributes }}>
+                {%- assign items = b.items | newline_to_br | split: '<br />' -%}
+                {%- for item in items -%}
+                  {%- assign line = item | strip -%}
+                  {%- if line != blank -%}<li>{% render 'icon', icon: 'check' %}<span>{{ line }}</span></li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- when 'variant_picker' -%}
+              <div {{ block.shopify_attributes }}>
+                {%- capture size_guide -%}
+                  {%- if b.size_guide_page != blank -%}
+                    <modal-opener data-modal="SizeGuide-{{ block.id }}" class="option__guide"><button type="button" class="option__guide">{% render 'icon', icon: 'leather' %} {{ b.size_guide_label }}</button></modal-opener>
+                  {%- endif -%}
+                {%- endcapture -%}
+                {% render 'variant-picker', product: product, section_id: section.id, style: b.style, update_url: true, size_guide: size_guide %}
+                {%- if b.size_guide_page != blank -%}
+                  <dialog id="SizeGuide-{{ block.id }}" class="popup color-{{ s.color_scheme }}">
+                    <div class="popup__inner">
+                      <button type="button" class="icon-button popup__close" data-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+                      <h2 class="h3">{{ b.size_guide_page.title }}</h2>
+                      <div class="rte">{{ b.size_guide_page.content }}</div>
+                    </div>
+                  </dialog>
+                {%- endif -%}
+              </div>
+            {%- when 'buy_buttons' -%}
+              <div {{ block.shopify_attributes }}>
+                {%- capture properties -%}
+                  {%- if b.monogram -%}
+                    <div class="field" style="margin-bottom: 1rem;">
+                      <label for="Monogram-{{ section.id }}">{{ b.monogram_label }}</label>
+                      <input class="input" type="text" id="Monogram-{{ section.id }}" name="properties[{{ b.monogram_label | escape }}]" maxlength="{{ b.monogram_max }}" placeholder="{{ 'products.product.monogram_placeholder' | t: max: b.monogram_max }}" style="text-transform: uppercase;">
+                    </div>
+                  {%- endif -%}
+                  {%- if b.gift_wrap -%}
+                    <label class="checkbox gift-note" style="margin-bottom: 1rem;">
+                      <input type="checkbox" name="properties[{{ 'products.product.gift_wrap' | t }}]" value="{{ 'general.yes' | t }}">
+                      <span>{% render 'icon', icon: 'gift' %}</span>
+                      <span>{{ b.gift_wrap_label }}</span>
+                    </label>
+                  {%- endif -%}
+                {%- endcapture -%}
+                {% render 'buy-buttons', product: product, form_id: form_id, show_quantity: b.show_quantity, dynamic_checkout: b.dynamic_checkout, main: true, properties: properties %}
+              </div>
+            {%- when 'inventory' -%}
+              <div data-swap="inventory" {{ block.shopify_attributes }}>
+                {%- liquid
+                  assign qty = variant.inventory_quantity
+                  assign tracked = false
+                  if variant.inventory_management == 'shopify'
+                    assign tracked = true
+                  endif
+                -%}
+                {%- if variant.available == false -%}
+                  <div class="inventory inventory--out"><div class="inventory__row"><span class="inventory__dot"></span>{{ 'products.product.inventory.out' | t }}</div></div>
+                {%- elsif tracked and qty > 0 and qty <= b.threshold -%}
+                  {%- assign pct = qty | times: 100 | divided_by: b.threshold | at_least: 8 -%}
+                  <div class="inventory inventory--low">
+                    <div class="inventory__row"><span class="inventory__dot"></span><strong>{{ 'products.product.inventory.low' | t: count: qty }}</strong></div>
+                    {%- if b.show_bar -%}<div class="inventory__bar"><span style="--pct: {{ pct }}%;"></span></div>{%- endif -%}
+                  </div>
+                {%- else -%}
+                  <div class="inventory"><div class="inventory__row"><span class="inventory__dot"></span>{{ b.in_stock_text | default: 'In stock, ready to ship' }}</div></div>
+                {%- endif -%}
+              </div>
+            {%- when 'delivery' -%}
+              <delivery-estimate class="delivery" data-min="{{ b.min_days }}" data-max="{{ b.max_days }}" data-cutoff="{{ b.cutoff_hour }}" data-skip-weekends="{{ b.skip_weekends }}" {{ block.shopify_attributes }}>
+                {% render 'icon', icon: 'truck' %}
+                <div>
+                  <div>{{ 'products.product.delivery.estimate' | t }} <strong data-range>{{ b.min_days }}–{{ b.max_days }} {{ 'products.product.delivery.days' | t }}</strong></div>
+                  {%- if b.cutoff_hour > 0 -%}<div class="text-muted" style="font-size: .82rem;">{{ 'products.product.delivery.order_within_html' | t }}</div>{%- endif -%}
+                </div>
+              </delivery-estimate>
+            {%- when 'trust' -%}
+              {%- assign trust_count = 0 -%}
+              {%- for i in (1..4) -%}{%- assign tk = 'text_' | append: i -%}{%- if b[tk] != blank -%}{%- assign trust_count = trust_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+              <div class="trust-icons" style="--cols: {{ trust_count | at_least: 1 }};" {{ block.shopify_attributes }}>
+                {%- for i in (1..4) -%}
+                  {%- assign tk = 'text_' | append: i -%}
+                  {%- assign ik = 'icon_' | append: i -%}
+                  {%- if b[tk] != blank -%}
+                    <div class="trust-icons__item">{% render 'icon', icon: b[ik] %}<span>{{ b[tk] }}</span></div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- when 'payment_icons' -%}
+              <div class="product-payment-icons" {{ block.shopify_attributes }}>
+                <span style="display: inline-flex; align-items: center; gap: .4rem;">{% render 'icon', icon: 'lock' %} {{ b.text }}</span>
+                <ul class="payment-icons" role="list">{%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}</ul>
+              </div>
+            {%- when 'collapsible' -%}
+              <details class="accordion__item" id="{{ b.anchor | default: block.id }}" {% if b.open %}open{% endif %} {{ block.shopify_attributes }} style="border-top: 1px solid var(--color-border);">
+                <summary class="accordion__summary"><span class="accordion__summary-left">{% if b.icon != 'none' %}{% render 'icon', icon: b.icon %}{% endif %}{{ b.heading }}</span><span class="accordion__toggle" aria-hidden="true"></span></summary>
+                <div class="accordion__content rte">
+                  {%- if b.source == 'description' -%}{{ product.description }}{%- endif -%}
+                  {{ b.content }}
+                  {%- if b.page != blank -%}{{ b.page.content }}{%- endif -%}
+                </div>
+              </details>
+            {%- when 'complementary' -%}
+              <product-recommendations class="complementary" data-section-id="{{ section.id }}" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ b.limit }}&intent=complementary" {{ block.shopify_attributes }}>
+                {%- if recommendations.performed and recommendations.products_count > 0 -%}
+                  <p class="complementary__title">{{ b.heading }}</p>
+                  <div class="complementary__list">
+                    {%- for rec in recommendations.products limit: b.limit -%}
+                      {% render 'upsell-item', product: rec %}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </product-recommendations>
+            {%- when 'share' -%}
+              <share-button data-url="{{ shop.url | append: product.url }}" {{ block.shopify_attributes }}>
+                <button type="button" class="share">{% render 'icon', icon: 'share' %} {{ 'general.share.share' | t }}</button>
+              </share-button>
+            {%- when 'text' -%}
+              <div class="rte{% if b.style == 'note' %} gift-note{% endif %}" {{ block.shopify_attributes }}>
+                {%- if b.style == 'note' and b.icon != 'none' -%}{% render 'icon', icon: b.icon %}{%- endif -%}
+                <div>{{ b.text }}</div>
+              </div>
+            {%- when 'divider' -%}
+              <hr class="product__divider" style="margin: 0;" {{ block.shopify_attributes }}>
+            {%- when 'custom_liquid' -%}
+              <div {{ block.shopify_attributes }}>{{ b.custom_liquid }}</div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if s.sticky_atc -%}
+    <sticky-atc class="sticky-atc color-{{ s.color_scheme }}" data-target="#MainAtc-{{ form_id }}" aria-hidden="true" inert>
+      <div class="page-width sticky-atc__inner">
+        <div class="sticky-atc__product">
+          {%- if product.featured_media -%}
+            <span class="media">{{ product.featured_media.preview_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}</span>
+          {%- endif -%}
+          <div class="sticky-atc__meta" style="min-width: 0;">
+            <div class="sticky-atc__title">{{ product.title }}</div>
+            <div class="sticky-atc__variant" data-swap="sticky-variant">{% unless product.has_only_default_variant %}{{ variant.title }}{% endunless %}</div>
+          </div>
+        </div>
+        <div class="sticky-atc__price" data-swap="sticky-price">{% render 'price', product: product, use_variant: true %}</div>
+        <div data-swap="sticky-btn">
+          <button type="submit" form="{{ form_id }}" class="btn" {% unless variant.available %}disabled aria-disabled="true"{% endunless %}>
+            <span>{% if variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+          </button>
+        </div>
+      </div>
+    </sticky-atc>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Product information",
+  "tag": "div",
+  "class": "section-main-product",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Media" },
+    { "type": "select", "id": "gallery_layout", "label": "Desktop gallery layout", "options": [ { "value": "thumbs-bottom", "label": "Carousel, thumbnails below" }, { "value": "thumbs-left", "label": "Carousel, thumbnails left" }, { "value": "grid", "label": "Two-column grid" } ], "default": "thumbs-left" },
+    { "type": "range", "id": "media_width", "label": "Media width", "min": 45, "max": 65, "step": 1, "unit": "%", "default": 56 },
+    { "type": "select", "id": "media_ratio", "label": "Media ratio", "options": [ { "value": "portrait", "label": "Portrait (4:5)" }, { "value": "square", "label": "Square" }, { "value": "tall", "label": "Tall (2:3)" } ], "default": "portrait" },
+    { "type": "checkbox", "id": "media_contain", "label": "Fit images without cropping", "default": false },
+    { "type": "checkbox", "id": "enable_zoom", "label": "Enable zoom lightbox", "default": true },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "sticky_info", "label": "Sticky product info on desktop", "default": true },
+    { "type": "checkbox", "id": "sticky_atc", "label": "Sticky add to cart bar", "default": true },
+    { "type": "checkbox", "id": "show_breadcrumbs", "label": "Show breadcrumbs", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "vendor", "name": "Vendor", "limit": 1, "settings": [] },
+    { "type": "title", "name": "Title", "limit": 1, "settings": [] },
+    { "type": "rating", "name": "Rating", "limit": 1, "settings": [ { "type": "text", "id": "anchor", "label": "Link to section id", "default": "reviews" } ] },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_save", "label": "Show savings percentage", "default": true },
+        { "type": "checkbox", "id": "show_tax", "label": "Show tax & shipping note", "default": true }
+      ]
+    },
+    { "type": "sku", "name": "SKU", "limit": 1, "settings": [] },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "truncate", "label": "Show short excerpt", "default": false },
+        { "type": "text", "id": "collapsible_anchor", "label": "Read more links to tab id" }
+      ]
+    },
+    { "type": "highlights", "name": "Highlights", "settings": [ { "type": "textarea", "id": "items", "label": "Items (one per line)", "default": "Full-grain vegetable-tanned leather\nHand-stitched with waxed linen thread\nDevelops a rich patina over time" } ] },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        { "type": "select", "id": "style", "label": "Non-color option style", "options": [ { "value": "pills", "label": "Pills" }, { "value": "dropdown", "label": "Dropdown" } ], "default": "pills" },
+        { "type": "page", "id": "size_guide_page", "label": "Size guide page", "info": "Opens in a popup next to the last option" },
+        { "type": "text", "id": "size_guide_label", "label": "Size guide label", "default": "Size guide" }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        { "type": "checkbox", "id": "show_quantity", "label": "Show quantity selector", "default": true },
+        { "type": "checkbox", "id": "dynamic_checkout", "label": "Show dynamic checkout buttons", "default": true },
+        { "type": "header", "content": "Personalization" },
+        { "type": "checkbox", "id": "monogram", "label": "Enable monogram field", "default": false },
+        { "type": "text", "id": "monogram_label", "label": "Monogram label", "default": "Monogram (optional)" },
+        { "type": "range", "id": "monogram_max", "label": "Max characters", "min": 1, "max": 10, "step": 1, "default": 3 },
+        { "type": "checkbox", "id": "gift_wrap", "label": "Show gift wrap option", "default": false },
+        { "type": "text", "id": "gift_wrap_label", "label": "Gift wrap label", "default": "Add complimentary gift wrapping" }
+      ]
+    },
+    {
+      "type": "inventory",
+      "name": "Inventory status",
+      "limit": 1,
+      "settings": [
+        { "type": "range", "id": "threshold", "label": "Low stock threshold", "min": 1, "max": 30, "step": 1, "default": 10 },
+        { "type": "checkbox", "id": "show_bar", "label": "Show low stock bar", "default": true },
+        { "type": "text", "id": "in_stock_text", "label": "In stock text", "default": "In stock, ready to ship" }
+      ]
+    },
+    {
+      "type": "delivery",
+      "name": "Delivery estimate",
+      "limit": 1,
+      "settings": [
+        { "type": "range", "id": "min_days", "label": "Minimum business days", "min": 1, "max": 30, "step": 1, "default": 3 },
+        { "type": "range", "id": "max_days", "label": "Maximum business days", "min": 1, "max": 45, "step": 1, "default": 6 },
+        { "type": "range", "id": "cutoff_hour", "label": "Same-day dispatch cutoff hour", "min": 0, "max": 23, "step": 1, "default": 14, "info": "0 hides the countdown" },
+        { "type": "checkbox", "id": "skip_weekends", "label": "Skip weekends", "default": true }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust icons",
+      "limit": 2,
+      "settings": [
+        { "type": "select", "id": "icon_1", "label": "Icon 1", "options": [ { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Returns" }, { "value": "shield", "label": "Shield" }, { "value": "hand", "label": "Handmade" }, { "value": "gift", "label": "Gift" }, { "value": "lock", "label": "Lock" }, { "value": "leaf", "label": "Leaf" }, { "value": "award", "label": "Award" } ], "default": "truck" },
+        { "type": "text", "id": "text_1", "label": "Text 1", "default": "Free shipping over $150" },
+        { "type": "select", "id": "icon_2", "label": "Icon 2", "options": [ { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Returns" }, { "value": "shield", "label": "Shield" }, { "value": "hand", "label": "Handmade" }, { "value": "gift", "label": "Gift" }, { "value": "lock", "label": "Lock" }, { "value": "leaf", "label": "Leaf" }, { "value": "award", "label": "Award" } ], "default": "return" },
+        { "type": "text", "id": "text_2", "label": "Text 2", "default": "30-day free returns" },
+        { "type": "select", "id": "icon_3", "label": "Icon 3", "options": [ { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Returns" }, { "value": "shield", "label": "Shield" }, { "value": "hand", "label": "Handmade" }, { "value": "gift", "label": "Gift" }, { "value": "lock", "label": "Lock" }, { "value": "leaf", "label": "Leaf" }, { "value": "award", "label": "Award" } ], "default": "shield" },
+        { "type": "text", "id": "text_3", "label": "Text 3", "default": "Lifetime warranty" },
+        { "type": "select", "id": "icon_4", "label": "Icon 4", "options": [ { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Returns" }, { "value": "shield", "label": "Shield" }, { "value": "hand", "label": "Handmade" }, { "value": "gift", "label": "Gift" }, { "value": "lock", "label": "Lock" }, { "value": "leaf", "label": "Leaf" }, { "value": "award", "label": "Award" } ], "default": "hand" },
+        { "type": "text", "id": "text_4", "label": "Text 4" }
+      ]
+    },
+    { "type": "payment_icons", "name": "Payment icons", "limit": 1, "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Secure checkout guaranteed" } ] },
+    {
+      "type": "collapsible",
+      "name": "Collapsible tab",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Materials & care" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [ { "value": "none", "label": "None" }, { "value": "leather", "label": "Leather" }, { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Returns" }, { "value": "shield", "label": "Shield" }, { "value": "hand", "label": "Handmade" }, { "value": "leaf", "label": "Leaf" }, { "value": "gift", "label": "Gift" } ], "default": "none" },
+        { "type": "select", "id": "source", "label": "Content source", "options": [ { "value": "custom", "label": "Custom content / page" }, { "value": "description", "label": "Product description" } ], "default": "custom" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Full-grain vegetable-tanned leather. Wipe clean with a dry cloth and condition every 6–12 months.</p>" },
+        { "type": "page", "id": "page", "label": "Page content" },
+        { "type": "text", "id": "anchor", "label": "Anchor id" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    },
+    {
+      "type": "complementary",
+      "name": "Complementary products",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Set up with the Search & Discovery app" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Pairs well with" },
+        { "type": "range", "id": "limit", "label": "Products", "min": 1, "max": 6, "step": 1, "default": 3 }
+      ]
+    },
+    { "type": "share", "name": "Share", "limit": 1, "settings": [] },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Free monogramming on every order.</p>" },
+        { "type": "select", "id": "style", "label": "Style", "options": [ { "value": "plain", "label": "Plain" }, { "value": "note", "label": "Highlighted note" } ], "default": "note" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [ { "value": "none", "label": "None" }, { "value": "gift", "label": "Gift" }, { "value": "leather", "label": "Leather" }, { "value": "heart", "label": "Heart" }, { "value": "award", "label": "Award" }, { "value": "clock", "label": "Clock" } ], "default": "gift" }
+      ]
+    },
+    { "type": "divider", "name": "Divider", "settings": [] },
+    { "type": "custom_liquid", "name": "Custom Liquid", "settings": [ { "type": "liquid", "id": "custom_liquid", "label": "Custom Liquid" } ] }
+  ]
+}
+{% endschema %}

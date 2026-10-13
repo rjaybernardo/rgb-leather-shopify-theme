@@ -1,0 +1,58 @@
+{% doc %}
+  Outputs a CSS background value for a swatch: Shopify swatch color/image, a leather tone map, or the value name as a color.
+
+  @param {object} [value] - product_option_value object
+  @param {string} [name] - Fallback value name when no option value object is available
+
+  @example
+  style="--swatch: {% render 'swatch-value', value: value %}"
+{% enddoc %}
+{%- liquid
+  assign label = name | default: value.name | default: value
+  assign key = label | handleize
+  if value.swatch.image
+    assign swatch_img = value.swatch.image | image_url: width: 80
+    echo 'url(' | append: swatch_img | append: ')'
+  elsif value.swatch.color
+    echo value.swatch.color
+  else
+    case key
+      when 'cognac'
+        echo '#9A5B2C'
+      when 'chestnut'
+        echo '#6E3B1F'
+      when 'espresso', 'dark-brown'
+        echo '#3B2A20'
+      when 'oxblood'
+        echo '#4A0F12'
+      when 'saddle', 'saddle-brown'
+        echo '#8B5A2B'
+      when 'natural', 'vegetable-tan', 'veg-tan'
+        echo '#D8B98F'
+      when 'whiskey', 'whisky'
+        echo '#B5651D'
+      when 'caramel'
+        echo '#C68E5B'
+      when 'honey'
+        echo '#C9862D'
+      when 'walnut'
+        echo '#5D3A1A'
+      when 'sand'
+        echo '#D6C4A8'
+      when 'cream', 'ivory'
+        echo '#F3EBDD'
+      when 'burgundy', 'bordeaux'
+        echo '#6D1A2A'
+      when 'forest', 'forest-green', 'green'
+        echo '#2F4A35'
+      when 'navy', 'navy-blue'
+        echo '#1F2A44'
+      when 'grey', 'gray'
+        echo '#8C8C8C'
+      when 'brown'
+        echo '#6B4226'
+      else
+        echo key | replace: '-', ''
+    endcase
+  endif
+-%}

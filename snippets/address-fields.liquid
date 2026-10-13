@@ -1,0 +1,20 @@
+{% doc %}
+  Customer address form fields.
+
+  @param {object} form - customer_address form object
+
+  @example
+  {% render 'address-fields', form: form %}
+{% enddoc %}
+<div class="form-grid form-grid--2">
+  <div class="field"><label>{{ 'customer.register.first_name' | t }}<input type="text" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name"></label></div>
+  <div class="field"><label>{{ 'customer.register.last_name' | t }}<input type="text" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name"></label></div>
+  <div class="field field--full"><label>{{ 'customer.addresses.company' | t }}<input type="text" name="address[company]" value="{{ form.company }}" autocomplete="organization"></label></div>
+  <div class="field field--full"><label>{{ 'customer.addresses.address1' | t }}<input type="text" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1"></label></div>
+  <div class="field field--full"><label>{{ 'customer.addresses.address2' | t }}<input type="text" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2"></label></div>
+  <div class="field"><label>{{ 'customer.addresses.city' | t }}<input type="text" name="address[city]" value="{{ form.city }}" autocomplete="address-level2"></label></div>
+  <div class="field"><label>{{ 'customer.addresses.country' | t }}<select name="address[country]" autocomplete="country" data-default="{{ form.country | escape }}">{{ all_country_option_tags }}</select></label></div>
+  <div class="field"><label>{{ 'customer.addresses.province' | t }}<input type="text" name="address[province]" value="{{ form.province }}" autocomplete="address-level1"></label></div>
+  <div class="field"><label>{{ 'customer.addresses.zip' | t }}<input type="text" name="address[zip]" value="{{ form.zip }}" autocomplete="postal-code"></label></div>
+  <div class="field field--full"><label>{{ 'customer.addresses.phone' | t }}<input type="tel" name="address[phone]" value="{{ form.phone }}" autocomplete="tel"></label></div>
+</div>

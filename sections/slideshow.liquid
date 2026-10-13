@@ -1,0 +1,159 @@
+{%- liquid
+  assign h = section.settings.height
+  assign h_mobile = section.settings.height_mobile
+-%}
+<slideshow-component
+  class="slideshow"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.speed }}"
+  style="--h: {{ h }}vh; --h-mobile: {{ h_mobile }}svh;"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="slideshow__track">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign s = block.settings
+        assign tag = 'div'
+        if s.link != blank and s.button_label == blank
+          assign tag = 'a'
+        endif
+        assign loading = 'lazy'
+        if forloop.first and section.index == 1
+          assign loading = 'eager'
+        endif
+      -%}
+      <{{ tag }}
+        class="slideshow__slide{% if forloop.first %} is-active{% endif %}{% if s.text_dark %} hero--dark-text{% endif %}"
+        {% if tag == 'a' %}href="{{ s.link }}"{% endif %}
+        role="group"
+        aria-roledescription="slide"
+        aria-label="{{ forloop.index }} / {{ forloop.length }}"
+        {% unless forloop.first %}inert{% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        <div class="hero__media">
+          {%- if s.video != blank -%}
+            {{ s.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false, image_size: '1920x' }}
+          {%- elsif s.image != blank -%}
+            {%- if s.image_mobile != blank -%}
+              <div class="hero__media hero__media--mobile">{{ s.image_mobile | image_url: width: 1200 | image_tag: loading: loading, fetchpriority: 'high', widths: '400,600,800,1000,1200', sizes: '100vw', alt: s.image_mobile.alt }}</div>
+            {%- endif -%}
+            <div class="hero__media hero__media--desktop">{{ s.image | image_url: width: 3000 | image_tag: loading: loading, widths: '600,900,1200,1600,2000,2400,3000', sizes: '100vw', alt: s.image.alt, style: s.focal }}</div>
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="hero__overlay" style="--overlay: {{ s.overlay | divided_by: 100.0 }};"></div>
+        <div class="page-width hero__content hero__content--{{ s.position }} hero__content--{{ s.align }}">
+          <div class="hero__box">
+            {%- if s.subheading != blank -%}<span class="subheading">{{ s.subheading }}</span>{%- endif -%}
+            {%- if s.heading != blank -%}
+              {%- if forloop.first and section.index == 1 -%}
+                <h2 class="h0 heading-italic">{{ s.heading }}</h2>
+              {%- else -%}
+                <p class="h0 heading-italic">{{ s.heading }}</p>
+              {%- endif -%}
+            {%- endif -%}
+            {%- if s.text != blank -%}<div class="hero__text">{{ s.text }}</div>{%- endif -%}
+            {%- if s.button_label != blank or s.button_label_2 != blank -%}
+              <div class="button-row">
+                {%- if s.button_label != blank -%}
+                  <a href="{{ s.link | default: routes.all_products_collection_url }}" class="btn {% if s.text_dark %}btn{% else %}btn--light{% endif %}">{{ s.button_label }}</a>
+                {%- endif -%}
+                {%- if s.button_label_2 != blank -%}
+                  <a href="{{ s.link_2 | default: routes.collections_url }}" class="btn {% if s.text_dark %}btn--secondary{% else %}btn--outline-light{% endif %}">{{ s.button_label_2 }}</a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </{{ tag }}>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="page-width slideshow__ui">
+      <div class="slideshow__bars">
+        {%- for block in section.blocks -%}
+          <button type="button" class="slideshow__bar" aria-label="{{ 'general.slider.go_to' | t: index: forloop.index }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><span></span></button>
+        {%- endfor -%}
+      </div>
+      <div class="slideshow__arrows">
+        <button type="button" class="slider__btn" data-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', icon: 'chevron-left' %}</button>
+        <button type="button" class="slider__btn" data-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', icon: 'chevron-right' %}</button>
+      </div>
+    </div>
+  {%- elsif section.settings.scroll_cue -%}
+    <span class="scroll-cue" aria-hidden="true"></span>
+  {%- endif -%}
+</slideshow-component>
+
+{% schema %}
+{
+  "name": "Hero slideshow",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    { "type": "range", "id": "height", "label": "Desktop height", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 95 },
+    { "type": "range", "id": "height_mobile", "label": "Mobile height", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 85 },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
+    { "type": "range", "id": "speed", "label": "Change slides every", "min": 3, "max": 12, "step": 1, "unit": "s", "default": 7 },
+    { "type": "checkbox", "id": "scroll_cue", "label": "Show scroll indicator (single slide)", "default": true },
+    { "type": "text", "id": "accessibility_label", "label": "Slideshow description", "default": "Featured collections" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Mobile image", "info": "Optional portrait crop for phones" },
+        { "type": "video", "id": "video", "label": "Background video", "info": "Plays muted and looped. Overrides image." },
+        { "type": "range", "id": "overlay", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 40 },
+        { "type": "text", "id": "subheading", "label": "Subheading", "default": "Handcrafted since 2014" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Leather that <em>ages</em> with you", "info": "Wrap words in italics for accent color" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Full-grain, vegetable-tanned and hand-stitched in small batches. Built to be carried for decades.</p>" },
+        { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop bestsellers" },
+        { "type": "url", "id": "link", "label": "Primary link" },
+        { "type": "text", "id": "button_label_2", "label": "Secondary button label", "default": "Our craft" },
+        { "type": "url", "id": "link_2", "label": "Secondary link" },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Vertical position",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "middle", "label": "Middle" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "select",
+          "id": "align",
+          "label": "Horizontal alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        { "type": "checkbox", "id": "text_dark", "label": "Dark text (for light images)", "default": false },
+        { "type": "text", "id": "focal", "label": "Image CSS position", "default": "object-position: center", "info": "Advanced: e.g. object-position: 30% center" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slideshow",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide", "settings": { "subheading": "New season", "heading": "The <em>Heritage</em> collection", "button_label": "Discover", "button_label_2": "", "align": "center", "position": "middle" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
