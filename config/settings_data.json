@@ -1,0 +1,59 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#F7F3EE",
+            "surface": "#FFFFFF",
+            "text": "#1E1915",
+            "accent": "#9B5B2C",
+            "button": "#1E1915",
+            "button_label": "#FFFFFF"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#FFFFFF",
+            "surface": "#F7F3EE",
+            "text": "#1E1915",
+            "accent": "#9B5B2C",
+            "button": "#1E1915",
+            "button_label": "#FFFFFF"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#1E1915",
+            "surface": "#2A231E",
+            "text": "#F7F3EE",
+            "accent": "#D9A06B",
+            "button": "#F7F3EE",
+            "button_label": "#1E1915"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#9B5B2C",
+            "surface": "#A86836",
+            "text": "#FFFFFF",
+            "accent": "#F3D9BF",
+            "button": "#FFFFFF",
+            "button_label": "#1E1915"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#E9DFD3",
+            "surface": "#F7F3EE",
+            "text": "#1E1915",
+            "accent": "#9B5B2C",
+            "button": "#9B5B2C",
+            "button_label": "#FFFFFF"
+          }
+        }
+      }
+    }
+  }
+}

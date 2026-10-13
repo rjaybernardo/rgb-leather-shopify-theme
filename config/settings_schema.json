@@ -1,0 +1,198 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "RGB Leather Premium",
+    "theme_version": "2.0.0",
+    "theme_author": "RGB Leather",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Logo & favicon",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "image_picker", "id": "logo_inverse", "label": "Logo for transparent header", "info": "Light version shown over hero images" },
+      { "type": "range", "id": "logo_width", "label": "Desktop logo width", "min": 60, "max": 300, "step": 5, "unit": "px", "default": 140 },
+      { "type": "range", "id": "logo_width_mobile", "label": "Mobile logo width", "min": 50, "max": 200, "step": 5, "unit": "px", "default": 100 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "32 x 32px .png recommended" }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          { "type": "color", "id": "background", "label": "Background", "default": "#F7F3EE" },
+          { "type": "color", "id": "surface", "label": "Card & input background", "default": "#FFFFFF" },
+          { "type": "color", "id": "text", "label": "Text", "default": "#1E1915" },
+          { "type": "color", "id": "accent", "label": "Accent", "default": "#9B5B2C" },
+          { "type": "color", "id": "button", "label": "Primary button", "default": "#1E1915" },
+          { "type": "color", "id": "button_label", "label": "Primary button label", "default": "#FFFFFF" }
+        ],
+        "role": {
+          "text": "text",
+          "background": { "solid": "background", "gradient": "background" },
+          "links": "accent",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button",
+          "secondary_button": "background",
+          "on_secondary_button": "text",
+          "secondary_button_border": "text"
+        }
+      },
+      { "type": "header", "content": "Status colors" },
+      { "type": "color", "id": "color_sale", "label": "Sale badge & price", "default": "#B4432F" },
+      { "type": "color", "id": "color_badge", "label": "Custom badge", "default": "#1E1915" },
+      { "type": "color", "id": "color_success", "label": "Success & in stock", "default": "#3E7B4F" },
+      { "type": "color", "id": "color_rating", "label": "Star rating", "default": "#C8963E" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "header", "content": "Headings" },
+      { "type": "font_picker", "id": "type_heading_font", "label": "Font", "default": "playfair_display_n4" },
+      { "type": "range", "id": "heading_scale", "label": "Size scale", "min": 80, "max": 140, "step": 5, "unit": "%", "default": 100 },
+      { "type": "range", "id": "heading_letter_spacing", "label": "Letter spacing", "min": -5, "max": 10, "step": 1, "unit": "px", "default": 0, "info": "Value is divided by 100 and applied in em" },
+      { "type": "checkbox", "id": "heading_uppercase", "label": "Uppercase headings", "default": false },
+      { "type": "header", "content": "Body" },
+      { "type": "font_picker", "id": "type_body_font", "label": "Font", "default": "assistant_n4" },
+      { "type": "range", "id": "body_scale", "label": "Size scale", "min": 90, "max": 120, "step": 5, "unit": "%", "default": 100 },
+      { "type": "header", "content": "Small labels" },
+      { "type": "checkbox", "id": "label_uppercase", "label": "Uppercase subheadings, buttons and labels", "default": true }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "label": "Page width", "min": 1000, "max": 1800, "step": 20, "unit": "px", "default": 1440 },
+      { "type": "range", "id": "grid_gap", "label": "Grid spacing", "min": 4, "max": 40, "step": 2, "unit": "px", "default": 20 },
+      { "type": "range", "id": "radius", "label": "Corner radius for images & cards", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 4 }
+    ]
+  },
+  {
+    "name": "Buttons & inputs",
+    "settings": [
+      { "type": "range", "id": "button_radius", "label": "Button corner radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 0 },
+      { "type": "range", "id": "input_radius", "label": "Input corner radius", "min": 0, "max": 20, "step": 2, "unit": "px", "default": 0 },
+      { "type": "checkbox", "id": "button_hover_fill", "label": "Animated fill on hover", "default": true }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image ratio",
+        "options": [
+          { "value": "adapt", "label": "Adapt to image" },
+          { "value": "portrait", "label": "Portrait (4:5)" },
+          { "value": "tall", "label": "Tall (2:3)" },
+          { "value": "square", "label": "Square" }
+        ],
+        "default": "portrait"
+      },
+      { "type": "checkbox", "id": "card_image_cover", "label": "Crop image to fill", "default": true },
+      { "type": "checkbox", "id": "card_hover_image", "label": "Show second image on hover", "default": true },
+      { "type": "checkbox", "id": "card_show_vendor", "label": "Show vendor", "default": false },
+      { "type": "checkbox", "id": "card_show_rating", "label": "Show product rating", "default": true, "info": "Requires a reviews app that writes the standard rating metafield" },
+      { "type": "checkbox", "id": "card_show_swatches", "label": "Show color swatches", "default": true },
+      { "type": "text", "id": "swatch_option_names", "label": "Swatch option names", "default": "Color, Colour, Leather, Finish", "info": "Comma-separated option names that render as swatches" },
+      { "type": "checkbox", "id": "card_quick_add", "label": "Enable quick add", "default": true },
+      {
+        "type": "select",
+        "id": "card_text_align",
+        "label": "Text alignment",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Center" }
+        ],
+        "default": "left"
+      }
+    ]
+  },
+  {
+    "name": "Badges",
+    "settings": [
+      {
+        "type": "select",
+        "id": "badge_position",
+        "label": "Position on cards",
+        "options": [
+          { "value": "top-left", "label": "Top left" },
+          { "value": "top-right", "label": "Top right" }
+        ],
+        "default": "top-left"
+      },
+      {
+        "type": "select",
+        "id": "sale_badge_style",
+        "label": "Sale badge",
+        "options": [
+          { "value": "text", "label": "Text (Sale)" },
+          { "value": "percent", "label": "Percentage (-20%)" },
+          { "value": "amount", "label": "Amount (Save $20)" }
+        ],
+        "default": "percent"
+      },
+      { "type": "checkbox", "id": "badge_new_enable", "label": "Show New badge", "default": true },
+      { "type": "range", "id": "badge_new_days", "label": "Products are new for", "min": 7, "max": 90, "step": 1, "unit": "d", "default": 30 },
+      { "type": "paragraph", "content": "Add a custom badge to any product with a tag like badge:Bestseller" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      },
+      { "type": "checkbox", "id": "cart_free_shipping_enable", "label": "Show free shipping progress bar", "default": true },
+      { "type": "number", "id": "cart_free_shipping_threshold", "label": "Free shipping threshold", "default": 150, "info": "In your store's default currency" },
+      { "type": "header", "content": "Drawer upsell" },
+      { "type": "checkbox", "id": "cart_upsell_enable", "label": "Show product recommendations", "default": true },
+      { "type": "collection", "id": "cart_upsell_collection", "label": "Fallback collection", "info": "Used when the cart is empty or has no recommendations" },
+      { "type": "header", "content": "Checkout" },
+      { "type": "checkbox", "id": "cart_note_enable", "label": "Enable order notes", "default": true },
+      { "type": "checkbox", "id": "cart_terms_enable", "label": "Require terms agreement", "default": false },
+      { "type": "page", "id": "cart_terms_page", "label": "Terms page" },
+      { "type": "inline_richtext", "id": "cart_trust_text", "label": "Trust message under checkout", "default": "Secure checkout · Free returns within 30 days" }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      { "type": "checkbox", "id": "animations_reveal", "label": "Reveal sections on scroll", "default": true },
+      { "type": "checkbox", "id": "animations_hover", "label": "Image zoom on hover", "default": true }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      { "type": "checkbox", "id": "predictive_search_enabled", "label": "Enable search suggestions", "default": true },
+      { "type": "link_list", "id": "search_popular_menu", "label": "Popular searches menu", "info": "Shown before customers start typing" }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram", "info": "https://instagram.com/shopify" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok" },
+      { "type": "text", "id": "social_pinterest_link", "label": "Pinterest" },
+      { "type": "text", "id": "social_youtube_link", "label": "YouTube" },
+      { "type": "text", "id": "social_twitter_link", "label": "X (Twitter)" }
+    ]
+  }
+]
