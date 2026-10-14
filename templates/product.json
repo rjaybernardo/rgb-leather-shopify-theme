@@ -4,16 +4,8 @@
       "type": "main-product",
       "settings": {},
       "blocks": {
-        "b0": {
-          "type": "vendor",
-          "settings": {}
-        },
         "b1": {
           "type": "title",
-          "settings": {}
-        },
-        "b2": {
-          "type": "rating",
           "settings": {}
         },
         "b3": {
@@ -22,7 +14,9 @@
         },
         "b4": {
           "type": "highlights",
-          "settings": {}
+          "settings": {
+            "items": "Genuine leather, hand-tooled\nMade by hand in Los Baños, Laguna\nGets better with age"
+          }
         },
         "b5": {
           "type": "variant_picker",
@@ -30,22 +24,39 @@
         },
         "b6": {
           "type": "inventory",
-          "settings": {}
+          "settings": {
+            "in_stock_text": "In stock, ready to ship"
+          }
         },
         "b7": {
           "type": "buy_buttons",
           "settings": {
             "monogram": true,
-            "gift_wrap": true
+            "monogram_label": "Name or initials to tool (up to 10 characters)",
+            "monogram_max": 10,
+            "gift_wrap": false
           }
         },
         "b8": {
           "type": "delivery",
-          "settings": {}
+          "settings": {
+            "min_days": 3,
+            "max_days": 7,
+            "skip_weekends": true
+          }
         },
         "b9": {
           "type": "trust",
-          "settings": {}
+          "settings": {
+            "icon_1": "truck",
+            "text_1": "Nationwide delivery via LBC",
+            "icon_2": "shield",
+            "text_2": "Genuine leather",
+            "icon_3": "hand",
+            "text_3": "Handmade",
+            "icon_4": "award",
+            "text_4": "Custom orders welcome"
+          }
         },
         "b10": {
           "type": "complementary",
@@ -65,15 +76,16 @@
           "type": "collapsible",
           "settings": {
             "heading": "Materials & care",
-            "icon": "leaf"
+            "icon": "leaf",
+            "content": "<p>Genuine leather. Wipe clean with a dry cloth, keep away from rain and direct sun, and condition every few months. Leather naturally darkens and develops character with age.</p>"
           }
         },
         "b13": {
           "type": "collapsible",
           "settings": {
-            "heading": "Shipping & returns",
+            "heading": "Shipping & custom orders",
             "icon": "truck",
-            "content": "<p>Free shipping on orders over $150. Free 30-day returns and exchanges.</p>"
+            "content": "<p>We ship nationwide via LBC; fees are calculated at checkout. Custom and made-to-order pieces ship once complete. We'll confirm the lead time with you before you pay.</p>"
           }
         },
         "b14": {
@@ -86,9 +98,7 @@
         }
       },
       "block_order": [
-        "b0",
         "b1",
-        "b2",
         "b3",
         "b4",
         "b5",
@@ -113,26 +123,26 @@
         "b0": {
           "type": "text",
           "settings": {
-            "text": "Full-grain leather"
+            "text": "Genuine leather"
           }
         },
         "b1": {
           "type": "text",
           "settings": {
-            "text": "Hand-stitched",
+            "text": "Hand-tooled",
             "italic": true
           }
         },
         "b2": {
           "type": "text",
           "settings": {
-            "text": "Lifetime warranty"
+            "text": "Made to order"
           }
         },
         "b3": {
           "type": "text",
           "settings": {
-            "text": "Free monogramming",
+            "text": "Los Baños, Laguna",
             "italic": true
           }
         }
@@ -155,31 +165,32 @@
           "type": "column",
           "settings": {
             "icon": "leather",
-            "title": "Full-grain only"
+            "title": "Real leather",
+            "text": "<p>Less likely to tear or crack than synthetics, and only gets better with age.</p>"
           }
         },
         "b1": {
           "type": "column",
           "settings": {
             "icon": "hand",
-            "title": "Hand-stitched",
-            "text": "<p>Saddle-stitched with waxed linen \u2014 twice as strong as machine lock-stitch.</p>"
+            "title": "Hand-tooled",
+            "text": "<p>Every pattern is carved and stamped by hand.</p>"
           }
         },
         "b2": {
           "type": "column",
           "settings": {
-            "icon": "leaf",
-            "title": "Vegetable tanned",
-            "text": "<p>Tanned slowly with natural tree bark extracts.</p>"
+            "icon": "award",
+            "title": "30+ years",
+            "text": "<p>Three decades of leatherwork in one family workshop.</p>"
           }
         },
         "b3": {
           "type": "column",
           "settings": {
-            "icon": "shield",
-            "title": "Lifetime warranty",
-            "text": "<p>If a stitch ever fails, we repair it for free.</p>"
+            "icon": "heart",
+            "title": "Made for you",
+            "text": "<p>Add your gamefarm name or logo to any case.</p>"
           }
         }
       },
@@ -188,37 +199,6 @@
         "b1",
         "b2",
         "b3"
-      ]
-    },
-    "reviews": {
-      "type": "testimonials",
-      "settings": {
-        "color_scheme": "scheme-2"
-      },
-      "blocks": {
-        "b0": {
-          "type": "testimonial",
-          "settings": {}
-        },
-        "b1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The stitching is flawless \u2014 worth every penny.",
-            "author": "Elena R."
-          }
-        },
-        "b2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Customer service repaired a strap I broke myself, no questions asked.",
-            "author": "James W."
-          }
-        }
-      },
-      "block_order": [
-        "b0",
-        "b1",
-        "b2"
       ]
     },
     "related": {
@@ -234,7 +214,6 @@
     "main",
     "marquee",
     "why",
-    "reviews",
     "related",
     "recent"
   ]

@@ -2,7 +2,14 @@
   "sections": {
     "main": {
       "type": "contact-form",
-      "settings": {}
+      "settings": {
+        "subheading": "Get in touch",
+        "heading": "Let's make something <em>yours</em>",
+        "text": "<p>Questions about an order or a custom tari case? Send us a message, call or text.</p><p>Workshop: Lot 8 Block 7 L.A. Village, Tuntungin-Putho, Los Baños, Laguna</p>",
+        "phone": "+63 909 293 3908",
+        "hours": "",
+        "email": ""
+      }
     },
     "faq": {
       "type": "faq",
@@ -12,13 +19,16 @@
       "blocks": {
         "b0": {
           "type": "question",
-          "settings": {}
+          "settings": {
+            "question": "How much is delivery?",
+            "answer": "<p>We ship nationwide via LBC. Delivery fees are calculated at checkout based on your address.</p>"
+          }
         },
         "b1": {
           "type": "question",
           "settings": {
-            "question": "How long does shipping take?",
-            "answer": "<p>Orders ship within 1\u20132 business days.</p>"
+            "question": "Can I order a custom design?",
+            "answer": "<p>Yes. Tell us your gamefarm name, initials or logo and we'll quote a custom piece.</p>"
           }
         }
       },

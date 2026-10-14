@@ -3,8 +3,11 @@
     "banner": {
       "type": "image-banner",
       "settings": {
+        "image": "shopify://shop_images/hero-hand-tooling.jpg",
+        "overlay": 40,
         "subheading": "Our story",
-        "heading": "Made by <em>hand</em>, not by machine",
+        "heading": "Gets better with age, <em>elegant</em> and always in style",
+        "text": "<p>A family leather workshop from Los Baños, Laguna.</p>",
         "button_label": "",
         "height": 70
       }
@@ -15,19 +18,65 @@
       "blocks": {
         "b0": {
           "type": "subheading",
-          "settings": {}
+          "settings": {
+            "text": "Why leather"
+          }
         },
         "b1": {
           "type": "heading",
-          "settings": {}
+          "settings": {
+            "heading": "Just like a new car, there's nothing like that <em>real leather</em> smell",
+            "size": "h2"
+          }
         },
         "b2": {
           "type": "text",
-          "settings": {}
+          "settings": {
+            "text": "<p>We have always worked in leather. For more than 30 years our family has made wallets, bags and belts by hand, and today we bring that same craft to the tari case. We want sabungeros to own something special and unique, something they can be proud of and pass on to the next generation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/ricardo-bernardo-workshop.jpg",
+        "image_2": "shopify://shop_images/workshop-stitching-02.jpg"
+      },
+      "blocks": {
+        "b0": {
+          "type": "subheading",
+          "settings": {
+            "text": "The man behind RGB LeatherCrafts"
+          }
+        },
+        "b1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ricardo G. <em>Bernardo</em>"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ricardo has been making products from leather for more than 30 years. In his spare time he raises and trains game fowl. When a farm owner from Bacolod asked whether he could make a tari case from leather, he made one and delivered it personally. It was the beginning of a new market for the workshop.</p><p>For years our shop stood at the main gate of the University of the Philippines Los Baños. Students and visiting researchers bought wallets, bags and belts to take home, and some came back years later, now professors, to show us the piece they still carry.</p>"
+          }
         },
         "b3": {
-          "type": "signature",
-          "settings": {}
+          "type": "stats",
+          "settings": {
+            "value_1": "30+",
+            "label_1": "Years working leather",
+            "value_2": "10–15",
+            "label_2": "Years a well-kept piece lasts",
+            "value_3": "1 by 1",
+            "label_3": "Made to order"
+          }
         }
       },
       "block_order": [
@@ -35,39 +84,6 @@
         "b1",
         "b2",
         "b3"
-      ]
-    },
-    "story": {
-      "type": "image-with-text",
-      "settings": {},
-      "blocks": {
-        "b0": {
-          "type": "subheading",
-          "settings": {}
-        },
-        "b1": {
-          "type": "heading",
-          "settings": {}
-        },
-        "b2": {
-          "type": "text",
-          "settings": {}
-        },
-        "b3": {
-          "type": "checklist",
-          "settings": {}
-        },
-        "b4": {
-          "type": "stats",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "b0",
-        "b1",
-        "b2",
-        "b3",
-        "b4"
       ]
     },
     "process": {
@@ -84,29 +100,29 @@
         "b0": {
           "type": "column",
           "settings": {
-            "title": "Select",
-            "text": "<p>We hand-pick full-grain hides from family tanneries.</p>"
+            "title": "Design",
+            "text": "<p>We sketch your pattern, name or gamefarm logo onto the leather.</p>"
           }
         },
         "b1": {
           "type": "column",
           "settings": {
-            "title": "Cut",
-            "text": "<p>Every panel is cut by hand to make the most of the grain.</p>"
+            "title": "Tool",
+            "text": "<p>The design is carved and stamped by hand, then dyed and antiqued.</p>"
           }
         },
         "b2": {
           "type": "column",
           "settings": {
-            "title": "Stitch",
-            "text": "<p>Saddle-stitched with waxed linen, two needles at a time.</p>"
+            "title": "Build",
+            "text": "<p>Leather is fitted over a fibreglass shell and lined with velvet.</p>"
           }
         },
         "b3": {
           "type": "column",
           "settings": {
             "title": "Finish",
-            "text": "<p>Edges are burnished and the piece is conditioned before it ships.</p>"
+            "text": "<p>Hardware is fitted, edges are finished and the case is checked before it ships.</p>"
           }
         }
       },
@@ -117,13 +133,36 @@
         "b3"
       ]
     },
-    "video": {
-      "type": "video",
-      "settings": {}
-    },
     "newsletter": {
       "type": "newsletter",
-      "settings": {}
+      "settings": {
+        "subheading": "Stay in the loop",
+        "heading": "New builds, <em>first</em>",
+        "text": "<p>Be the first to see new tari case designs and limited custom pieces.</p>"
+      }
+    },
+    "film": {
+      "type": "video",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "subheading": "In the field",
+        "heading": "The catch bag <em>in action</em>",
+        "video": "shopify://files/videos/catch-bag-insert-removal.mp4",
+        "cover": "shopify://shop_images/catch-bag-in-use.jpg",
+        "full_width": true
+      }
+    },
+    "journal": {
+      "type": "featured-blog",
+      "settings": {
+        "subheading": "The journal",
+        "heading": "Stories from the <em>workshop</em>",
+        "blog": "journal",
+        "limit": 3,
+        "columns": 3,
+        "link_label": "Read the journal",
+        "link_url": "shopify://blogs/journal"
+      }
     }
   },
   "order": [
@@ -131,7 +170,8 @@
     "intro",
     "story",
     "process",
-    "video",
+    "film",
+    "journal",
     "newsletter"
   ]
 }

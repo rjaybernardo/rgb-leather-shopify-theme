@@ -61,6 +61,9 @@
       --color-subtle: rgb({{ scheme.settings.text.rgb }} / 0.05);
       background-color: var(--color-bg);
       color: var(--color-fg);
+      {%- if scheme.settings.background_gradient != blank %}
+      background: {{ scheme.settings.background_gradient }};
+      {%- endif %}
     }
   {%- endfor %}
 {% endstyle %}

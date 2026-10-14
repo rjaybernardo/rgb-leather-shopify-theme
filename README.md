@@ -4,7 +4,7 @@ A modern, conversion-focused **Online Store 2.0** theme built for RGB Leather's 
 
 ![RGB Leather homepage hero](docs/screenshots/home-hero.jpg)
 
-> Screenshots are a design preview rendered from the theme's own CSS, JavaScript and section markup with the default settings. Product photos are demo images from [Unsplash](https://unsplash.com) and are **not** part of the theme. Replace them with your own in the theme editor.
+> Screenshots are of the live RGB LeatherCrafts store (`rgb-leather.myshopify.com`) running this theme, taken 2026-10-14. Product photos and videos are RGB LeatherCrafts' own and are uploaded to the store, **not** bundled with the theme. Prices show as $ until the store currency is switched to PHP.
 
 ---
 
@@ -143,8 +143,26 @@ You can also connect this repository through **Online Store → Themes → Add t
 6. **Swatches:** use Shopify's native swatches, or name option values after leather tones (Cognac, Chestnut, Espresso, Oxblood, Saddle, Natural, Whiskey, …). Common leather colors are built in.
 7. **Pages:** assign the `page.about` template to your About page and `page.contact` to Contact.
 
+## Deployment
+
+The theme is installed on **rgb-leather.myshopify.com** as **RGB Leather Premium** (theme ID `200429863072`) and is the live theme. It replaced the sample `test-data` theme, which is still in the theme library.
+
+- **Storefront:** https://rgb-leather.myshopify.com (password-protected until the store is launched)
+- **Theme editor:** https://rgb-leather.myshopify.com/admin/themes/200429863072/editor
+- **Push updates to the same theme:**
+
+  ```bash
+  shopify theme push --store rgb-leather.myshopify.com --theme 200429863072
+  ```
+
+
+> `theme push` overwrites the theme's `config/settings_data.json` and templates with the versions in this repo. If you've customized the theme in the editor, run `shopify theme pull --theme 200429863072` first and commit those changes, so they aren't lost.
+
 ## Notes
 
+- Shopify upload rules learned during deployment, which `theme check` does not catch:
+  - A `color_scheme_group` `background.gradient` role must point to a `color_background` setting (here, `background_gradient`).
+  - `url` settings can only default to `/collections` or `/collections/all`.
 - Only the English locale is included. Add other languages under `locales/`.
 - The free-shipping bar is shown only when the customer shops in the store's default currency, because Liquid doesn't expose exchange rates.
 - This theme replaces the original Debut-based theme. That version is preserved outside the repo in `rgb-leather-debut-original-backup.tar.gz`.

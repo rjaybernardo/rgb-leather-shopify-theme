@@ -1,0 +1,463 @@
+{
+  "sections": {
+    "banner": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/custom-36-capacity-crest-02.jpg",
+        "overlay": 45,
+        "subheading": "Custom builds",
+        "heading": "Your name, <em>carved</em> in leather",
+        "text": "<p>Every case below was made to order for a gamefarm, club or collector. Yours will be one of a kind too.</p>",
+        "button_label": "Start a custom order",
+        "link": "shopify://pages/contact",
+        "height": 70
+      }
+    },
+    "intro": {
+      "type": "rich-text",
+      "settings": {},
+      "blocks": {
+        "b0": {
+          "type": "subheading",
+          "settings": {
+            "text": "How it works"
+          }
+        },
+        "b1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Choose a size, send your <em>design</em>",
+            "size": "h2"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pick a capacity: 6, 24, 36 or 48 blades. Send us your gamefarm name, initials, logo or crest. We draw it onto the leather, hand-tool and dye it, and build the case around a fibreglass shell with a velvet-lined interior.</p><p>6-capacity from ₱2,500 · 24-capacity from ₱4,000 · 36-capacity from ₱6,000 · 48-capacity from ₱7,000</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "builds": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "subheading": "Order a build like these",
+        "heading": "Past <em>custom</em> builds",
+        "collection": "custom-builds",
+        "limit": 8,
+        "layout": "grid",
+        "link_label": "",
+        "link_url": ""
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "settings": {
+        "subheading": "Portfolio",
+        "heading": "From the <em>workbench</em>",
+        "description": "<p>Gamefarm logos, club crests and floral tooling, all done by hand.</p>",
+        "link_url": ""
+      },
+      "blocks": {
+        "b0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-36-capacity-crest-01.jpg",
+            "link": "shopify://products/custom-36-capacity-crest"
+          }
+        },
+        "b1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-48-capacity-shield-logo-02.jpg",
+            "link": "shopify://products/custom-48-capacity-shield-logo"
+          }
+        },
+        "b2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-48-capacity-lucky-box-01.jpg",
+            "link": "shopify://products/custom-48-capacity-lucky-box"
+          }
+        },
+        "b3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-association-crest-04.jpg",
+            "link": ""
+          }
+        },
+        "b4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-36-capacity-latch-lock-04.jpg",
+            "link": "shopify://products/custom-36-capacity-latch-lock"
+          }
+        },
+        "b5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-6-capacity-floral-03.jpg",
+            "link": "shopify://products/custom-6-capacity-floral"
+          }
+        },
+        "b6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-association-crest-02.jpg",
+            "link": ""
+          }
+        },
+        "b7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-36-capacity-combination-lock-02.jpg",
+            "link": "shopify://products/custom-36-capacity-combination-lock"
+          }
+        },
+        "b8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-process-01.jpg",
+            "link": ""
+          }
+        },
+        "b9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-48-capacity-shield-logo-08.jpg",
+            "link": ""
+          }
+        },
+        "b10": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom-36-capacity-old-type-01.jpg",
+            "link": "shopify://products/custom-36-capacity-old-type"
+          }
+        },
+        "b11": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-process-03.jpg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11"
+      ]
+    },
+    "process": {
+      "type": "multicolumn",
+      "settings": {
+        "media": "number",
+        "align": "left",
+        "heading": "From sketch to <em>case</em>",
+        "subheading": "The process",
+        "card": true
+      },
+      "blocks": {
+        "b0": {
+          "type": "column",
+          "settings": {
+            "title": "Send your design",
+            "text": "<p>Message us your name, logo or crest and the capacity you need.</p>"
+          }
+        },
+        "b1": {
+          "type": "column",
+          "settings": {
+            "title": "Approve the layout",
+            "text": "<p>We lay out the design and confirm the price and lead time with you.</p>"
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "title": "Hand-tooling",
+            "text": "<p>Your design is carved, stamped and dyed by hand.</p>"
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "title": "Build & ship",
+            "text": "<p>The case is assembled, lined and shipped to you via LBC.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "b0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Have a design in mind?",
+            "size": "h2"
+          }
+        },
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Call or text +63 909 293 3908, or send us a message.</p>"
+          }
+        },
+        "b2": {
+          "type": "button",
+          "settings": {
+            "label": "Contact us",
+            "link": "shopify://pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2"
+      ]
+    },
+    "catch_bags": {
+      "type": "gallery",
+      "settings": {
+        "subheading": "Catch bags",
+        "heading": "Your <em>name</em> on every bag",
+        "description": "<p>A few of the gamefarms we've made personalised catch bags for.</p>",
+        "link_url": ""
+      },
+      "blocks": {
+        "b0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-01.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-02.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-03.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-04.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-05.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-06.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-07.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-08.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-09.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-10.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b10": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-11.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        },
+        "b11": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-catch-bag-12.jpg",
+            "link": "shopify://products/personalised-leather-catch-bag"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11"
+      ]
+    },
+    "more_cases": {
+      "type": "gallery",
+      "settings": {
+        "subheading": "More client work",
+        "heading": "Crests, emblems and <em>logos</em>",
+        "description": "<p>Club crests, gamefarm emblems and one-of-a-kind artwork, tooled by hand.</p>",
+        "link_url": ""
+      },
+      "blocks": {
+        "b0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-fraternity-crest-01.jpg",
+            "link": ""
+          }
+        },
+        "b1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-ship-wheel-crest-03.jpg",
+            "link": ""
+          }
+        },
+        "b2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-eagle-crest-03.jpg",
+            "link": ""
+          }
+        },
+        "b3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-rooster-case-02.jpg",
+            "link": ""
+          }
+        },
+        "b4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-eagle-crest-01.jpg",
+            "link": ""
+          }
+        },
+        "b5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-ship-wheel-crest-01.jpg",
+            "link": ""
+          }
+        },
+        "b6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-rooster-case-03.jpg",
+            "link": ""
+          }
+        },
+        "b7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/portfolio-fraternity-crest-03.jpg",
+            "link": ""
+          }
+        },
+        "b8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/personalised-sharpener-case-01.jpg",
+            "link": "shopify://products/personalised-sharpener-case"
+          }
+        }
+      },
+      "block_order": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ]
+    },
+    "film": {
+      "type": "video",
+      "settings": {
+        "subheading": "Up close",
+        "heading": "Inside a <em>custom</em> tari case",
+        "description": "<p>Velvet-lined compartments, blade pockets and solid locks.</p>",
+        "video": "shopify://files/videos/tari-case-demo.mp4",
+        "cover": "shopify://shop_images/custom-36-capacity-latch-lock-04.jpg"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "intro",
+    "builds",
+    "gallery",
+    "more_cases",
+    "catch_bags",
+    "film",
+    "process",
+    "cta"
+  ]
+}

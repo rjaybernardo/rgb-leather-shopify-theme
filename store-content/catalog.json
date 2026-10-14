@@ -1,0 +1,604 @@
+{
+  "_notes": "Store content for rgb-leather.myshopify.com. Prices marked null still need confirming by the owner; products with a null price are created as drafts. Images are relative to store-content/images.",
+  "collections": [
+    {
+      "handle": "tari-cases",
+      "title": "Tari Cases",
+      "descriptionHtml": "<p>Hand-tooled leather tari cases built on a fibreglass shell, lined in velvet and finished with a combination lock. Made to order in Los Baños, Laguna.</p>",
+      "image": "products/tari-case-basket-weave-01.jpg"
+    },
+    {
+      "handle": "catch-bags",
+      "title": "Catch Bags",
+      "descriptionHtml": "<p>Hand-sewn leather catch bags that protect your catch cock from the blows of your game fowl during sparring and training.</p>",
+      "image": "products/catch-bag-01.jpg"
+    },
+    {
+      "handle": "accessories",
+      "title": "Takera & Accessories",
+      "descriptionHtml": "<p>Leather takera, tari sheaths, sharpener cases and arm protectors: the small pieces every sabungero carries.</p>",
+      "image": "products/takera-01.jpg"
+    },
+    {
+      "handle": "custom-builds",
+      "title": "Custom Builds",
+      "descriptionHtml": "<p>Made-to-order tari cases, hand-tooled with your gamefarm name, logo or crest. Each piece pictured was built for a client; yours is made from scratch to your design. Price depends on capacity.</p>",
+      "image": "custom/custom-36-capacity-crest-01.jpg"
+    },
+    {
+      "handle": "takera",
+      "title": "Takera",
+      "descriptionHtml": "<p>Hand-tooled leather takera that hold your tari blades in individual sleeves, closed with a strap and buckle.</p>",
+      "image": "products/takera-01.jpg"
+    },
+    {
+      "handle": "tari-sheaths",
+      "title": "Tari Sheaths",
+      "descriptionHtml": "<p>Curved, hand-stitched leather sheaths that protect the tari edge and your hands.</p>",
+      "image": "products/tari-sheath-01.jpg"
+    },
+    {
+      "handle": "sharpener-cases",
+      "title": "Sharpener Cases",
+      "descriptionHtml": "<p>Hand-tooled leather cases for your blade sharpening stone, plain or personalised with your name.</p>",
+      "image": "products/sharpener-case-04.jpg"
+    },
+    {
+      "handle": "arm-protectors",
+      "title": "Arm Protectors",
+      "descriptionHtml": "<p>Stitched leather arm guards that protect the handler's forearm while sparring.</p>",
+      "image": "products/arm-protector-01.jpg"
+    }
+  ],
+  "products": [
+    {
+      "handle": "leather-tari-case-basket-weave",
+      "title": "Leather Tari Case — Basket Weave",
+      "productType": "Tari Case",
+      "collections": [
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "leather",
+        "badge:Bestseller"
+      ],
+      "price": "4000.00",
+      "descriptionHtml": "<p>Our signature tari case, hand-tooled with a basket-weave pattern and floral border on genuine leather. A rigid fibreglass shell keeps its shape, and the red velvet interior holds your tari, sheaths and tools in individual compartments.</p><ul><li>Genuine leather, hand-stamped design</li><li>Fibreglass shell, velvet-lined compartments</li><li>Custom leather handle</li><li>Combination lock</li><li>24-blade capacity</li></ul><p>Each case is made to order. Contact us to add your gamefarm name or logo.</p>",
+      "images": [
+        "products/tari-case-basket-weave-01.jpg",
+        "products/tari-case-basket-weave-02.jpg",
+        "products/tari-case-basket-weave-03.jpg",
+        "products/tari-case-basket-weave-04.jpg",
+        "products/tari-case-basket-weave-05.jpg",
+        "products/tari-case-basket-weave-06.jpg",
+        "products/tari-case-basket-weave-07.jpg",
+        "products/tari-case-basket-weave-08.jpg",
+        "products/tari-case-basket-weave-09.jpg"
+      ]
+    },
+    {
+      "handle": "leather-tari-case-crocodile",
+      "title": "Leather Tari Case — Crocodile Embossed",
+      "productType": "Tari Case",
+      "collections": [
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "leather"
+      ],
+      "price": "4000.00",
+      "descriptionHtml": "<p>A deep brown crocodile-embossed leather case on an all-fibreglass body. Inside, a lift-out tray and padded blade pockets keep everything in place, lined in red velvet.</p><ul><li>Crocodile-embossed genuine leather</li><li>All-fibreglass shell</li><li>Velvet-lined tray and blade pockets</li><li>Padded leather handle, chrome latches</li><li>24-blade capacity</li></ul>",
+      "images": [
+        "products/tari-case-croc-01.jpg",
+        "products/tari-case-croc-02.jpg",
+        "products/tari-case-croc-03.jpg",
+        "products/tari-case-croc-04.jpg",
+        "products/tari-case-croc-05.jpg",
+        "products/tari-case-croc-06.jpg",
+        "products/tari-case-croc-07.jpg",
+        "products/tari-case-croc-08.jpg"
+      ]
+    },
+    {
+      "handle": "leather-tari-case-square-shoulder-strap",
+      "title": "Leather Tari Case — Square with Shoulder Strap",
+      "productType": "Tari Case",
+      "collections": [
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "leather"
+      ],
+      "price": "4000.00",
+      "descriptionHtml": "<p>A compact, square tari case with a hand-tooled lid personalised with your gamefarm name, and a detachable leather shoulder strap for carrying hands-free into the derby.</p><ul><li>Hand-tooled and personalised genuine leather</li><li>Velvet-lined compartments</li><li>Detachable, adjustable leather shoulder strap</li><li>Chrome latches</li><li>24-blade capacity</li></ul><p>Pictured: a custom build for Lanjean Gamefarm. Send us your name or logo to make it yours.</p>",
+      "images": [
+        "products/tari-case-square-strap-01.jpg",
+        "products/tari-case-square-strap-02.jpg",
+        "products/tari-case-square-strap-03.jpg",
+        "products/tari-case-square-strap-04.jpg",
+        "products/tari-case-square-strap-05.jpg",
+        "products/tari-case-square-strap-06.jpg",
+        "products/tari-case-square-strap-07.jpg"
+      ]
+    },
+    {
+      "handle": "leather-catch-bag",
+      "title": "Leather Catch Bag",
+      "productType": "Catch Bag",
+      "collections": [
+        "catch-bags"
+      ],
+      "tags": [
+        "catch cock",
+        "leather",
+        "badge:Bestseller"
+      ],
+      "price": "1500.00",
+      "descriptionHtml": "<p>A hand-sewn leather catch bag (body protector) that shields your catch cock from the blows of your game fowl during sparring and gaff testing. A sturdy top handle and buckle strap keep the bird secure and easy to hold.</p><ul><li>~3mm genuine leather</li><li>Hand-stitched with 1mm nylon thread</li><li>Top carry handle with buckle closure</li><li>Stamped with the RGB LeatherCrafts mark</li></ul>",
+      "images": [
+        "products/catch-bag-01.jpg",
+        "products/catch-bag-02.jpg",
+        "products/catch-bag-03.jpg",
+        "products/catch-bag-04.jpg",
+        "products/catch-bag-05.jpg",
+        "products/catch-bag-06.jpg",
+        "products/catch-bag-07.jpg",
+        "products/catch-bag-08.jpg"
+      ]
+    },
+    {
+      "handle": "leather-catch-bag-foam-padded",
+      "title": "Leather Catch Bag — Foam Padded",
+      "productType": "Catch Bag",
+      "collections": [
+        "catch-bags"
+      ],
+      "tags": [
+        "catch cock",
+        "leather",
+        "badge:New"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>Our catch bag with an added foam-padded leather lining for extra protection and comfort for the bird. The padded insert is removable for cleaning.</p><ul><li>Genuine leather outer, hand-stitched</li><li>Removable foam-padded leather lining</li><li>Top carry handle with buckle closure</li></ul>",
+      "images": [
+        "products/catch-bag-foam-01.jpg",
+        "products/catch-bag-foam-02.jpg",
+        "products/catch-bag-foam-03.jpg",
+        "products/catch-bag-foam-04.jpg",
+        "products/catch-bag-foam-05.jpg",
+        "products/catch-bag-foam-06.jpg"
+      ]
+    },
+    {
+      "handle": "leather-takera",
+      "title": "Leather Takera",
+      "productType": "Takera",
+      "collections": [
+        "accessories",
+        "takera"
+      ],
+      "tags": [
+        "takera",
+        "leather"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>A pocket-sized, hand-tooled leather takera that holds your tari blades in individual sleeves, so they stay sharp and organised at the derby. Closes with a leather strap and buckle.</p><ul><li>Genuine leather, hand-tooled side panels</li><li>Individual blade sleeves</li><li>Strap and buckle closure</li></ul>",
+      "images": [
+        "products/takera-01.jpg",
+        "products/takera-02.jpg",
+        "products/takera-03.jpg",
+        "products/takera-04.jpg",
+        "products/takera-05.jpg",
+        "products/takera-06.jpg",
+        "products/takera-07.jpg",
+        "products/takera-08.jpg"
+      ]
+    },
+    {
+      "handle": "leather-tari-sheath",
+      "title": "Leather Tari Sheath",
+      "productType": "Tari Sheath",
+      "collections": [
+        "accessories",
+        "tari-sheaths"
+      ],
+      "tags": [
+        "tari sheath",
+        "leather"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>A curved, hand-stitched leather sheath shaped to fit over the tari blade, protecting both the edge and your hands when it is not in use.</p><ul><li>Genuine leather, hand-stitched</li><li>Curved to the shape of the blade</li><li>Sold individually</li></ul>",
+      "images": [
+        "products/tari-sheath-01.jpg",
+        "products/tari-sheath-02.jpg",
+        "products/tari-sheath-03.jpg",
+        "products/tari-sheath-04.jpg",
+        "products/tari-sheath-05.jpg",
+        "products/tari-sheath-06.jpg",
+        "products/tari-sheath-07.jpg",
+        "products/tari-sheath-08.jpg"
+      ]
+    },
+    {
+      "handle": "leather-sharpener-case",
+      "title": "Leather Sharpener Case",
+      "productType": "Sharpener Case",
+      "collections": [
+        "accessories",
+        "sharpener-cases"
+      ],
+      "tags": [
+        "sharpener",
+        "leather"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>A hand-tooled leather case for your blade sharpening stone, with a floral carved design. Keeps the stone clean and your takera tidy.</p><ul><li>Genuine leather, hand-tooled floral design</li><li>Fits a standard flat sharpening stone</li></ul>",
+      "images": [
+        "products/sharpener-case-04.jpg",
+        "products/sharpener-case-03.jpg",
+        "products/sharpener-case-01.jpg",
+        "products/sharpener-case-05.jpg",
+        "products/sharpener-case-02.jpg",
+        "products/sharpener-case-06.jpg"
+      ]
+    },
+    {
+      "handle": "leather-arm-protector",
+      "title": "Leather Arm Protector",
+      "productType": "Arm Protector",
+      "collections": [
+        "accessories",
+        "arm-protectors"
+      ],
+      "tags": [
+        "arm protector",
+        "leather"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>A stitched leather arm guard with double buckle straps that protects the handler's forearm from spurs and gaffs while sparring.</p><ul><li>Genuine leather, hand-stitched</li><li>Two adjustable buckle straps</li></ul>",
+      "images": [
+        "products/arm-protector-01.jpg",
+        "products/arm-protector-03.jpg"
+      ]
+    },
+    {
+      "handle": "custom-6-capacity-floral",
+      "title": "Custom 6-Capacity Tari Case — Floral Name Tooling",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "2500.00",
+      "descriptionHtml": "<p>A compact 6-capacity case, small enough to carry anywhere, with your name carved into a deep floral pattern across the lid and sides.</p><ul><li>6-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Chrome latches</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-6-capacity-floral-01.jpg",
+        "custom/custom-6-capacity-floral-02.jpg",
+        "custom/custom-6-capacity-floral-03.jpg",
+        "custom/custom-6-capacity-floral-04.jpg",
+        "custom/custom-6-capacity-floral-05.jpg",
+        "custom/custom-6-capacity-floral-06.jpg",
+        "custom/custom-6-capacity-floral-07.jpg",
+        "custom/custom-6-capacity-floral-08.jpg"
+      ]
+    },
+    {
+      "handle": "custom-36-capacity-combination-lock",
+      "title": "Custom 36-Capacity Tari Case — Floral, Combination Lock",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "6000.00",
+      "descriptionHtml": "<p>A full-size 36-capacity case with all-over floral carving, brass combination locks and a padded leather handle.</p><ul><li>36-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Brass combination locks</li><li>Fibreglass shell</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-36-capacity-combination-lock-01.jpg",
+        "custom/custom-36-capacity-combination-lock-02.jpg",
+        "custom/custom-36-capacity-combination-lock-03.jpg",
+        "custom/custom-36-capacity-combination-lock-04.jpg",
+        "custom/custom-36-capacity-combination-lock-05.jpg",
+        "custom/custom-36-capacity-combination-lock-06.jpg",
+        "custom/custom-36-capacity-combination-lock-07.jpg",
+        "custom/custom-36-capacity-combination-lock-08.jpg"
+      ]
+    },
+    {
+      "handle": "custom-36-capacity-latch-lock",
+      "title": "Custom 36-Capacity Tari Case — Filigree, Latch Lock",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "6000.00",
+      "descriptionHtml": "<p>Symmetrical filigree tooling on a 36-capacity case, finished with chrome latch locks and a hand-stitched handle.</p><ul><li>36-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Chrome latch locks</li><li>Fibreglass shell</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-36-capacity-latch-lock-01.jpg",
+        "custom/custom-36-capacity-latch-lock-02.jpg",
+        "custom/custom-36-capacity-latch-lock-03.jpg",
+        "custom/custom-36-capacity-latch-lock-04.jpg",
+        "custom/custom-36-capacity-latch-lock-05.jpg",
+        "custom/custom-36-capacity-latch-lock-06.jpg",
+        "custom/custom-36-capacity-latch-lock-07.jpg",
+        "custom/custom-36-capacity-latch-lock-08.jpg"
+      ]
+    },
+    {
+      "handle": "custom-36-capacity-crest",
+      "title": "Custom 36-Capacity Tari Case — Club Crest",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "6000.00",
+      "descriptionHtml": "<p>Your club, fraternity or gamefarm crest, carved large across a smooth leather lid. The pictured case carries a fraternity crest with the word \"Sabungero\".</p><ul><li>36-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Chrome latch locks</li><li>Fibreglass shell</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-36-capacity-crest-01.jpg",
+        "custom/custom-36-capacity-crest-02.jpg",
+        "custom/custom-36-capacity-crest-03.jpg",
+        "custom/custom-36-capacity-crest-04.jpg",
+        "custom/custom-36-capacity-crest-05.jpg",
+        "custom/custom-36-capacity-crest-06.jpg",
+        "custom/custom-36-capacity-crest-07.jpg",
+        "custom/custom-36-capacity-crest-08.jpg"
+      ]
+    },
+    {
+      "handle": "custom-36-capacity-old-type",
+      "title": "Custom 36-Capacity Tari Case — Old Type",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "6000.00",
+      "descriptionHtml": "<p>Our original 36-capacity \"old type\" layout: a slimmer case with two rows of floral tooling and a combination lock.</p><ul><li>36-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Combination lock</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-36-capacity-old-type-01.jpg",
+        "custom/custom-36-capacity-old-type-02.jpg",
+        "custom/custom-36-capacity-old-type-03.jpg",
+        "custom/custom-36-capacity-old-type-04.jpg",
+        "custom/custom-36-capacity-old-type-05.jpg",
+        "custom/custom-36-capacity-old-type-06.jpg",
+        "custom/custom-36-capacity-old-type-07.jpg"
+      ]
+    },
+    {
+      "handle": "custom-48-capacity-shield-logo",
+      "title": "Custom 48-Capacity Tari Case — Gamefarm Shield",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "7000.00",
+      "descriptionHtml": "<p>A 48-capacity case with your gamefarm initials set in a carved shield and banner. Clean, bold and easy to recognise across the pit.</p><ul><li>48-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Brass combination locks</li><li>Fibreglass shell</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-48-capacity-shield-logo-01.jpg",
+        "custom/custom-48-capacity-shield-logo-02.jpg",
+        "custom/custom-48-capacity-shield-logo-03.jpg",
+        "custom/custom-48-capacity-shield-logo-04.jpg",
+        "custom/custom-48-capacity-shield-logo-05.jpg",
+        "custom/custom-48-capacity-shield-logo-06.jpg",
+        "custom/custom-48-capacity-shield-logo-07.jpg",
+        "custom/custom-48-capacity-shield-logo-08.jpg"
+      ]
+    },
+    {
+      "handle": "custom-48-capacity-lucky-box",
+      "title": "Custom 48-Capacity Tari Case — Floral Lettering",
+      "productType": "Tari Case",
+      "collections": [
+        "custom-builds",
+        "tari-cases"
+      ],
+      "tags": [
+        "tari case",
+        "custom",
+        "custom build",
+        "made to order"
+      ],
+      "price": "7000.00",
+      "descriptionHtml": "<p>Hand-lettered script worked into dense floral carving across a 48-capacity case, with a two-tier interior and blade pockets.</p><ul><li>48-blade capacity</li><li>Genuine leather, hand-tooled and hand-dyed</li><li>Chrome latch locks</li><li>Two-tier interior</li><li>Velvet-lined compartments</li></ul><p><em>Pictured: a past custom build. Every case is made to order, so we'll tool your own name, logo or design. Message us with your idea before ordering and we'll confirm the design and lead time.</em></p>",
+      "images": [
+        "custom/custom-48-capacity-lucky-box-01.jpg",
+        "custom/custom-48-capacity-lucky-box-02.jpg",
+        "custom/custom-48-capacity-lucky-box-03.jpg",
+        "custom/custom-48-capacity-lucky-box-04.jpg",
+        "custom/custom-48-capacity-lucky-box-05.jpg",
+        "custom/custom-48-capacity-lucky-box-06.jpg",
+        "custom/custom-48-capacity-lucky-box-07.jpg"
+      ]
+    },
+    {
+      "handle": "personalised-leather-catch-bag",
+      "title": "Personalised Leather Catch Bag",
+      "productType": "Catch Bag",
+      "collections": [
+        "catch-bags",
+        "custom-builds"
+      ],
+      "tags": [
+        "catch cock",
+        "leather",
+        "custom",
+        "made to order"
+      ],
+      "price": "1500.00",
+      "descriptionHtml": "<p>Our hand-sewn leather catch bag with your gamefarm name stamped along the side. Over the years we've made these for dozens of gamefarms across the Philippines.</p><ul><li>~3mm genuine leather, hand-stitched</li><li>Your gamefarm name hand-stamped</li><li>Top carry handle with buckle closure</li></ul><p>Enter your gamefarm name in the personalisation box when you order.</p><p><em>Pictured: past orders made for our customers. Yours is made to order with your own name.</em></p>",
+      "images": [
+        "custom/personalised-catch-bag-01.jpg",
+        "custom/personalised-catch-bag-02.jpg",
+        "custom/personalised-catch-bag-03.jpg",
+        "custom/personalised-catch-bag-04.jpg",
+        "custom/personalised-catch-bag-05.jpg",
+        "custom/personalised-catch-bag-06.jpg",
+        "custom/personalised-catch-bag-07.jpg",
+        "custom/personalised-catch-bag-08.jpg",
+        "custom/personalised-catch-bag-09.jpg",
+        "custom/personalised-catch-bag-10.jpg"
+      ]
+    },
+    {
+      "handle": "leather-takera-tri-kolor",
+      "title": "Leather Takera — Tri-Kolor",
+      "productType": "Takera",
+      "collections": [
+        "takera",
+        "accessories"
+      ],
+      "tags": [
+        "takera",
+        "leather"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>A takera with a two-tone burgundy body and a contrasting tan strap, holding each tari blade in its own leather sleeve.</p><ul><li>Genuine leather, hand-stitched</li><li>Individual blade sleeves</li><li>Contrasting strap and buckle closure</li></ul>",
+      "images": [
+        "custom/leather-takera-tri-kolor-01.jpg",
+        "custom/leather-takera-tri-kolor-02.jpg",
+        "custom/leather-takera-tri-kolor-03.jpg",
+        "custom/leather-takera-tri-kolor-04.jpg",
+        "custom/leather-takera-tri-kolor-05.jpg",
+        "custom/leather-takera-tri-kolor-06.jpg",
+        "custom/leather-takera-tri-kolor-07.jpg",
+        "custom/leather-takera-tri-kolor-08.jpg"
+      ]
+    },
+    {
+      "handle": "personalised-sharpener-case",
+      "title": "Personalised Sharpener Case",
+      "productType": "Sharpener Case",
+      "collections": [
+        "sharpener-cases",
+        "accessories",
+        "custom-builds"
+      ],
+      "tags": [
+        "sharpener",
+        "leather",
+        "custom",
+        "made to order"
+      ],
+      "price": null,
+      "descriptionHtml": "<p>Our hand-tooled sharpener case, carved with your name or gamefarm and the year. A practical piece that makes a good gift for a fellow sabungero.</p><ul><li>Genuine leather, hand-tooled floral border</li><li>Your name and year carved on the front</li><li>Suede-finish back</li></ul><p><em>Pictured: past orders made for our customers. Yours is made to order with your own name.</em></p>",
+      "images": [
+        "custom/personalised-sharpener-case-01.jpg",
+        "custom/personalised-sharpener-case-02.jpg",
+        "custom/personalised-sharpener-case-03.jpg",
+        "custom/personalised-sharpener-case-04.jpg",
+        "custom/personalised-sharpener-case-05.jpg",
+        "custom/personalised-sharpener-case-06.jpg"
+      ]
+    }
+  ],
+  "theme_files": [
+    "brand/rgb-leathercrafts-logo.png",
+    "brand/rgb-leathercrafts-logo-light.png",
+    "brand/favicon.png",
+    "site/hero-hand-tooling.jpg",
+    "site/workshop-bw.jpg",
+    "site/workshop-portrait.jpg",
+    "site/ricardo-bernardo-workshop.jpg",
+    "site/workshop-stitching-01.jpg",
+    "site/workshop-stitching-02.jpg",
+    "site/catch-bag-in-use.jpg",
+    "site/catch-bag-customer.jpg",
+    "site/tari-case-detail.jpg",
+    "site/leather-croc-texture.jpg",
+    "products/tari-case-basket-weave-01.jpg",
+    "products/tari-case-croc-01.jpg",
+    "products/catch-bag-01.jpg",
+    "products/takera-01.jpg",
+    "products/tari-sheath-01.jpg",
+    "products/takera-03.jpg",
+    "custom/portfolio-association-crest-01.jpg",
+    "custom/portfolio-association-crest-02.jpg",
+    "custom/portfolio-association-crest-03.jpg",
+    "custom/portfolio-association-crest-04.jpg",
+    "custom/portfolio-process-01.jpg",
+    "custom/portfolio-process-02.jpg",
+    "custom/portfolio-process-03.jpg",
+    "custom/custom-36-capacity-combination-lock-02.jpg",
+    "custom/custom-36-capacity-crest-01.jpg",
+    "custom/custom-36-capacity-crest-02.jpg",
+    "custom/custom-36-capacity-latch-lock-04.jpg",
+    "custom/custom-36-capacity-old-type-01.jpg",
+    "custom/custom-48-capacity-lucky-box-01.jpg",
+    "custom/custom-48-capacity-shield-logo-02.jpg",
+    "custom/custom-48-capacity-shield-logo-08.jpg",
+    "custom/custom-6-capacity-floral-03.jpg",
+    "custom/portfolio-catch-bag-01.jpg",
+    "custom/portfolio-catch-bag-02.jpg",
+    "custom/portfolio-catch-bag-03.jpg",
+    "custom/portfolio-catch-bag-04.jpg",
+    "custom/portfolio-catch-bag-05.jpg",
+    "custom/portfolio-catch-bag-06.jpg",
+    "custom/portfolio-catch-bag-07.jpg",
+    "custom/portfolio-catch-bag-08.jpg",
+    "custom/portfolio-catch-bag-09.jpg",
+    "custom/portfolio-catch-bag-10.jpg",
+    "custom/portfolio-catch-bag-11.jpg",
+    "custom/portfolio-catch-bag-12.jpg",
+    "custom/portfolio-rooster-case-01.jpg",
+    "custom/portfolio-rooster-case-02.jpg",
+    "custom/portfolio-rooster-case-03.jpg",
+    "custom/portfolio-rooster-case-04.jpg",
+    "custom/portfolio-ship-wheel-crest-01.jpg",
+    "custom/portfolio-ship-wheel-crest-02.jpg",
+    "custom/portfolio-ship-wheel-crest-03.jpg",
+    "custom/portfolio-ship-wheel-crest-04.jpg",
+    "custom/portfolio-eagle-crest-01.jpg",
+    "custom/portfolio-eagle-crest-02.jpg",
+    "custom/portfolio-eagle-crest-03.jpg",
+    "custom/portfolio-eagle-crest-04.jpg",
+    "custom/portfolio-fraternity-crest-01.jpg",
+    "custom/portfolio-fraternity-crest-02.jpg",
+    "custom/portfolio-fraternity-crest-03.jpg",
+    "custom/portfolio-fraternity-crest-04.jpg",
+    "custom/personalised-sharpener-case-01.jpg"
+  ]
+}

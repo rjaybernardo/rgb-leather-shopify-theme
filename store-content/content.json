@@ -1,0 +1,151 @@
+{
+  "product_media": {
+    "leather-catch-bag": {
+      "alt": "Leather Catch Bag",
+      "images": [
+        "extra/catch-bag-feature-01.jpg",
+        "extra/catch-bag-worn-01.jpg",
+        "extra/catch-bag-worn-02.jpg",
+        "extra/catch-bag-feature-02.jpg",
+        "extra/catch-bag-feature-03.jpg",
+        "extra/catch-bag-detail-01.jpg",
+        "extra/catch-bag-detail-02.jpg",
+        "extra/catch-bag-detail-03.jpg",
+        "extra/catch-bag-detail-04.jpg",
+        "extra/catch-bag-detail-05.jpg",
+        "extra/catch-bag-detail-06.jpg"
+      ],
+      "videos": [
+        "catch-bag-adjustable.mp4"
+      ]
+    },
+    "personalised-leather-catch-bag": {
+      "alt": "Personalised Leather Catch Bag",
+      "images": [
+        "extra/catch-bag-detail-05.jpg",
+        "extra/catch-bag-detail-06.jpg"
+      ],
+      "videos": [
+        "catch-bag-insert-removal.mp4"
+      ]
+    },
+    "leather-catch-bag-foam-padded": {
+      "alt": "Leather Catch Bag — Foam Padded",
+      "images": [
+        "extra/catch-bag-foam-insert-01.jpg",
+        "extra/catch-bag-foam-insert-02.jpg",
+        "extra/catch-bag-foam-insert-03.jpg",
+        "extra/catch-bag-foam-insert-04.jpg",
+        "extra/catch-bag-foam-insert-05.jpg"
+      ]
+    },
+    "leather-takera": {
+      "alt": "Leather Takera",
+      "images": [
+        "extra/takera-client-01.jpg",
+        "extra/takera-client-02.jpg",
+        "extra/takera-client-03.jpg",
+        "extra/takera-client-04.jpg",
+        "extra/takera-client-05.jpg",
+        "extra/takera-client-06.jpg"
+      ],
+      "videos": [
+        "leather-takera.mp4"
+      ]
+    },
+    "leather-tari-sheath": {
+      "alt": "Leather Tari Sheath",
+      "images": [
+        "extra/tari-sheath-client-01.jpg",
+        "extra/tari-sheath-client-02.jpg",
+        "extra/tari-sheath-client-03.jpg",
+        "extra/tari-sheath-client-04.jpg"
+      ],
+      "videos": [
+        "tari-sheath.mp4"
+      ]
+    },
+    "leather-sharpener-case": {
+      "alt": "Leather Sharpener Case",
+      "videos": [
+        "sharpener-case.mp4"
+      ]
+    },
+    "personalised-sharpener-case": {
+      "alt": "Personalised Sharpener Case",
+      "videos": [
+        "sharpener-case.mp4"
+      ]
+    }
+  },
+  "theme_videos": [
+    "made-by-rgb.mp4",
+    "tari-case-demo.mp4",
+    "catch-bag-insert-removal.mp4"
+  ],
+  "blog": {
+    "handle": "journal",
+    "title": "Journal",
+    "articles": [
+      {
+        "handle": "how-a-leather-catch-bag-is-made",
+        "title": "How a leather catch bag is made",
+        "tags": [
+          "catch bag",
+          "process"
+        ],
+        "summary": "<p>From a flat piece of leather to a bag that protects your catch cock: a look at the workbench.</p>",
+        "images": [
+          "journal/journal-catch-bag-making-01.jpg",
+          "journal/journal-catch-bag-making-02.jpg",
+          "journal/journal-catch-bag-making-03.jpg",
+          "journal/journal-catch-bag-making-04.jpg",
+          "journal/journal-catch-bag-making-05.jpg",
+          "journal/journal-catch-bag-making-06.jpg",
+          "journal/journal-catch-bag-fitting-01.jpg",
+          "journal/journal-catch-bag-fitting-02.jpg",
+          "journal/journal-catch-bag-fitting-03.jpg"
+        ],
+        "body": "<p>Every RGB catch bag starts as a flat hide on the workbench in Los Baños. There's no mould and no machine stitching. Each bag is cut, shaped and sewn by hand.</p><figure><img src=\"{{journal-catch-bag-making-01.jpg}}\" alt=\"Tracing the pattern onto the leather\" loading=\"lazy\"><figcaption>Tracing the pattern onto the leather</figcaption></figure><h2>Cutting and shaping</h2><p>The panels are traced from our patterns and cut by hand. The leather is about 3mm thick, firm enough to hold its shape around the bird and soft enough to bend without cracking.</p><figure><img src=\"{{journal-catch-bag-making-03.jpg}}\" alt=\"Shaping the body panel\" loading=\"lazy\"><figcaption>Shaping the body panel</figcaption></figure><figure><img src=\"{{journal-catch-bag-making-04.jpg}}\" alt=\"Fitting the panels together\" loading=\"lazy\"><figcaption>Fitting the panels together</figcaption></figure><h2>Hand stitching</h2><p>The seams are sewn by hand with strong nylon thread. Hand stitching takes longer, but every stitch is pulled tight and the seams don't unravel the way a single broken machine stitch can.</p><figure><img src=\"{{journal-catch-bag-making-05.jpg}}\" alt=\"Stitching the seam by hand\" loading=\"lazy\"><figcaption>Stitching the seam by hand</figcaption></figure><figure><img src=\"{{journal-catch-bag-making-06.jpg}}\" alt=\"Checking the finished shape\" loading=\"lazy\"><figcaption>Checking the finished shape</figcaption></figure><h2>Dyeing, hardware and the final fitting</h2><p>Once sewn, the bag is dyed, the handle and buckle strap are fitted, and the RGB LeatherCrafts mark is stamped on. Then it goes on a real bird to check the fit before it ships.</p><figure><img src=\"{{journal-catch-bag-fitting-01.jpg}}\" alt=\"Fitting a finished bag\" loading=\"lazy\"><figcaption>Fitting a finished bag</figcaption></figure><figure><img src=\"{{journal-catch-bag-fitting-03.jpg}}\" alt=\"Ready for sparring\" loading=\"lazy\"><figcaption>Ready for sparring</figcaption></figure><p>Want your gamefarm name on yours? <a href=\"/products/personalised-leather-catch-bag\">Order a personalised catch bag</a>.</p>"
+      },
+      {
+        "handle": "where-our-leather-comes-from",
+        "title": "Where our leather comes from",
+        "tags": [
+          "leather",
+          "materials"
+        ],
+        "summary": "<p>We pick our hides in person at the tannery and our hardware from the shops of Binondo.</p>",
+        "images": [
+          "journal/journal-tannery-01.jpg",
+          "journal/journal-tannery-02.jpg",
+          "journal/journal-tannery-03.jpg",
+          "journal/journal-tannery-04.jpg",
+          "journal/journal-tannery-05.jpg",
+          "journal/journal-tannery-06.jpg",
+          "journal/journal-hardware-01.jpg",
+          "journal/journal-hardware-02.jpg"
+        ],
+        "body": "<p>Good leatherwork starts long before the first cut. We choose our hides in person, at the tannery, so we can see and feel each one.</p><figure><img src=\"{{journal-tannery-01.jpg}}\" alt=\"Hides at the tannery\" loading=\"lazy\"><figcaption>Hides at the tannery</figcaption></figure><h2>Choosing the hide</h2><p>Every hide is different: thickness, grain, colour and the marks the animal carried. For tooled tari cases we look for smooth, even hides that take a carving cleanly. For catch bags we want thickness and strength.</p><figure><img src=\"{{journal-tannery-02.jpg}}\" alt=\"Comparing finishes\" loading=\"lazy\"><figcaption>Comparing finishes</figcaption></figure><figure><img src=\"{{journal-tannery-03.jpg}}\" alt=\"Embossed and textured leathers\" loading=\"lazy\"><figcaption>Embossed and textured leathers</figcaption></figure><figure><img src=\"{{journal-tannery-04.jpg}}\" alt=\"Checking the grain\" loading=\"lazy\"><figcaption>Checking the grain</figcaption></figure><figure><img src=\"{{journal-tannery-05.jpg}}\" alt=\"Natural, undyed leather\" loading=\"lazy\"><figcaption>Natural, undyed leather</figcaption></figure><h2>Hardware from Binondo</h2><p>Buckles, latches, rivets and locks come from the hardware shops of Binondo in Manila. We pick each piece by hand to match the case or bag it's going on.</p><figure><img src=\"{{journal-hardware-01.jpg}}\" alt=\"Buckles and fittings in Binondo\" loading=\"lazy\"><figcaption>Buckles and fittings in Binondo</figcaption></figure><figure><img src=\"{{journal-hardware-02.jpg}}\" alt=\"Choosing hardware\" loading=\"lazy\"><figcaption>Choosing hardware</figcaption></figure><p>Genuine leather costs more and takes longer to work, but it's why our pieces <a href=\"/pages/about\">last for years</a>.</p>"
+      },
+      {
+        "handle": "rgb-leathercrafts-at-the-world-gamefowl-expo",
+        "title": "RGB LeatherCrafts at the World Gamefowl Expo",
+        "tags": [
+          "events"
+        ],
+        "summary": "<p>Our tari cases and catch bags on display at the World Gamefowl Expo.</p>",
+        "images": [
+          "journal/journal-expo-01.jpg",
+          "journal/journal-expo-02.jpg",
+          "journal/journal-expo-2016-01.jpg",
+          "journal/journal-expo-2016-02.jpg",
+          "journal/journal-expo-2016-03.jpg",
+          "journal/journal-expo-2017-01.jpg",
+          "journal/journal-expo-2017-02.jpg"
+        ],
+        "body": "<p>We've brought our tari cases and catch bags to the World Gamefowl Expo, the country's biggest gathering of breeders, handlers and suppliers. It's where many sabungeros first saw a leather tari case up close.</p><figure><img src=\"{{journal-expo-01.jpg}}\" alt=\"Hand-tooled tari case on display\" loading=\"lazy\"><figcaption>Hand-tooled tari case on display</figcaption></figure><figure><img src=\"{{journal-expo-02.jpg}}\" alt=\"Our display at the expo\" loading=\"lazy\"><figcaption>Our display at the expo</figcaption></figure><h2>On the floor</h2><p>The expo gave us the chance to show the work in person: the weight of the cases, the depth of the tooling, and how the catch bag fits in the hand.</p><figure><img src=\"{{journal-expo-2016-01.jpg}}\" alt=\"Catch bags at the stand\" loading=\"lazy\"><figcaption>Catch bags at the stand</figcaption></figure><figure><img src=\"{{journal-expo-2016-02.jpg}}\" alt=\"Catch bags and cases on the table\" loading=\"lazy\"><figcaption>Catch bags and cases on the table</figcaption></figure><figure><img src=\"{{journal-expo-2016-03.jpg}}\" alt=\"Visitors at the expo\" loading=\"lazy\"><figcaption>Visitors at the expo</figcaption></figure><figure><img src=\"{{journal-expo-2017-01.jpg}}\" alt=\"At the stand\" loading=\"lazy\"><figcaption>At the stand</figcaption></figure><figure><img src=\"{{journal-expo-2017-02.jpg}}\" alt=\"World Gamefowl Expo 2017\" loading=\"lazy\"><figcaption>World Gamefowl Expo 2017</figcaption></figure><p>Missed us at the expo? <a href=\"/collections/all\">Browse the full collection</a> or <a href=\"/pages/contact\">message us</a> about a custom piece.</p>"
+      }
+    ]
+  }
+}

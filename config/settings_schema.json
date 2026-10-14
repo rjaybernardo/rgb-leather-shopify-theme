@@ -25,6 +25,7 @@
         "id": "color_schemes",
         "definition": [
           { "type": "color", "id": "background", "label": "Background", "default": "#F7F3EE" },
+          { "type": "color_background", "id": "background_gradient", "label": "Background gradient", "info": "Optional. Overrides the solid background for sections using this scheme." },
           { "type": "color", "id": "surface", "label": "Card & input background", "default": "#FFFFFF" },
           { "type": "color", "id": "text", "label": "Text", "default": "#1E1915" },
           { "type": "color", "id": "accent", "label": "Accent", "default": "#9B5B2C" },
@@ -33,7 +34,7 @@
         ],
         "role": {
           "text": "text",
-          "background": { "solid": "background", "gradient": "background" },
+          "background": { "solid": "background", "gradient": "background_gradient" },
           "links": "accent",
           "icons": "text",
           "primary_button": "button",

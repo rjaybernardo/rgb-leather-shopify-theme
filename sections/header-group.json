@@ -5,28 +5,71 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement-1": { "type": "announcement", "settings": { "text": "Complimentary shipping on orders over $150", "link": "" } },
-        "announcement-2": { "type": "announcement", "settings": { "text": "Lifetime warranty on every handcrafted piece", "link": "" } },
-        "announcement-3": { "type": "announcement", "settings": { "text": "Free monogramming — make it yours", "link": "" } }
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Handcrafted genuine leather from Los Baños, Laguna",
+            "link": ""
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Custom tari cases made to order — message us",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "announcement-3": {
+          "type": "announcement",
+          "settings": {
+            "text": "Nationwide delivery via LBC",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["announcement-1", "announcement-2", "announcement-3"],
-      "settings": { "color_scheme": "scheme-3", "autoplay": true, "speed": 5, "show_social": true }
+      "block_order": [
+        "announcement-1",
+        "announcement-2",
+        "announcement-3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "autoplay": true,
+        "speed": 5,
+        "show_social": true
+      }
     },
     "header": {
       "type": "header",
       "blocks": {
-        "mega-1": { "type": "mega_menu", "settings": { "menu_item": "Shop", "title_1": "New arrivals", "title_2": "Bestsellers" } }
+        "mega-1": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Shop",
+            "image_1": "shopify://shop_images/tari-case-basket-weave-01.jpg",
+            "title_1": "Tari cases",
+            "url_1": "shopify://collections/tari-cases",
+            "image_2": "shopify://shop_images/catch-bag-01.jpg",
+            "title_2": "Catch bags",
+            "url_2": "shopify://collections/catch-bags"
+          }
+        }
       },
-      "block_order": ["mega-1"],
+      "block_order": [
+        "mega-1"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "menu": "main-menu",
         "layout": "logo-left",
         "sticky": "smart",
         "transparent_home": true,
-        "highlight_item": "Sale"
+        "highlight_item": ""
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }

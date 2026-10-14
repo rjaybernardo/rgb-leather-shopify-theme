@@ -2,21 +2,41 @@
   "sections": {
     "hero": {
       "type": "slideshow",
-      "settings": {},
+      "settings": {
+        "height": 90,
+        "autoplay": true,
+        "speed": 6,
+        "accessibility_label": "RGB LeatherCrafts"
+      },
       "blocks": {
         "b0": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/hero-hand-tooling.jpg",
+            "overlay": 35,
+            "subheading": "Handcrafted in Los Baños, Laguna",
+            "heading": "Leather that gets <em>better</em> with age",
+            "text": "<p>Hand-tooled tari cases, catch bags and takera, made one at a time by a family that has worked leather for more than 30 years.</p>",
+            "button_label": "Shop tari cases",
+            "link": "shopify://collections/tari-cases",
+            "button_label_2": "Our story",
+            "link_2": "shopify://pages/about",
+            "position": "bottom",
+            "align": "left"
+          }
         },
         "b1": {
           "type": "slide",
           "settings": {
-            "subheading": "New season",
-            "heading": "The <em>Heritage</em> collection",
-            "button_label": "Discover",
-            "button_label_2": "",
-            "align": "center",
-            "position": "middle"
+            "image": "shopify://shop_images/catch-bag-in-use.jpg",
+            "overlay": 35,
+            "subheading": "Catch bags",
+            "heading": "Built for the <em>sparring</em> pit",
+            "text": "<p>Hand-sewn, 3mm genuine leather that protects your catch cock from every blow.</p>",
+            "button_label": "Shop catch bags",
+            "link": "shopify://collections/catch-bags",
+            "position": "bottom",
+            "align": "left"
           }
         }
       },
@@ -34,26 +54,26 @@
         "b0": {
           "type": "text",
           "settings": {
-            "text": "Full-grain leather"
+            "text": "Genuine leather"
           }
         },
         "b1": {
           "type": "text",
           "settings": {
-            "text": "Hand-stitched",
+            "text": "Hand-tooled",
             "italic": true
           }
         },
         "b2": {
           "type": "text",
           "settings": {
-            "text": "Lifetime warranty"
+            "text": "Made to order"
           }
         },
         "b3": {
           "type": "text",
           "settings": {
-            "text": "Free monogramming",
+            "text": "Since the 1980s",
             "italic": true
           }
         }
@@ -67,51 +87,64 @@
     },
     "collections": {
       "type": "collection-list",
-      "settings": {},
+      "settings": {
+        "subheading": "Shop by category",
+        "heading": "Gear for the <em>sabungero</em>",
+        "link_label": "All products",
+        "link_url": "/collections/all",
+        "layout": "grid",
+        "columns": 4
+      },
       "blocks": {
         "b0": {
           "type": "collection",
           "settings": {
-            "title": "Bags"
+            "collection": "tari-cases",
+            "image": "shopify://shop_images/tari-case-basket-weave-01.jpg",
+            "title": "Tari Cases"
           }
         },
         "b1": {
           "type": "collection",
           "settings": {
-            "title": "Wallets"
+            "collection": "catch-bags",
+            "image": "shopify://shop_images/catch-bag-01.jpg",
+            "title": "Catch Bags"
           }
         },
         "b2": {
           "type": "collection",
           "settings": {
-            "title": "Belts"
+            "collection": "accessories",
+            "image": "shopify://shop_images/takera-01.jpg",
+            "title": "Accessories"
           }
         },
         "b3": {
           "type": "collection",
           "settings": {
-            "title": "Accessories"
-          }
-        },
-        "b4": {
-          "type": "collection",
-          "settings": {
-            "title": "Gifts"
+            "collection": "takera",
+            "image": "shopify://shop_images/takera-03.jpg",
+            "title": "Takera"
           }
         }
       },
       "block_order": [
         "b0",
         "b1",
-        "b2",
         "b3",
-        "b4"
+        "b2"
       ]
     },
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "subheading": "The collection",
+        "heading": "Hand-tooled <em>tari cases</em>",
+        "collection": "tari-cases",
+        "link_label": "Shop all tari cases",
+        "link_url": "shopify://collections/tari-cases"
       }
     },
     "bento": {
@@ -125,34 +158,45 @@
           "type": "tile",
           "settings": {
             "size": "large",
+            "image": "shopify://shop_images/tari-case-basket-weave-01.jpg",
             "subheading": "Signature",
-            "heading": "The <em>Weekender</em> duffle",
-            "text": "Our most-gifted bag, now in three new hides.",
-            "link_label": "Shop the bag"
+            "heading": "The <em>Basket Weave</em> tari case",
+            "text": "Hand-stamped leather on a fibreglass shell, with a combination lock.",
+            "link_label": "Shop the case",
+            "link": "shopify://products/leather-tari-case-basket-weave",
+            "text_dark": true
           }
         },
         "b1": {
           "type": "tile",
           "settings": {
             "size": "wide",
-            "heading": "Slim wallets",
-            "link_label": "Shop wallets"
+            "image": "shopify://shop_images/tari-case-croc-01.jpg",
+            "heading": "Crocodile embossed",
+            "link_label": "View the case",
+            "link": "shopify://products/leather-tari-case-crocodile"
           }
         },
         "b2": {
           "type": "tile",
           "settings": {
             "size": "small",
-            "heading": "Belts",
-            "link_label": "Shop belts"
+            "image": "shopify://shop_images/takera-03.jpg",
+            "heading": "Takera",
+            "link_label": "Shop takera",
+            "link": "shopify://products/leather-takera",
+            "text_dark": true
           }
         },
         "b3": {
           "type": "tile",
           "settings": {
             "size": "small",
-            "heading": "Gift cards",
-            "link_label": "Give a gift"
+            "image": "shopify://shop_images/tari-sheath-01.jpg",
+            "heading": "Tari sheaths",
+            "link_label": "Shop sheaths",
+            "link": "shopify://products/leather-tari-sheath",
+            "text_dark": true
           }
         }
       },
@@ -171,32 +215,32 @@
           "type": "item",
           "settings": {
             "icon": "truck",
-            "title": "Free shipping",
-            "text": "On orders over $150"
+            "title": "Nationwide delivery",
+            "text": "Shipped via LBC"
           }
         },
         "b1": {
           "type": "item",
           "settings": {
-            "icon": "return",
-            "title": "30-day returns",
-            "text": "Hassle-free exchanges"
+            "icon": "leather",
+            "title": "Genuine leather",
+            "text": "Never PU or bonded"
           }
         },
         "b2": {
           "type": "item",
           "settings": {
-            "icon": "shield",
-            "title": "Lifetime warranty",
-            "text": "On every stitch"
+            "icon": "hand",
+            "title": "Hand-tooled",
+            "text": "Made one at a time"
           }
         },
         "b3": {
           "type": "item",
           "settings": {
-            "icon": "hand",
-            "title": "Handmade",
-            "text": "By a single artisan"
+            "icon": "award",
+            "title": "Custom orders",
+            "text": "Add your gamefarm name"
           }
         }
       },
@@ -209,27 +253,46 @@
     },
     "story": {
       "type": "image-with-text",
-      "settings": {},
+      "settings": {
+        "image": "shopify://shop_images/ricardo-bernardo-workshop.jpg",
+        "image_2": "shopify://shop_images/tari-case-detail.jpg"
+      },
       "blocks": {
         "b0": {
           "type": "subheading",
-          "settings": {}
+          "settings": {
+            "text": "The man behind RGB"
+          }
         },
         "b1": {
           "type": "heading",
-          "settings": {}
+          "settings": {
+            "heading": "Three decades at the <em>workbench</em>"
+          }
         },
         "b2": {
           "type": "text",
-          "settings": {}
+          "settings": {
+            "text": "<p>Ricardo G. Bernardo has been making things from leather for more than 30 years. A breeder of game fowl himself, he made his first leather tari case for a Bacolod farm owner and delivered it by hand. That case started a new chapter for the family workshop.</p>"
+          }
         },
         "b3": {
           "type": "stats",
-          "settings": {}
+          "settings": {
+            "value_1": "30+",
+            "label_1": "Years working leather",
+            "value_2": "100%",
+            "label_2": "Genuine leather",
+            "value_3": "1 by 1",
+            "label_3": "Made to order"
+          }
         },
         "b4": {
           "type": "button",
-          "settings": {}
+          "settings": {
+            "label": "Read our story",
+            "link": "shopify://pages/about"
+          }
         }
       },
       "block_order": [
@@ -242,56 +305,30 @@
     },
     "tabs": {
       "type": "collection-tabs",
-      "settings": {},
-      "blocks": {
-        "b0": {
-          "type": "tab",
-          "settings": {
-            "title": "New arrivals"
-          }
-        },
-        "b1": {
-          "type": "tab",
-          "settings": {
-            "title": "Bestsellers"
-          }
-        },
-        "b2": {
-          "type": "tab",
-          "settings": {
-            "title": "Gifts"
-          }
-        }
+      "settings": {
+        "subheading": "Shop the workshop",
+        "heading": "Something for <em>every</em> derby"
       },
-      "block_order": [
-        "b0",
-        "b1",
-        "b2"
-      ]
-    },
-    "look": {
-      "type": "shop-the-look",
-      "settings": {},
       "blocks": {
         "b0": {
-          "type": "hotspot",
+          "type": "tab",
           "settings": {
-            "x": 35,
-            "y": 40
+            "collection": "tari-cases",
+            "title": "Tari cases"
           }
         },
         "b1": {
-          "type": "hotspot",
+          "type": "tab",
           "settings": {
-            "x": 62,
-            "y": 65
+            "collection": "catch-bags",
+            "title": "Catch bags"
           }
         },
         "b2": {
-          "type": "hotspot",
+          "type": "tab",
           "settings": {
-            "x": 48,
-            "y": 82
+            "collection": "accessories",
+            "title": "Accessories"
           }
         }
       },
@@ -304,38 +341,41 @@
     "why": {
       "type": "multicolumn",
       "settings": {
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "subheading": "Why genuine leather",
+        "heading": "Built to be <em>passed down</em>"
       },
       "blocks": {
         "b0": {
           "type": "column",
           "settings": {
             "icon": "leather",
-            "title": "Full-grain only"
+            "title": "Real leather",
+            "text": "<p>Like a fine wine, real leather only gets better with age. It is less likely to tear or crack than synthetics.</p>"
           }
         },
         "b1": {
           "type": "column",
           "settings": {
             "icon": "hand",
-            "title": "Hand-stitched",
-            "text": "<p>Saddle-stitched with waxed linen \u2014 twice as strong as machine lock-stitch.</p>"
+            "title": "Hand-tooled",
+            "text": "<p>Every pattern is carved and stamped by hand, so no two cases are exactly alike.</p>"
           }
         },
         "b2": {
-          "type": "column",
-          "settings": {
-            "icon": "leaf",
-            "title": "Vegetable tanned",
-            "text": "<p>Tanned slowly with natural tree bark extracts, free of harsh chromium.</p>"
-          }
-        },
-        "b3": {
           "type": "column",
           "settings": {
             "icon": "shield",
-            "title": "Lifetime warranty",
-            "text": "<p>If a stitch ever fails, we repair it for free. For life.</p>"
+            "title": "Made to last",
+            "text": "<p>Well-cared-for leather lasts 10 to 15 years or more, long enough to hand down.</p>"
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "icon": "leaf",
+            "title": "Made in the Philippines",
+            "text": "<p>Designed and made in our family workshop in Los Baños, Laguna.</p>"
           }
         }
       },
@@ -345,118 +385,40 @@
         "b2",
         "b3"
       ]
-    },
-    "reviews": {
-      "type": "testimonials",
-      "settings": {},
-      "blocks": {
-        "b0": {
-          "type": "testimonial",
-          "settings": {}
-        },
-        "b1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The stitching is flawless. You can tell a real person made this with care \u2014 worth every penny.",
-            "author": "Elena R."
-          }
-        },
-        "b2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Bought the weekender as an anniversary gift. He hasn't stopped talking about it.",
-            "author": "Priya S."
-          }
-        },
-        "b3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Customer service repaired a strap I broke myself, no questions asked. Customer for life.",
-            "author": "James W."
-          }
-        }
-      },
-      "block_order": [
-        "b0",
-        "b1",
-        "b2",
-        "b3"
-      ]
-    },
-    "press": {
-      "type": "logo-list",
-      "settings": {},
-      "blocks": {
-        "b0": {
-          "type": "logo",
-          "settings": {
-            "name": "Esquire"
-          }
-        },
-        "b1": {
-          "type": "logo",
-          "settings": {
-            "name": "GQ"
-          }
-        },
-        "b2": {
-          "type": "logo",
-          "settings": {
-            "name": "Monocle"
-          }
-        },
-        "b3": {
-          "type": "logo",
-          "settings": {
-            "name": "Kinfolk"
-          }
-        },
-        "b4": {
-          "type": "logo",
-          "settings": {
-            "name": "Vogue"
-          }
-        }
-      },
-      "block_order": [
-        "b0",
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ]
-    },
-    "promo": {
-      "type": "countdown-banner",
-      "settings": {}
     },
     "faq": {
       "type": "faq",
-      "settings": {},
+      "settings": {
+        "button_label": "Contact us",
+        "button_link": "shopify://pages/contact"
+      },
       "blocks": {
         "b0": {
           "type": "question",
-          "settings": {}
+          "settings": {
+            "question": "How much is delivery?",
+            "answer": "<p>We ship nationwide via LBC. Delivery fees are calculated at checkout based on your address.</p>"
+          }
         },
         "b1": {
           "type": "question",
           "settings": {
-            "question": "How long does shipping take?",
-            "answer": "<p>Orders ship within 1\u20132 business days. Domestic delivery takes 2\u20135 days; international 5\u201310 days.</p>"
+            "question": "Can I order a custom design?",
+            "answer": "<p>Yes. Most of our tari cases are made to order, and we can tool your gamefarm name, initials or logo into the leather. Message us with your idea and we'll quote it.</p>"
           }
         },
         "b2": {
           "type": "question",
           "settings": {
-            "question": "What does the lifetime warranty cover?",
-            "answer": "<p>All stitching and hardware for the life of the product. Normal wear and patina are part of the charm.</p>"
+            "question": "How long does a made-to-order piece take?",
+            "answer": "<p>Lead time depends on the design and our current queue. We'll confirm the timeline before you pay.</p>"
           }
         },
         "b3": {
           "type": "question",
           "settings": {
-            "question": "Can I add a monogram?",
-            "answer": "<p>Yes \u2014 choose personalization on the product page. Monogrammed items ship within 3 business days.</p>"
+            "question": "How do I care for my leather?",
+            "answer": "<p>Wipe with a dry cloth, keep it out of the rain and direct sun, and condition the leather every few months. Real leather darkens and develops character as it ages.</p>"
           }
         }
       },
@@ -469,31 +431,54 @@
     },
     "gallery": {
       "type": "gallery",
-      "settings": {},
+      "settings": {
+        "subheading": "From the workbench",
+        "heading": "Recent <em>custom</em> work",
+        "description": "<p>Every one built to order.</p>",
+        "link_url": "shopify://pages/custom-builds"
+      },
       "blocks": {
         "b0": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/custom-36-capacity-crest-01.jpg",
+            "link": "shopify://pages/custom-builds"
+          }
         },
         "b1": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/custom-48-capacity-shield-logo-02.jpg",
+            "link": "shopify://pages/custom-builds"
+          }
         },
         "b2": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/custom-48-capacity-lucky-box-01.jpg",
+            "link": "shopify://pages/custom-builds"
+          }
         },
         "b3": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/workshop-stitching-01.jpg",
+            "link": "shopify://pages/custom-builds"
+          }
         },
         "b4": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/custom-36-capacity-latch-lock-04.jpg",
+            "link": "shopify://pages/custom-builds"
+          }
         },
         "b5": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/portfolio-association-crest-04.jpg",
+            "link": "shopify://pages/custom-builds"
+          }
         }
       },
       "block_order": [
@@ -507,7 +492,48 @@
     },
     "newsletter": {
       "type": "newsletter",
-      "settings": {}
+      "settings": {
+        "subheading": "Stay in the loop",
+        "heading": "New builds, <em>first</em>",
+        "text": "<p>Be the first to see new tari case designs and limited custom pieces.</p>"
+      }
+    },
+    "custom": {
+      "type": "featured-collection",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "subheading": "Made to order",
+        "heading": "Custom <em>builds</em>",
+        "description": "<p>Your gamefarm name, logo or crest, hand-tooled into the leather.</p>",
+        "collection": "custom-builds",
+        "limit": 8,
+        "link_label": "See all custom builds",
+        "link_url": "shopify://pages/custom-builds"
+      }
+    },
+    "film": {
+      "type": "video",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "subheading": "Made by RGB",
+        "heading": "Real leather, <em>made</em> to work",
+        "description": "<p>Thick leather, a sturdy handle and hand-stitched seams, built for the sparring pit.</p>",
+        "video": "shopify://files/videos/made-by-rgb.mp4",
+        "cover": "shopify://shop_images/hero-hand-tooling.jpg",
+        "full_width": true
+      }
+    },
+    "journal": {
+      "type": "featured-blog",
+      "settings": {
+        "subheading": "The journal",
+        "heading": "Stories from the <em>workshop</em>",
+        "blog": "journal",
+        "limit": 3,
+        "columns": 3,
+        "link_label": "Read the journal",
+        "link_url": "shopify://blogs/journal"
+      }
     }
   },
   "order": [
@@ -517,15 +543,14 @@
     "bestsellers",
     "bento",
     "trust",
+    "custom",
     "story",
+    "film",
     "tabs",
-    "look",
     "why",
-    "reviews",
-    "press",
-    "promo",
     "faq",
     "gallery",
+    "journal",
     "newsletter"
   ]
 }

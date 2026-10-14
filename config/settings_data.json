@@ -53,7 +53,16 @@
             "button_label": "#FFFFFF"
           }
         }
-      }
+      },
+      "logo": "shopify://shop_images/rgb-leathercrafts-logo.png",
+      "logo_inverse": "shopify://shop_images/rgb-leathercrafts-logo-light.png",
+      "logo_width": 190,
+      "logo_width_mobile": 130,
+      "favicon": "shopify://shop_images/favicon.png",
+      "card_image_ratio": "square",
+      "cart_free_shipping_enable": false,
+      "cart_upsell_collection": "accessories",
+      "cart_trust_text": "Secure checkout · Handmade in the Philippines"
     }
   }
 }

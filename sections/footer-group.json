@@ -5,14 +5,54 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "brand": { "type": "brand", "settings": {} },
-        "menu-1": { "type": "menu", "settings": { "heading": "Shop", "menu": "main-menu" } },
-        "menu-2": { "type": "menu", "settings": { "heading": "Help", "menu": "footer" } },
-        "newsletter": { "type": "newsletter", "settings": {} }
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/rgb-leathercrafts-logo-light.png",
+            "heading": "RGB LeatherCrafts",
+            "text": "<p>Hand-tooled genuine leather tari cases, catch bags and takera, made by a family workshop in Los Baños, Laguna.</p>",
+            "show_social": true
+          }
+        },
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {}
+        },
+        "contact": {
+          "type": "text",
+          "settings": {
+            "heading": "Visit the workshop",
+            "text": "<p>Lot 8 Block 7 L.A. Village<br>Tuntungin-Putho, Los Baños, Laguna<br>+63 909 293 3908</p>"
+          }
+        }
       },
-      "block_order": ["brand", "menu-1", "menu-2", "newsletter"],
-      "settings": { "color_scheme": "scheme-3", "wordmark": "RGB Leather" }
+      "block_order": [
+        "brand",
+        "menu-1",
+        "menu-2",
+        "contact"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "wordmark": "RGB LeatherCrafts"
+      }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

@@ -1,0 +1,6 @@
+
+# Store build: regenerable media (build-*.sh) and private session notes
+store-content/images/
+store-content/videos/
+store-content/SESSION-NOTES.md
+__pycache__/
